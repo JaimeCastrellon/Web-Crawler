@@ -95,6 +95,13 @@ propagate. Both robots files and page responses are cached, including HTTP error
 `--refresh` explicitly to retry a cached error or replace a damaged cache. Cached bodies
 are checked against their SHA-256 before reuse.
 
+Cache writes stage the body and metadata using atomic file replacements. A complete pending
+metadata sidecar marks a response ready to publish. If publication is interrupted, the next
+lookup verifies its hash and finishes publishing without another HTTP request. An earlier
+committed response remains usable if a refresh stops before the new response is ready.
+Legacy incomplete entries (a missing body/sidecar or truncated JSON) are logged and retried
+as unfinished downloads; hash mismatches in complete entries still require explicit refresh.
+
 Redirects are followed explicitly: each page destination gets its own robots check and
 host delay. Redirected robots files are fetched as part of the robots lookup. The retry
 limit counts retries after the initial attempt (three retries means four attempts).
@@ -109,7 +116,11 @@ clients remain owned by their caller; `close()` closes only an internally create
 `python -m ivydata fixtures [--refresh]` copies successful cached bodies into the fixture
 directory and prints name/status/byte counts. HTTP errors, robots denials, and network
 failures are reported with URLs and do not stop later entries. Failed captures do not
-replace existing fixtures. Real fixture capture is a separate human step after task 1 merges.
+replace existing fixtures. Known Incapsula and Cloudflare challenge script/iframe URLs are
+reported and skipped even on HTTP 200; the response remains in the raw cache and existing
+fixtures stay intact. This detects known challenge markers, not every possible blocked or
+invalid page, so captures still need human inspection. Real fixture capture is a separate
+human step after task 1 merges.
 
 ## Module interfaces
 

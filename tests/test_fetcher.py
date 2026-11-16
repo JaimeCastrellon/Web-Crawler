@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 from hashlib import sha1, sha256
+from pathlib import Path
 from types import SimpleNamespace
 
 import httpx
@@ -223,3 +224,53 @@ def test_redirect_loop_is_bounded(setup_fetcher):
     with pytest.raises(httpx.TooManyRedirects):
         s.fetcher.get(BASE + "/loop")
     assert len(s.calls) == 2
+
+
+@pytest.mark.parametrize("phase", [".html.pending", ".json.pending", ".html", ".json"])
+@pytest.mark.parametrize("refreshing", [False, True])
+def test_interrupted_save_recovers_after_restart(setup_fetcher, monkeypatch, phase, refreshing):
+    original = setup_fetcher(handler=lambda r: httpx.Response(200, text="old"))
+    url = BASE + "/page"
+    original.fetcher.get(BASE + "/robots.txt")
+    if refreshing:
+        original.fetcher.get(url)
+    interrupted = setup_fetcher(
+        refresh=refreshing, handler=lambda r: httpx.Response(200, text="new")
+    )
+    stem = sha1(url.encode()).hexdigest()
+    replace = Path.replace
+
+    def interrupt(self, target):
+        if Path(target).name == stem + phase:
+            raise InterruptedError("simulated interrupted publication")
+        return replace(self, target)
+
+    with monkeypatch.context() as patch:
+        patch.setattr(Path, "replace", interrupt)
+        with pytest.raises(InterruptedError):
+            interrupted.fetcher.get(url)
+    restarted = setup_fetcher(handler=lambda r: httpx.Response(200, text="retried"))
+    result = restarted.fetcher.get(url)
+    ready = phase in {".html", ".json"}
+    assert result.text() == ("new" if ready else "old" if refreshing else "retried")
+    assert result.from_cache == (ready or refreshing)
+    assert [call[0] for call in restarted.calls] == ([] if ready or refreshing else [url])
+    assert restarted.fetcher.get(url).from_cache
+
+
+@pytest.mark.parametrize("incomplete", ["body", "metadata", "truncated_metadata"])
+def test_old_incomplete_cache_retries_only_unfinished_url(setup_fetcher, caplog, incomplete):
+    original = setup_fetcher()
+    result = original.fetcher.get(BASE + "/page")
+    body = result.path
+    metadata = body.with_suffix(".json")
+    if incomplete == "body":
+        metadata.unlink()
+    elif incomplete == "metadata":
+        body.unlink()
+    else:
+        metadata.write_text('{"url":')
+    restarted = setup_fetcher()
+    assert restarted.fetcher.get(result.url).status == 200
+    assert [call[0] for call in restarted.calls] == [result.url]
+    assert result.url in caplog.text and "unfinished download" in caplog.text

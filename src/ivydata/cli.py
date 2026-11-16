@@ -4,12 +4,28 @@ from __future__ import annotations
 
 import argparse
 import shutil
+from html.parser import HTMLParser
 
 import httpx
 import yaml
 
 from ivydata.config import REPO_ROOT, Config, load_config
 from ivydata.crawl.fetcher import Fetcher, RobotsDisallowed
+
+
+class _ChallengeParser(HTMLParser):
+    challenge: str | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag not in {"script", "iframe"}:
+            return
+        source = (dict(attrs).get("src") or "").lower()
+        for marker, provider in (
+            ("_incapsula_resource", "Incapsula"),
+            ("/cdn-cgi/challenge-platform/", "Cloudflare"),
+        ):
+            if marker in source:
+                self.challenge = provider
 
 
 def _capture_fixtures(config: Config, *, refresh: bool) -> int:
@@ -36,6 +52,15 @@ def _capture_fixtures(config: Config, *, refresh: bool) -> int:
             size = result.path.stat().st_size if result.path is not None else 0
             print(f"{name:<40} {result.status:<12} {size}")
             if result.status == 200 and result.path is not None:
+                parser = _ChallengeParser()
+                parser.feed(result.text())
+                parser.close()
+                if parser.challenge:
+                    print(
+                        f"  not saved: {url} ({parser.challenge} bot challenge; "
+                        "existing fixture preserved)"
+                    )
+                    continue
                 shutil.copyfile(result.path, directory / f"{name}.html")
             else:
                 print(f"  not saved: {url} (HTTP {result.status})")

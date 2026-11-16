@@ -6,6 +6,7 @@ Spec: docs/TASKS.md, Task 1. Rules: AGENTS.md "Hard rules" 2 and 3.
 from __future__ import annotations
 
 import json
+import logging
 import math
 import time
 from collections.abc import Callable
@@ -13,12 +14,15 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from hashlib import sha1, sha256
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 from threading import RLock
 
 import httpx
 from protego import Protego
 
 from ivydata.config import load_config
+
+logger = logging.getLogger(__name__)
 
 
 class RobotsDisallowed(Exception):
@@ -101,9 +105,19 @@ class Fetcher:
 
     def _cached(self, url: str) -> tuple[FetchResult, str | None] | None:
         body, sidecar = self._paths(url)
+        if sidecar.with_suffix(".json.pending").exists():
+            logger.warning("Recovering interrupted cache save for %s", url)
+            self._publish_pending(url)
         if self.refresh or not (body.exists() or sidecar.exists()):
             return None
-        metadata = json.loads(sidecar.read_text(encoding="utf-8"))
+        if not (body.exists() and sidecar.exists()):
+            logger.warning("Incomplete cache entry for %s; retrying unfinished download", url)
+            return None
+        try:
+            metadata = json.loads(sidecar.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            logger.warning("Incomplete cache metadata for %s; retrying unfinished download", url)
+            return None
         if metadata["url"] != url or sha256(body.read_bytes()).hexdigest() != metadata["sha256"]:
             raise ValueError(f"invalid cache for {url}; use --refresh to replace it")
         return (
@@ -112,6 +126,35 @@ class Fetcher:
             ),
             metadata.get("location"),
         )
+
+    def _write_atomic(self, path: Path, content: bytes) -> None:
+        with NamedTemporaryFile(
+            dir=path.parent, prefix=path.name + ".", suffix=".tmp", delete=False
+        ) as stream:
+            temporary = Path(stream.name)
+            try:
+                stream.write(content)
+                stream.flush()
+            except BaseException:
+                temporary.unlink(missing_ok=True)
+                raise
+        try:
+            temporary.replace(path)
+        finally:
+            temporary.unlink(missing_ok=True)
+
+    def _publish_pending(self, url: str) -> None:
+        body, sidecar = self._paths(url)
+        pending_body = body.with_suffix(".html.pending")
+        pending_metadata = sidecar.with_suffix(".json.pending")
+        metadata = json.loads(pending_metadata.read_text(encoding="utf-8"))
+        # The body may already have moved when a previous publication was interrupted.
+        source = pending_body if pending_body.exists() else body
+        if metadata["url"] != url or sha256(source.read_bytes()).hexdigest() != metadata["sha256"]:
+            raise ValueError(f"invalid pending cache for {url}; refusing to publish it")
+        if pending_body.exists():
+            pending_body.replace(body)
+        pending_metadata.replace(sidecar)
 
     def _store(
         self, url: str, status: int, content: bytes, location: str | None = None
@@ -123,8 +166,13 @@ class Fetcher:
         metadata = {"url": url, "status": status, "fetched_at": fetched_at, "sha256": digest}
         if location is not None:
             metadata["location"] = location
-        body.write_bytes(content)
-        sidecar.write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
+        self._write_atomic(body.with_suffix(".html.pending"), content)
+        # Publishing this complete sidecar marks the pair ready for recovery after restart.
+        self._write_atomic(
+            sidecar.with_suffix(".json.pending"),
+            (json.dumps(metadata, indent=2) + "\n").encode("utf-8"),
+        )
+        self._publish_pending(url)
         return FetchResult(url, status, body, digest, False, fetched_at)
 
     def _authorize(self, url: str) -> None:

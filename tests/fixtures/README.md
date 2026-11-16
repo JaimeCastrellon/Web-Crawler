@@ -16,3 +16,8 @@ The command prints each name, HTTP status, and byte count. Missing pages, robots
 and network failures are reported and later entries continue; only HTTP 200 bodies are
 saved. Failed captures leave existing fixtures in place. Responses (including errors) are
 reused from `data/raw/`; use `python -m ivydata fixtures --refresh` to explicitly refetch.
+
+Known Incapsula and Cloudflare challenge scripts/iframes are reported and skipped even when
+the site returns HTTP 200. These responses remain in the raw cache; they do not create or
+overwrite fixtures. Inspect successful captures too, since unknown challenge pages may not
+be detected.
