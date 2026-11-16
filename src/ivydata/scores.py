@@ -686,10 +686,10 @@ def build_scores(
     manifest_cols = ["url", "school", "season", "kind", "status", "fetched_at", "sha256",
                      "season_slug"]  # fmt: skip
     pages = sorted(pages, key=lambda p: (p["school"], p["season"], p["kind"], p["url"]))
-    write_csv(repo_root / "data" / "manifest" / "urls.csv", pages, manifest_cols)
+    write_csv(repo_root / "data" / "manifest" / "score_sources.csv", pages, manifest_cols)
 
     cov = coverage(pages, games, config)
-    write_csv(repo_root / "data" / "reports" / "coverage_report.csv", cov, list(cov[0].keys()))
+    write_csv(repo_root / "data" / "reports" / "score_coverage.csv", cov, list(cov[0].keys()))
     box = sorted({u for g in games for u in g["_boxscore_urls"]})
     (repo_root / "data" / "manifest" / "boxscore_urls.txt").write_text(
         "\n".join(box) + "\n", encoding="utf-8"
