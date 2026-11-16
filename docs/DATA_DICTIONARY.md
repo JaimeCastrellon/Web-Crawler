@@ -78,3 +78,17 @@ Box-score team stats (empty when `stats_level = score_only`):
 ## `data/manifest/urls.csv` — one row per fetched URL
 
 `url, school, season, kind (schedule|boxscore|robots), status, fetched_at, sha256, season_slug`
+
+## `data/reports/crawl_errors.csv` — unresolved crawl failures, one row per URL
+
+| column | description |
+|---|---|
+| `url` | requested URL, including failed schedule candidates |
+| `school`, `season` | context of the most recent attempt |
+| `kind` | `schedule` or `boxscore` |
+| `error` | HTTP status, exception type/message, known bot challenge, or unrecognized schedule shape |
+
+Rows are sorted by (`school`, numeric `season`, `kind`, `url`). Successful retries remove
+their error row; failures outside the current selection remain. Requests that fail before
+an HTTP response exists appear here without a fabricated manifest status. Robots responses
+are recorded in the URL manifest using their actual cached status.

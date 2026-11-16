@@ -122,6 +122,30 @@ fixtures stay intact. This detects known challenge markers, not every possible b
 invalid page, so captures still need human inspection. Real fixture capture is a separate
 human step after task 1 merges.
 
+**Discovery and provenance.** `crawl` expands each school's slug candidates in configured
+order, skipping seasons in `skip_seasons`. It accepts HTTP 200 schedules with populated
+legacy `.sidearm-schedule-game` rows or current `.s-game-card` elements. This is a page-shape
+check, independent of the task 4 parser; it does not yet validate every game's date or score.
+Football box-score links are resolved relative to the page, matched against the configured
+path regex, and deduplicated in page order (ignoring fragments).
+
+The URL manifest upserts by URL and sorts by `(school, season, kind, url)`. It is saved
+atomically after every request; existing rows are retained on partial reruns. Robots
+provenance is read from Fetcher's completed cache sidecars without additional HTTP requests.
+Because the manifest has one row per URL, a shared robots URL is associated with the last
+school/season visited in deterministic crawl order. `season_slug` is empty for robots.
+
+Failures (HTTP errors, network errors, robots denials, known challenge pages, and empty
+schedules) are logged with URLs and persisted to `data/reports/crawl_errors.csv`. The report
+is updated atomically and retains unresolved failures across reruns, clearing a URL's error
+when it succeeds. Unfetched URLs have no fabricated HTTP status in the manifest. This report
+is intended as input to the later coverage and validation work. A failed box score does not
+stop later links, and failed schedule candidates do not stop fallback candidates.
+
+`crawl/pages.py` shares page-shape and challenge checks between discovery and fixture
+capture. A known protection script on a populated sports page is treated as monitoring,
+rather than rejecting otherwise usable schedules, box scores, and news recaps.
+
 ## Module interfaces
 
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a

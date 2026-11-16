@@ -21,3 +21,18 @@ Known Incapsula and Cloudflare challenge scripts/iframes are reported and skippe
 the site returns HTTP 200. These responses remain in the raw cache; they do not create or
 overwrite fixtures. Inspect successful captures too, since unknown challenge pages may not
 be detected.
+
+## Committed schedule excerpts
+
+Captured through Fetcher on 2026-11-16, then reduced to the schedule game elements so the
+repo contains small parser fixtures rather than full navigation, ads, and scripts. Text,
+game attributes, dates, scores, and links within the retained elements are unchanged.
+
+| fixture | source | retained elements |
+|---|---|---|
+| `schedule_yale_2025.html` | `https://yalebulldogs.com/sports/football/schedule/2025` | all 12 `.sidearm-schedule-game` rows |
+| `schedule_yale_2004.html` | `https://yalebulldogs.com/sports/football/schedule/2004` | all 10 `.sidearm-schedule-game` rows, 9 box-score links |
+| `schedule_brown_2025_excerpt.html` | `https://brownbears.com/sports/football/schedule/2025` | first 2 `.s-game-card` elements |
+
+Recapturing creates full local pages; reduce them to these elements before committing.
+Harvard's 2025 box-score URL returned an empty Incapsula challenge and is not included.
