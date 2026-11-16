@@ -11,3 +11,13 @@ git add tests/fixtures/*.html && git commit -m "Add HTML fixtures"
 
 The URL list is `fixtures.yaml`. Keep fixtures few and small — add one only when a parser
 needs a new page shape (e.g. an overtime game, an old-format season, a neutral site).
+
+The command prints each name, HTTP status, and byte count. Missing pages, robots denials,
+and network failures are reported and later entries continue; only HTTP 200 bodies are
+saved. Failed captures leave existing fixtures in place. Responses (including errors) are
+reused from `data/raw/`; use `python -m ivydata fixtures --refresh` to explicitly refetch.
+
+Known Incapsula and Cloudflare challenge scripts/iframes are reported and skipped even when
+the site returns HTTP 200. These responses remain in the raw cache; they do not create or
+overwrite fixtures. Inspect successful captures too, since unknown challenge pages may not
+be detected.

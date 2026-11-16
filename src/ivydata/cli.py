@@ -3,8 +3,70 @@
 from __future__ import annotations
 
 import argparse
+import shutil
+from html.parser import HTMLParser
 
-from ivydata.config import load_config
+import httpx
+import yaml
+
+from ivydata.config import REPO_ROOT, Config, load_config
+from ivydata.crawl.fetcher import Fetcher, RobotsDisallowed
+
+
+class _ChallengeParser(HTMLParser):
+    challenge: str | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag not in {"script", "iframe"}:
+            return
+        source = (dict(attrs).get("src") or "").lower()
+        for marker, provider in (
+            ("_incapsula_resource", "Incapsula"),
+            ("/cdn-cgi/challenge-platform/", "Cloudflare"),
+        ):
+            if marker in source:
+                self.challenge = provider
+
+
+def _capture_fixtures(config: Config, *, refresh: bool) -> int:
+    directory = REPO_ROOT / "tests" / "fixtures"
+    entries = yaml.safe_load((directory / "fixtures.yaml").read_text(encoding="utf-8"))
+    fetcher = Fetcher(
+        cache_dir=REPO_ROOT / "data" / "raw",
+        user_agent=config.crawl.user_agent,
+        min_delay_seconds=config.crawl.min_delay_seconds,
+        timeout_seconds=config.crawl.timeout_seconds,
+        max_retries=config.crawl.max_retries,
+        refresh=refresh,
+    )
+    print(f"{'name':<40} {'status':<12} bytes")
+    try:
+        for name, url in entries.items():
+            if not isinstance(name, str) or not name.replace("_", "").isalnum():
+                raise ValueError(f"invalid fixture name: {name!r}")
+            try:
+                result = fetcher.get(url)
+            except (RobotsDisallowed, httpx.HTTPError) as exc:
+                print(f"{name:<40} {'ERROR':<12} -  {url}: {exc}")
+                continue
+            size = result.path.stat().st_size if result.path is not None else 0
+            print(f"{name:<40} {result.status:<12} {size}")
+            if result.status == 200 and result.path is not None:
+                parser = _ChallengeParser()
+                parser.feed(result.text())
+                parser.close()
+                if parser.challenge:
+                    print(
+                        f"  not saved: {url} ({parser.challenge} bot challenge; "
+                        "existing fixture preserved)"
+                    )
+                    continue
+                shutil.copyfile(result.path, directory / f"{name}.html")
+            else:
+                print(f"  not saved: {url} (HTTP {result.status})")
+    finally:
+        fetcher.close()
+    return 0
 
 
 def _seasons(arg: str | None) -> list[int] | None:
@@ -21,7 +83,8 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
 
     sub.add_parser("config", help="print the loaded configuration summary")
-    sub.add_parser("fixtures", help="save test fixture pages (Task 1; needs internet)")
+    f = sub.add_parser("fixtures", help="save test fixture pages (needs internet)")
+    f.add_argument("--refresh", action="store_true", help="re-fetch even if cached")
 
     c = sub.add_parser("crawl", help="fetch schedules and box scores (Task 2)")
     c.add_argument("--schools", help="comma-separated ids, default all")
@@ -34,6 +97,9 @@ def main(argv: list[str] | None = None) -> int:
 
     args = p.parse_args(argv)
     config = load_config()
+
+    if args.cmd == "fixtures":
+        return _capture_fixtures(config, refresh=args.refresh)
 
     if args.cmd == "config":
         seasons = config.splits.seasons()
