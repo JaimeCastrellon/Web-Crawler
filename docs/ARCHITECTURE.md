@@ -146,6 +146,26 @@ stop later links, and failed schedule candidates do not stop fallback candidates
 capture. A known protection script on a populated sports page is treated as monitoring,
 rather than rejecting otherwise usable schedules, box scores, and news recaps.
 
+**Coverage audit.** `python -m ivydata coverage` reads only the manifest, crawl error
+report, and raw cache; it never fetches a URL. It writes a deterministically sorted,
+atomically replaced `coverage_report.csv` and prints the school-by-season F/P/S/- grid.
+Every configured school and non-skipped season appears, even before it has been crawled.
+Manifest columns are validated; damaged input does not replace the previous report.
+
+Coverage uses a small DOM summary of the legacy schedule rows and current game cards:
+game count, result-score presence, and box-score URLs. This is independent of the full
+task 4 schedule parser, which is not yet implemented. Each box score must have a successful
+manifest result, matching cached SHA-256, and recognizable box-score content; linked but
+failed or unfetched pages cannot make a season `full`. Duplicate links within one game are
+deduplicated, and a shared URL can count toward only one game. Dates, opponents, detailed
+stats, and preseason/postseason classifications are validated by later parsing tasks.
+
+The report uses configured slug preference when multiple schedule candidates exist. Failed
+candidates and crawl errors remain visible in notes. Unknown or damaged page shapes are
+logged with URLs and appear in report notes. Uncrawled seasons and future-only schedules
+are distinguished in notes rather than inventing a fifth coverage level. Report counts and
+notes do not create pre-game model features or copy any printed W-L records.
+
 ## Module interfaces
 
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a
