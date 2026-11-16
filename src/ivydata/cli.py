@@ -103,6 +103,21 @@ def main(argv: list[str] | None = None) -> int:
         crawl(config, schools=schools, seasons=_seasons(args.seasons), refresh=args.refresh)
         return 0
 
+    if args.cmd == "coverage":
+        from ivydata.crawl.coverage import build_coverage_report
+
+        report = build_coverage_report()
+        years = sorted(report["season"].unique())
+        symbols = {"full": "F", "partial": "P", "score_only": "S", "missing": "-"}
+        cells = {
+            (row.school, row.season): symbols[row.level] for row in report.itertuples(index=False)
+        }
+        print(f"{'school':<11}" + " ".join(f"{year % 100:02d}" for year in years))
+        for school in sorted(report["school"].unique()):
+            print(f"{school:<11}" + " ".join(f" {cells[school, year]}" for year in years))
+        print("F full | P partial | S score-only | - missing; see coverage_report.csv for notes")
+        return 0
+
     raise NotImplementedError(f"`{args.cmd}` is not implemented yet — see docs/TASKS.md")
 
 

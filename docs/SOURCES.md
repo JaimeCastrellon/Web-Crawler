@@ -38,6 +38,11 @@ fixtures, especially Harvard's. A cached challenge response requires an explicit
 `--refresh` to replace. Do not bypass site access controls.
 
 ## Known quirks
+- **First bounded crawl (2026-11-16):** Yale 2004 has 10 schedule rows with results and
+  9 box-score links. All 9 linked Yale box-score URLs returned HTTP 500 after the fetcher's
+  normal retry behavior. The committed manifest and crawl error report retain each URL;
+  coverage is `score_only`. This is one school-season probe, not a completed 2000–2026
+  crawl. Other school-seasons in the first coverage report are explicitly "not crawled".
 - **Season slugs differ** (`2004` vs `2004-05`). Discovery tries each pattern in
   `sources.yaml`.
 - **Older seasons** (≈ pre-2004) may lack HTML box scores. Some older games are linked only

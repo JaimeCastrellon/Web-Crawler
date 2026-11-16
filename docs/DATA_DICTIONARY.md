@@ -71,9 +71,20 @@ Box-score team stats (empty when `stats_level = score_only`):
 | `schedule_url` | the URL that worked (empty if none) |
 | `season_slug` | which slug pattern worked |
 | `games_on_schedule` | rows found on the schedule page |
-| `boxscores_found` | box-score links found |
-| `level` | `full` (all games have box scores), `partial`, `score_only`, `missing` |
+| `boxscores_found` | games with a distinct linked, successfully fetched, checksum-verified box-score page in the manifest/cache |
+| `level` | `full` (all games have usable cached box scores), `partial` (some do), `score_only` (no usable box scores but schedule results exist), `missing` (no result data available) |
 | `notes` | free text, e.g. "box scores linked only from news recaps" |
+
+Coverage measures available downloads, not merely link presence. A 404/5xx response,
+challenge, unfetched link, missing/corrupt body, or unrecognized box-score page is excluded
+from `boxscores_found` and described with its URL in `notes`. One box-score URL cannot
+satisfy multiple games. This refines the original link-count description while preserving
+the report's columns. `full` verifies recognizable box-score content; detailed stat parsing
+and validation happen in later tasks.
+
+Uncrawled school-seasons are marked `missing` with a "not crawled" note. A future-only
+schedule with neither results nor usable box scores also has level `missing`, but retains
+its schedule URL, slug, and game count with an explanatory note. There is no 2020 row.
 
 ## `data/manifest/urls.csv` — one row per fetched URL
 
