@@ -17,5 +17,6 @@ python -m ivydata scores \
 | `ivy_official_penn.json` | pennathletics.com schedule pages | 2000–2026 |
 | `ivy_wikipedia_schedules.json` | Wikipedia team-season articles, all 8 schools (CC BY-SA 4.0) | 2000–2026 |
 
-Harvard, Brown, Columbia, Dartmouth and Princeton's sites block automated access (see
-`docs/SOURCES.md`), so their games against each other come from Wikipedia only.
+Harvard, Brown, Columbia, Dartmouth and Princeton's sites returned bot challenges to the
+browser crawl (see `docs/SOURCES.md`), so their games against each other come from
+Wikipedia only in this build.

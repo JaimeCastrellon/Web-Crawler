@@ -19,10 +19,13 @@ home/away/neutral, pre-game records and `train`/`test`/`current` splits. Box-sco
 (quarters, yards, turnovers…) are the next pass.
 
 Sources: Yale, Cornell and Penn's official athletics sites (crawled at their robots.txt
-`Crawl-delay` of 30 s) plus Wikipedia team-season articles for all eight schools. Harvard,
-Brown, Columbia, Dartmouth and Princeton's sites block automated access, so games among those
-five come from Wikipedia. 963 games have two or more independent copies; 22 disagree and are
+`Crawl-delay` of 30 s) plus Wikipedia team-season articles for all eight schools. Harvard's
+site (and ivyleague.com) block automated access; Brown, Columbia, Dartmouth and Princeton
+challenged the browser-based crawl but not the Python `Fetcher`, so a follow-up
+`python -m ivydata crawl` for those four can make their games official-primary. For now,
+games among those five schools come from Wikipedia. 963 games have two or more independent copies; 22 disagree and are
 listed in `data/reports/validation_report.md`, with official-site values used where available.
+Score-build provenance: `data/manifest/score_sources.csv`, `data/reports/score_coverage.csv`.
 
 ## What you get
 
