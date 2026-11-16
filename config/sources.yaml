@@ -23,7 +23,7 @@ schools:
   - id: columbia
     name: Columbia
     base_url: https://gocolumbialions.com
-    verified: false
+    verified: true
   - id: cornell
     name: Cornell
     base_url: https://cornellbigred.com
