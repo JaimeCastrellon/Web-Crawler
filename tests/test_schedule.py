@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from ivydata.crawl.pages import declared_schedule_season
 from ivydata.parse.schedule import parse_schedule
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -196,6 +197,8 @@ def test_silent_redirect_to_current_season_does_not_relabel_games():
     assert not parsed.rows
     assert "page declares season 2026, expected 2004" in parsed.warnings[0]
     assert PAGE in parsed.warnings[0]
+    assert declared_schedule_season("<title>2004-05 Football Schedule - School</title>") == 2004
+    assert declared_schedule_season("<title>Football statistics</title>") is None
 
 
 def test_multiple_boxscore_sources_keep_first_and_warn_with_all_urls():

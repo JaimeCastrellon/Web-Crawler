@@ -126,7 +126,7 @@ def test_report_all_levels_grid_and_byte_identical_rerun(audit, capsys):
     assert "F full | P partial | S score-only | - missing" in output
 
 
-@pytest.mark.parametrize("fault", ["missing", "checksum", "challenge", "empty", "status"])
+@pytest.mark.parametrize("fault", ["missing", "checksum", "challenge", "empty", "status", "year"])
 def test_bad_schedule_is_reported_and_fallback_used(audit, fault):
     _, config, record = audit
     base = config.school("yale").base_url
@@ -137,6 +137,8 @@ def test_bad_schedule_is_reported_and_fallback_used(audit, fault):
         html = '<script src="/_Incapsula_Resource?challenge"></script>'
     elif fault == "empty":
         html = "navigation only"
+    elif fault == "year":
+        html = "<title>2026 Football Schedule</title>" + game()
     path = record("yale", first, html, status=404 if fault == "status" else 200)
     if fault == "missing":
         path.unlink()

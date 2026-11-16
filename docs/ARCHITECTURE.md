@@ -182,6 +182,10 @@ do not prevent later rows from parsing. Multiple distinct box-score URLs retain 
 and list all alternatives in a warning; labeled legacy/PDF box-score links are also retained.
 Header W-L records are never extracted.
 
+The explicit schedule-title season check is shared by the crawler, coverage audit, and
+parser. A current-season page returned for an unsupported historical URL is rejected during
+discovery and coverage as well, allowing the next slug candidate to be tried.
+
 ## Module interfaces
 
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a

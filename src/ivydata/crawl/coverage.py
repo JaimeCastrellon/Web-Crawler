@@ -17,7 +17,7 @@ from selectolax.lexbor import LexborHTMLParser
 from ivydata.config import REPO_ROOT, load_config
 from ivydata.crawl.discover import ERROR_COLUMNS, find_boxscore_links
 from ivydata.crawl.manifest import MANIFEST_COLUMNS
-from ivydata.crawl.pages import GAME_SELECTOR, challenge_provider
+from ivydata.crawl.pages import GAME_SELECTOR, challenge_provider, declared_schedule_season
 
 Level = Literal["full", "partial", "score_only", "missing"]
 REPORT_COLUMNS = [
@@ -163,6 +163,12 @@ def build_coverage_report() -> pd.DataFrame:
                 html, reason = _cached_html(candidate)
                 if html is None:
                     notes.append(reason)
+                    continue
+                declared = declared_schedule_season(html)
+                if declared is not None and declared != season:
+                    notes.append(
+                        f"page declares season {declared}, expected {season}: {candidate['url']}"
+                    )
                     continue
                 count, box_count, score_count, warnings = _schedule_counts(
                     html, candidate["url"], config.boxscore_regex, boxes

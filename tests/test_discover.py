@@ -144,6 +144,7 @@ def test_crawl_fallback_manifest_skip_2020_and_cli(fake_crawl, monkeypatch):
     "first",
     [
         (200, "no games here"),
+        (200, "<title>2026 Football Schedule</title>" + SCHEDULE),
         (200, '<script src="/_Incapsula_Resource"></script>'),
         RobotsDisallowed("not allowed"),
         httpx.ReadTimeout("timed out"),

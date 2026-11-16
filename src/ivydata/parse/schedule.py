@@ -11,7 +11,7 @@ from urllib.parse import urljoin, urlsplit
 from selectolax.lexbor import LexborHTMLParser, LexborNode
 
 from ivydata.crawl.discover import find_boxscore_links
-from ivydata.crawl.pages import GAME_SELECTOR
+from ivydata.crawl.pages import GAME_SELECTOR, declared_schedule_season
 
 BOX_PATTERN = r"/sports/football/stats/[^/]+/[^/]+/boxscore/\d+"
 MONTHS = {
@@ -125,10 +125,10 @@ def parse_schedule(html: str, school: str, season: int, page_url: str) -> Schedu
     parsed = ScheduleParse([])
     tree = LexborHTMLParser(html)
     title = _text(tree.css_first("title"))
-    declared = re.search(r"\b(\d{4})(?:[-–]\d{2,4})?\s+Football\s+Schedule\b", title, re.I)
-    if declared and int(declared[1]) != season:
+    declared = declared_schedule_season(html)
+    if declared is not None and declared != season:
         parsed.warnings.append(
-            f"{page_url}: page declares season {declared[1]}, expected {season}; raw={title}"
+            f"{page_url}: page declares season {declared}, expected {season}; raw={title}"
         )
         return parsed
     games = tree.css(GAME_SELECTOR)

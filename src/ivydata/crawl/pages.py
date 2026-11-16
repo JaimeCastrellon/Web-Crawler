@@ -1,9 +1,20 @@
 """Small page-shape checks used during capture and discovery, before full parsing."""
 
+import re
+
 from selectolax.lexbor import LexborHTMLParser
 
 GAME_SELECTOR = ".sidearm-schedule-game, .s-game-card"
 CONTENT_SELECTOR = GAME_SELECTOR + ", article.box-score, article.sidearm-story-template"
+
+
+def declared_schedule_season(html: str) -> int | None:
+    """Read a clear season declaration from a football-schedule title, if present."""
+    title = LexborHTMLParser(html).css_first("title")
+    if title is None:
+        return None
+    match = re.search(r"\b(\d{4})(?:[-–]\d{2,4})?\s+Football\s+Schedule\b", title.text(), re.I)
+    return int(match[1]) if match else None
 
 
 def challenge_provider(html: str) -> str | None:
