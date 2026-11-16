@@ -33,6 +33,8 @@ game attributes, dates, scores, and links within the retained elements are uncha
 | `schedule_yale_2025.html` | `https://yalebulldogs.com/sports/football/schedule/2025` | all 12 `.sidearm-schedule-game` rows |
 | `schedule_yale_2004.html` | `https://yalebulldogs.com/sports/football/schedule/2004` | all 10 `.sidearm-schedule-game` rows, 9 box-score links |
 | `schedule_brown_2025_excerpt.html` | `https://brownbears.com/sports/football/schedule/2025` | first 2 `.s-game-card` elements |
+| `schedule_harvard_2018_fenway.html` | `https://gocrimson.com/sports/football/schedule/2018` | Yale game row; listed home by source but played at Fenway |
+| `schedule_harvard_2026_upcoming.html` | `https://gocrimson.com/sports/football/schedule/2026` | upcoming Yale game row at Fenway, no result |
 
 Recapturing creates full local pages; reduce them to these elements before committing.
 Harvard's 2025 box-score URL returned an empty Incapsula challenge and is not included.
