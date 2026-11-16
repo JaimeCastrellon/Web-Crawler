@@ -1,0 +1,52 @@
+# Ivy League athletics sites (all on the Sidearm Sports platform).
+# `verified` = base URL confirmed to serve football pages; task 1 confirms the rest.
+
+crawl:
+  user_agent: "ivy-football-data/0.1 (+https://github.com/JaimeCastrellon/Web-Crawler)"
+  min_delay_seconds: 3.0     # per host; never lower this
+  timeout_seconds: 30
+  max_retries: 3
+
+url_patterns:
+  schedule: "{base_url}/sports/football/schedule/{season_slug}"
+  boxscore_regex: "/sports/football/stats/[^/]+/[^/]+/boxscore/\\d+"
+
+# Tried in order until a schedule page with >= 1 game is found.
+# {year} = 2004, {next_yy} = 05
+default_season_slug_patterns: ["{year}", "{year}-{next_yy}"]
+
+schools:
+  - id: brown
+    name: Brown
+    base_url: https://brownbears.com
+    verified: true
+  - id: columbia
+    name: Columbia
+    base_url: https://gocolumbialions.com
+    verified: false
+  - id: cornell
+    name: Cornell
+    base_url: https://cornellbigred.com
+    verified: true
+    # Seen: /sports/football/stats/2004-05/... — try the split-year slug first.
+    season_slug_patterns: ["{year}-{next_yy}", "{year}"]
+  - id: dartmouth
+    name: Dartmouth
+    base_url: https://dartmouthsports.com
+    verified: true
+  - id: harvard
+    name: Harvard
+    base_url: https://gocrimson.com
+    verified: true
+  - id: penn
+    name: Penn
+    base_url: https://pennathletics.com
+    verified: true
+  - id: princeton
+    name: Princeton
+    base_url: https://goprincetontigers.com
+    verified: true
+  - id: yale
+    name: Yale
+    base_url: https://yalebulldogs.com
+    verified: true

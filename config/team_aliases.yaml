@@ -1,0 +1,10 @@
+# canonical_id: [raw names seen on source pages]  (matching is case-insensitive)
+# Extend as the crawl turns up new spellings; unknown names are slugified and logged.
+brown: [Brown, Brown University, BRWN, BRO]
+columbia: [Columbia, Columbia University, COL]
+cornell: [Cornell, Cornell University, COR, CORN]
+dartmouth: [Dartmouth, Dartmouth College, DAR, DART]
+harvard: [Harvard, Harvard University, HAR, HARV]
+penn: [Penn, Pennsylvania, University of Pennsylvania, PENN]
+princeton: [Princeton, Princeton University, PRIN, PRI]
+yale: [Yale, Yale University, YAL, YALE]

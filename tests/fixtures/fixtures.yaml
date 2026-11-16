@@ -1,0 +1,12 @@
+# Pages saved as test fixtures by `python -m ivydata fixtures` (run locally; needs internet).
+# name -> url. Saved to tests/fixtures/<name>.html. A 404 is reported and skipped.
+boxscore_harvard_yale_2025: https://gocrimson.com/sports/football/stats/2025/yale-university/boxscore/32128
+boxscore_dartmouth_yale_2024_ot: https://yalebulldogs.com/sports/football/stats/2024/dartmouth/boxscore/18407
+boxscore_penn_yale_2004: https://pennathletics.com/sports/football/stats/2004/yale/boxscore/10596
+boxscore_cornell_yale_2004: https://cornellbigred.com/sports/football/stats/2004-05/yale-university/boxscore/4180
+schedule_yale_2025: https://yalebulldogs.com/sports/football/schedule/2025
+schedule_yale_2004: https://yalebulldogs.com/sports/football/schedule/2004
+schedule_harvard_2018_fenway: https://gocrimson.com/sports/football/schedule/2018
+schedule_harvard_2026_upcoming: https://gocrimson.com/sports/football/schedule/2026
+schedule_cornell_2004: https://cornellbigred.com/sports/football/schedule/2004-05
+news_yale_2004_the_game: https://yalebulldogs.com/news/2004/11/20/11_20_2004_4186.aspx

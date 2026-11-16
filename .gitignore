@@ -1,0 +1,18 @@
+# Raw HTML cache — never committed (AGENTS.md hard rule 3)
+data/raw/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,80 @@
+# Data dictionary
+
+Conventions: CSV, UTF-8, header row. Dates `YYYY-MM-DD`. Booleans `true`/`false`.
+Missing = empty cell (never `0`). Team ids are lowercase slugs (`yale`, `holy-cross`).
+
+## `games.csv` — one row per game
+
+| column | type | description |
+|---|---|---|
+| `game_id` | str | `{YYYYMMDD}-{away}-at-{home}`, or `{YYYYMMDD}-{a}-vs-{b}` (alphabetical) at neutral sites |
+| `season` | int | season year (fall), e.g. `2025` |
+| `date` | date | game date (local) |
+| `home_team` | str | canonical team id (for neutral sites: the team listed as home by the source) |
+| `away_team` | str | canonical team id |
+| `neutral_site` | bool | `true` if neither team played at its home stadium (e.g. Harvard–Yale at Fenway 2018, 2026) |
+| `stadium` | str | as printed by source |
+| `city` | str | as printed by source |
+| `home_pts`, `away_pts` | int | final score (empty for not-yet-played `current` games) |
+| `home_q1`…`home_q4`, `away_q1`…`away_q4` | int | points by quarter |
+| `home_ot`, `away_ot` | int | total overtime points (empty if no OT) |
+| `num_ot` | int | number of overtime periods (0 if none) |
+| `ivy_game` | bool | both teams are Ivy League members |
+| `attendance` | int | as printed |
+| `stats_level` | str | `full` (box score parsed) or `score_only` (schedule result only) |
+| `split` | str | `train` / `test` / `current` from `config/splits.yaml` |
+| `sources_agree` | bool | for games with two sources: did score + date match? empty if one source |
+| `source_urls` | str | `|`-separated URLs used |
+
+## `team_game_stats.csv` — one row per team per game (two rows per game)
+
+Identity and context:
+
+| column | type | description |
+|---|---|---|
+| `game_id`, `season`, `date`, `split`, `stats_level` | | copied from `games` |
+| `team`, `opponent` | str | canonical team ids |
+| `is_home` | bool | team is `home_team` in `games` |
+| `neutral_site` | bool | copied |
+| `points`, `points_allowed` | int | final score from this team's perspective |
+
+Pre-game context (computed from earlier rows only; **never** from box-score headers):
+
+| column | type | description |
+|---|---|---|
+| `games_before` | int | games this team played earlier in the same season |
+| `wins_before`, `losses_before`, `ties_before` | int | season record entering the game |
+| `ivy_wins_before`, `ivy_losses_before` | int | Ivy record entering the game |
+
+Box-score team stats (empty when `stats_level = score_only`):
+
+| column | type | description |
+|---|---|---|
+| `first_downs` | int | |
+| `rush_att`, `rush_yds`, `rush_td` | int | |
+| `pass_cmp`, `pass_att`, `pass_yds`, `pass_td`, `pass_int` | int | `pass_int` = interceptions thrown |
+| `total_plays`, `total_yds` | int | |
+| `fumbles`, `fumbles_lost` | int | |
+| `turnovers` | int | `pass_int + fumbles_lost` |
+| `penalties`, `penalty_yds` | int | |
+| `third_down_conv`, `third_down_att` | int | |
+| `fourth_down_conv`, `fourth_down_att` | int | |
+| `sacks_allowed`, `sack_yds_lost` | int | if reported |
+| `punts`, `punt_yds` | int | |
+| `time_of_possession_s` | int | seconds |
+
+## `coverage_report.csv` — one row per (school, season)
+
+| column | description |
+|---|---|
+| `school`, `season` | |
+| `schedule_url` | the URL that worked (empty if none) |
+| `season_slug` | which slug pattern worked |
+| `games_on_schedule` | rows found on the schedule page |
+| `boxscores_found` | box-score links found |
+| `level` | `full` (all games have box scores), `partial`, `score_only`, `missing` |
+| `notes` | free text, e.g. "box scores linked only from news recaps" |
+
+## `data/manifest/urls.csv` — one row per fetched URL
+
+`url, school, season, kind (schedule|boxscore|robots), status, fetched_at, sha256, season_slug`

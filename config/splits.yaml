@@ -1,0 +1,10 @@
+# Season-based splits for the modeling team. Change the cutoffs here only.
+first_season: 2000
+last_season: 2026
+
+skip_seasons: [2020]   # Ivy League did not play fall 2020
+
+splits:
+  train:   {from: 2000, to: 2023}
+  test:    {from: 2024, to: 2025}   # held out: predict these before 2026
+  current: {from: 2026, to: 2026}   # in progress; final target is Harvard–Yale, 2026-11-21
