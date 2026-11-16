@@ -13,18 +13,20 @@ Missing = empty cell (never `0`). Team ids are lowercase slugs (`yale`, `holy-cr
 | `home_team` | str | canonical team id (for neutral sites: the team listed as home by the source) |
 | `away_team` | str | canonical team id |
 | `neutral_site` | bool | `true` if neither team played at its home stadium (e.g. Harvard–Yale at Fenway 2018, 2026) |
-| `stadium` | str | as printed by source |
-| `city` | str | as printed by source |
+| `venue` | str | stadium and city as printed by the source |
 | `home_pts`, `away_pts` | int | final score (empty for not-yet-played `current` games) |
 | `home_q1`…`home_q4`, `away_q1`…`away_q4` | int | points by quarter |
 | `home_ot`, `away_ot` | int | total overtime points (empty if no OT) |
 | `num_ot` | int | number of overtime periods (0 if none) |
 | `ivy_game` | bool | both teams are Ivy League members |
-| `attendance` | int | as printed |
+| `attendance` | int | as printed (box-score pass) |
+| `status` | str | `final`, `scheduled`, or the source's text (e.g. `canceled`) |
 | `stats_level` | str | `full` (box score parsed) or `score_only` (schedule result only) |
 | `split` | str | `train` / `test` / `current` from `config/splits.yaml` |
-| `sources_agree` | bool | for games with two sources: did score + date match? empty if one source |
-| `source_urls` | str | `|`-separated URLs used |
+| `primary_source` | str | `official:<school>` or `wikipedia:<school>` — the copy whose values are used |
+| `sources` | str | every copy found, `|`-separated (up to 4: both schools × both sources) |
+| `sources_agree` | bool | all copies agree on date, score and home/away; empty if only one copy |
+| `source_urls` | str | `|`-separated URLs (schedule pages and any box-score links) |
 
 ## `team_game_stats.csv` — one row per team per game (two rows per game)
 
@@ -36,9 +38,12 @@ Identity and context:
 | `team`, `opponent` | str | canonical team ids |
 | `is_home` | bool | team is `home_team` in `games` |
 | `neutral_site` | bool | copied |
+| `ivy_game` | bool | copied |
 | `points`, `points_allowed` | int | final score from this team's perspective |
+| `result` | str | `W` / `L` / `T`, empty if not played |
 
-Pre-game context (computed from earlier rows only; **never** from box-score headers):
+Pre-game context (computed from earlier rows only; **never** from box-score headers). Empty
+for non-Ivy teams, whose other games are not in the dataset:
 
 | column | type | description |
 |---|---|---|
@@ -103,3 +108,23 @@ Rows are sorted by (`school`, numeric `season`, `kind`, `url`). Successful retri
 their error row; failures outside the current selection remain. Requests that fail before
 an HTTP response exists appear here without a fabricated manifest status. Robots responses
 are recorded in the URL manifest using their actual cached status.
+
+## `data/reports/score_coverage.csv` — score build, one row per (school, season)
+
+Written by `python -m ivydata scores` (the v0.1 score-level build).
+
+| column | description |
+|---|---|
+| `school`, `season` | |
+| `schedule_source` | `official` or `wikipedia` — which schedule page supplied this school-season |
+| `schedule_url` | the page used |
+| `games_on_schedule` | rows on that page |
+| `games_in_dataset` | games involving this school in `games.csv` |
+| `games_with_scores` | of those, with a final score |
+| `boxscore_links` | of those, with an official box-score link |
+| `level` | `full` (every game has a box-score link), `partial`, `score_only`, `missing` |
+
+## `data/manifest/score_sources.csv` — pages behind the score build
+
+Same columns as `urls.csv`; `kind` is `schedule` (official site) or `wikipedia`, and for
+Wikipedia `sha256` holds `revid:<revision id>` of the article revision used.

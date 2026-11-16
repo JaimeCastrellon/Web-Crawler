@@ -18,6 +18,7 @@ class School:
     base_url: str
     season_slug_patterns: tuple[str, ...]
     verified: bool = False
+    crawlable: bool = True  # False: site blocks automated access (bot challenge)
 
     def season_slugs(self, season: int) -> list[str]:
         """Candidate season slugs for this school, in the order to try them."""
@@ -86,6 +87,7 @@ def load_config(config_dir: Path = CONFIG_DIR) -> Config:
             base_url=s["base_url"].rstrip("/"),
             season_slug_patterns=tuple(s.get("season_slug_patterns", default_patterns)),
             verified=bool(s.get("verified", False)),
+            crawlable=bool(s.get("crawlable", True)),
         )
         for s in src["schools"]
     )

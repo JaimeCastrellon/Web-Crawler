@@ -37,6 +37,40 @@ HTTP 200 alone does not prove a usable fixture. Inspect captured pages before co
 fixtures, especially Harvard's. A cached challenge response requires an explicit
 `--refresh` to replace. Do not bypass site access controls.
 
+### Score-level crawl from a browser (2026-11-16)
+
+Every site's `robots.txt` allows `/sports/` and sets **`Crawl-delay: 30`** (now the
+configured minimum). The v0.1 score build crawled schedule pages from a browser tab on each
+site (`tools/browser/sidearm_schedule_crawler.js`), one request per 31 s per host:
+
+| school | browser-tab crawl result | used in v0.1 |
+|---|---|---|
+| Cornell | ok, 2000–2026 (slug `2004-05`) | official |
+| Penn | ok, 2000–2026 | official |
+| Yale | ok, 2000–2026 | official |
+| Harvard | Imperva/Incapsula challenge | Wikipedia |
+| Brown, Columbia, Dartmouth, Princeton | Imperva/Incapsula challenge to the browser tab, although the Python `Fetcher` above received schedule content | Wikipedia |
+| (league) ivyleague.com | Imperva/Incapsula challenge; robots also asks for `Visit-time: 0100-0645` | — |
+
+So Brown, Columbia, Dartmouth and Princeton can likely be crawled with `python -m ivydata
+crawl` (Harvard cannot). Doing so would make their games official-primary in the next build.
+**We do not attempt to get past bot protection;** `crawlable: false` in
+`config/sources.yaml` marks Harvard.
+
+## Secondary source — Wikipedia
+
+Team-season articles (`{year} {School} {Mascot} football team`) carry schedule/result tables,
+either as `{{CFB schedule entry}}` templates (≈2011+) or as older positional
+`{{CFB schedule}}` rows. All 208 school-seasons (8 × 2000–2026, no 2020) exist. Fetched via the
+MediaWiki API (`action=query&prop=revisions`, 40 titles per request, 1.5 s apart, with an
+`Api-User-Agent`) by `tools/browser/wikipedia_schedule_export.js`. Content is CC BY-SA 4.0;
+the revision id of every page used is recorded in `data/manifest/score_sources.csv`.
+
+**Precedence:** official athletics site > Wikipedia. Every game lists all sources that had it
+(`sources`), the one used (`primary_source`), and whether they agreed (`sources_agree`).
+Wikipedia pages disagree with each other on a handful of 2000–2012 games (home/away or a
+score); where an official page covers the game, it settles it.
+
 ## Known quirks
 - **First bounded crawl (2026-11-16):** Yale 2004 has 10 schedule rows with results and
   9 box-score links. All 9 linked Yale box-score URLs returned HTTP 500 after the fetcher's
@@ -61,8 +95,8 @@ fixtures, especially Harvard's. A cached challenge response requires an explicit
    access. Record any fallback source in `source_urls`.
 
 ## Etiquette (enforced in `Fetcher`)
-- Honor `robots.txt` and any `Crawl-delay`.
-- One request at a time per host, ≥ 3 seconds apart.
+- Honor `robots.txt` and any `Crawl-delay` (30 s on all Ivy sites).
+- One request at a time per host, ≥ `min_delay_seconds` apart.
 - User-Agent: `ivy-football-data/0.1 (+https://github.com/JaimeCastrellon/Web-Crawler)`.
 - Cache every response; a rebuild never re-fetches.
 - Raw HTML stays local (`data/raw/` is gitignored). We publish only derived factual data

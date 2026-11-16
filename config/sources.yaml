@@ -1,9 +1,11 @@
 # Ivy League athletics sites (all on the Sidearm Sports platform).
-# `verified` = base URL confirmed to serve football pages; task 1 confirms the rest.
+# `verified` = base URL confirmed to serve football pages (2026-11-16).
+# `crawlable: false` = the site answers our requests with an Imperva/Incapsula bot challenge.
+# We do not try to get around that; those schedules come from Wikipedia (docs/SOURCES.md).
 
 crawl:
   user_agent: "ivy-football-data/0.1 (+https://github.com/JaimeCastrellon/Web-Crawler)"
-  min_delay_seconds: 3.0     # per host; never lower this
+  min_delay_seconds: 3.0     # per host floor; Fetcher also honors robots Crawl-delay (30 s on all Ivy sites)
   timeout_seconds: 30
   max_retries: 3
 
@@ -38,6 +40,7 @@ schools:
     name: Harvard
     base_url: https://gocrimson.com
     verified: true
+    crawlable: false
   - id: penn
     name: Penn
     base_url: https://pennathletics.com

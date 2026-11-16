@@ -8,3 +8,10 @@ harvard: [Harvard, Harvard University, HAR, HARV]
 penn: [Penn, Pennsylvania, University of Pennsylvania, PENN]
 princeton: [Princeton, Princeton University, PRIN, PRI]
 yale: [Yale, Yale University, YAL, YALE]
+
+# Non-Ivy opponents whose names differ between sources
+boston-college: [Boston College]
+william-and-mary: [William & Mary, College of William & Mary, William and Mary]
+holy-cross: [Holy Cross, College of the Holy Cross]
+uconn: [UConn, Connecticut]
+st-francis-pa: [Saint Francis (PA), Saint Francis, St. Francis (PA), Saint Francis U.]

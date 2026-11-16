@@ -11,6 +11,19 @@ consumes the files in `data/processed/`.
 > No public, game-level Ivy League football dataset covering 2000+ with team box-score stats
 > appears to exist, so we are building one.
 
+## Status (2026-11-16)
+
+**v0.1-data is built:** every game from 2000 through the 2026 regular season — **1,355 games**
+(26 seasons × 28 Ivy games + non-conference + 2025 FCS playoff games), final scores,
+home/away/neutral, pre-game records and `train`/`test`/`current` splits. Box-score stats
+(quarters, yards, turnovers…) are the next pass.
+
+Sources: Yale, Cornell and Penn's official athletics sites (crawled at their robots.txt
+`Crawl-delay` of 30 s) plus Wikipedia team-season articles for all eight schools. Harvard,
+Brown, Columbia, Dartmouth and Princeton's sites block automated access, so games among those
+five come from Wikipedia. 963 games have two or more independent copies; 22 disagree and are
+listed in `data/reports/validation_report.md`, with official-site values used where available.
+
 ## What you get
 
 | File | One row per | Notes |
@@ -57,8 +70,10 @@ Details: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Sources and crawl etiqu
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 pytest                      # offline tests against saved HTML fixtures
-python -m ivydata crawl     # fetch (polite, cached in data/raw/, not committed)
-python -m ivydata build     # parse → normalize → validate → data/processed/
+# rebuild the score-level dataset from the saved source exports
+python -m ivydata scores \
+  --official data/sources/ivy_official_{cornell,penn,yale}.json \
+  --wikipedia data/sources/ivy_wikipedia_schedules.json
 ```
 
 ## How this repo is built

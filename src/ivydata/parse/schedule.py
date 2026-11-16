@@ -19,6 +19,10 @@ class ScheduleRow:
     opponent_points: int | None
     boxscore_url: str | None
     page_url: str
+    num_ot: int = 0
+    status_text: str | None = None  # e.g. "Canceled", "Postponed" when there is no result
+    source_game_id: str | None = None  # Sidearm data-game-id
+    conference_text: str | None = None  # e.g. "Ivy *"
 
 
 @dataclass

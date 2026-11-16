@@ -73,6 +73,10 @@ def main(argv: list[str] | None = None) -> int:
     c.add_argument("--seasons", help="e.g. 2000-2026 or 2024,2025; default from splits.yaml")
     c.add_argument("--refresh", action="store_true", help="re-fetch even if cached")
 
+    s = sub.add_parser("scores", help="build score-level CSVs from schedule exports (v0.1)")
+    s.add_argument("--official", nargs="*", default=[], help="athletics-site schedule exports")
+    s.add_argument("--wikipedia", help="Wikipedia team-season export (fallback source)")
+
     sub.add_parser("coverage", help="write data/reports/coverage_report.csv (Task 3)")
     sub.add_parser("build", help="parse + merge + write data/processed/ (Task 7)")
     sub.add_parser("validate", help="write data/reports/validation_report.md (Task 8)")
@@ -90,7 +94,7 @@ def main(argv: list[str] | None = None) -> int:
             f"({len(seasons)} seasons, skipping {sorted(config.splits.skip_seasons)})"
         )
         for s in config.schools:
-            flag = "" if s.verified else "  (unverified)"
+            flag = "" if s.crawlable else "  (blocks automated access)"
             print(f"  {s.id:<10} {s.base_url}{flag}")
         for name, (lo, hi) in config.splits.ranges.items():
             print(f"  split {name:<8} {lo}-{hi}")
@@ -116,6 +120,24 @@ def main(argv: list[str] | None = None) -> int:
         for school in sorted(report["school"].unique()):
             print(f"{school:<11}" + " ".join(f" {cells[school, year]}" for year in years))
         print("F full | P partial | S score-only | - missing; see coverage_report.csv for notes")
+        return 0
+
+    if args.cmd == "scores":
+        from pathlib import Path
+
+        from ivydata.scores import build_scores, write_validation_report
+
+        r = build_scores(
+            [Path(x) for x in args.official],
+            Path(args.wikipedia) if args.wikipedia else None,
+            REPO_ROOT,
+            config,
+        )
+        write_validation_report(r, REPO_ROOT / "data" / "reports" / "validation_report.md")
+        print(
+            f"{len(r['games'])} games, {len(r['team_rows'])} team rows, "
+            f"{len(r['conflicts'])} source conflicts, {len(r['warnings'])} warnings"
+        )
         return 0
 
     raise NotImplementedError(f"`{args.cmd}` is not implemented yet — see docs/TASKS.md")
