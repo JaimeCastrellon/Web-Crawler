@@ -110,9 +110,9 @@ def add_pregame_records(team_stats: pd.DataFrame) -> pd.DataFrame:
         for row in day_rows.itertuples(index=False):
             previous = counts[(row.season, row.team)]
             for key, value in zip(PREGAME_FIELDS, previous, strict=True):
-                records[key].append(value)
+                records[key].append(value if is_ivy(row.team) else None)
         for row in day_rows.itertuples(index=False):
-            if pd.isna(row.points) or pd.isna(row.points_allowed):
+            if not is_ivy(row.team) or pd.isna(row.points) or pd.isna(row.points_allowed):
                 continue
             counter = counts[(row.season, row.team)]
             counter[0] += 1

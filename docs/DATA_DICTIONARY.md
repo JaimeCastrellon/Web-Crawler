@@ -46,6 +46,9 @@ Pre-game context (computed from earlier rows only; **never** from box-score head
 | `wins_before`, `losses_before`, `ties_before` | int | season record entering the game |
 | `ivy_wins_before`, `ivy_losses_before` | int | Ivy record entering the game |
 
+Non-Ivy opponents' pre-game record fields are empty because their full schedules
+are not collected. Their observed Ivy matchups cannot establish true season records.
+
 Box-score team stats (empty when `stats_level = score_only`):
 
 | column | type | description |

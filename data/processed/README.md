@@ -8,7 +8,8 @@ score and do not update pre-game records. Other played games have known final sc
 
 The default split configuration assigns 1,196 games to train, 107 to test and 52 to
 current. All records are recomputed from completed games on strictly earlier dates.
-Non-Ivy opponents' records cover only their appearances in this dataset.
+Non-Ivy opponents' record fields are blank: their complete schedules are not
+collected, so their true pre-game season records are unknown.
 
 The shared schema includes stadium/city/turnovers, and neutral-site `is_home` follows
 the designated home team while `neutral_site` remains a separate flag. Only parsed
