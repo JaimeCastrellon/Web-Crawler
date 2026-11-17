@@ -282,4 +282,4 @@ def test_explicit_ot_count_refines_single_aggregate_box_column():
     row = ExportScheduleRow(**schedule().__dict__, num_ot=2)
     result = merge_games([b], [row], ALIASES)
     assert result.games[0]["num_ot"] == 2
-    assert any("conflicting num_ot" in c for c in result.conflicts)
+    assert not any("conflicting num_ot" in c for c in result.conflicts)

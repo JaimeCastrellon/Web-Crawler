@@ -183,27 +183,28 @@ def _merge_group(copies: list[_Copy], result: MergeResult) -> None:
     choose("neutral_site", [(c.url, c.neutral) for c in copies], True)
     if not neutral:
         choose("home_team", [(c.url, c.home) for c in copies], True)
+
+    def observation(copy: _Copy, key: str):
+        value = _value(copy, key, home, away)
+        if key == "num_ot" and copy.aggregate_ot and value is not None:
+            if any(
+                not other.aggregate_ot
+                and other.game.get("num_ot") is not None
+                and other.game["num_ot"] >= value
+                for other in copies
+            ):
+                return None  # a lower bound is not a contrary exact count
+        return value
+
     game = {
         key: choose(
             key,
-            [(c.url, _value(c, key, home, away)) for c in copies],
+            [(c.url, observation(c, key)) for c in copies],
             core=key in ("home_pts", "away_pts"),
         )
         for key in GAME_FIELDS
         if key not in ("date", "home_raw", "away_raw")
     }
-    # A single aggregate OT column proves at least one session, not exactly
-    # one. Retain the disagreement, but let an explicit larger period count
-    # refine that lower bound instead of discarding the source's 2OT label.
-    ot_copies = [c for c in copies if c.game.get("num_ot") is not None]
-    if ot_copies and ot_copies[0].aggregate_ot:
-        explicit = [
-            c.game["num_ot"]
-            for c in ot_copies
-            if not c.aggregate_ot and c.game["num_ot"] >= game["num_ot"]
-        ]
-        if explicit:
-            game["num_ot"] = explicit[0]
     stats_rows = []
     for team, opponent in ((away, home), (home, away)):
         stats = {
