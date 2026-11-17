@@ -2,7 +2,7 @@
 
 1,355 unique games and 2,710 team rows across 26 seasons, excluding 2020. The shared
 build combines the original PR #13's saved row exports with verified cached schedules
-and recovered box scores. There are 671 games with box-score statistics and 684
+and recovered box scores. There are 691 games with box-score statistics and 664
 score-only entries. Eight canceled 2001 games and four future 2026 games have no final
 score and do not update pre-game records. Other played games have known final scores.
 
