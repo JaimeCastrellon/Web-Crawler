@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import logging
 import re
+from datetime import date, timedelta
 from hashlib import sha1, sha256
 from pathlib import Path
 from tempfile import NamedTemporaryFile
@@ -23,6 +24,9 @@ from ivydata.crawl.pages import (
     declared_schedule_season,
     has_boxscore_content,
 )
+from ivydata.normalize.teams import canonical_team_id
+from ivydata.parse.boxscore import TEAM_STAT_FIELDS, parse_boxscore
+from ivydata.parse.schedule import parse_schedule
 
 Level = Literal["full", "partial", "score_only", "missing"]
 REPORT_COLUMNS = [
@@ -87,7 +91,14 @@ def _cached_html(row: dict[str, str]) -> tuple[str | None, str]:
 
 
 def _schedule_counts(
-    html: str, page_url: str, regex: str, boxes: dict[str, dict[str, str]]
+    html: str,
+    page_url: str,
+    regex: str,
+    boxes: dict[str, dict[str, str]],
+    school: str,
+    season: int,
+    aliases: dict[str, str],
+    recovered: dict[tuple, list[str]],
 ) -> tuple[int, int, int, list[str]]:
     games = [game for game in LexborHTMLParser(html).css(GAME_SELECTOR) if game.text(strip=True)]
     found = scores = 0
@@ -121,6 +132,28 @@ def _schedule_counts(
             if usable and url not in used and not available:
                 used.add(url)
                 available = True
+        if not available and recovered:
+            parsed = parse_schedule(game.html, school, season, page_url)
+            if len(parsed.rows) == 1:
+                row = parsed.rows[0]
+                try:
+                    pair = tuple(sorted((school, canonical_team_id(row.opponent_raw, aliases))))
+                    day = date.fromisoformat(row.date)
+                    matches = []
+                    for offset in (-1, 0, 1):
+                        matches.extend(
+                            recovered.get(
+                                (season, (day + timedelta(days=offset)).isoformat(), pair), []
+                            )
+                        )
+                    for url in sorted(set(matches)):
+                        if url not in used:
+                            used.add(url)
+                            available = True
+                            notes.append(f"recovered box score matched by teams/date: {url}")
+                            break
+                except ValueError as exc:
+                    notes.append(f"cannot match recovered box score ({exc}): {page_url}")
         found += available
     return len(games), found, scores, notes
 
@@ -129,9 +162,54 @@ def build_coverage_report() -> pd.DataFrame:
     """One row per (school, season) with the columns in docs/DATA_DICTIONARY.md,
     built from the manifest and the cached schedule pages."""
     config = load_config()
-    manifest = _read_csv(REPO_ROOT / "data/manifest/urls.csv", MANIFEST_COLUMNS)
+    manifests = [
+        REPO_ROOT / "data/manifest/urls.csv",
+        *sorted((REPO_ROOT / "data/manifest/recovered").glob("*.csv")),
+    ]
+    by_url = {}
+    for path in manifests:
+        for row in _read_csv(path, MANIFEST_COLUMNS):
+            previous = by_url.get(row["url"])
+            keys = ("kind", "season", "status", "sha256") + (
+                ("school",) if row["kind"] == "schedule" else ()
+            )
+            if previous and any(previous[k] != row[k] for k in keys):
+                raise ValueError(f"conflicting manifest entries: {row['url']}")
+            by_url[row["url"]] = row
+    manifest = list(by_url.values())
     errors = _read_csv(REPO_ROOT / "data/reports/crawl_errors.csv", ERROR_COLUMNS)
     boxes = {row["url"]: row for row in manifest if row["kind"] == "boxscore"}
+    recovered = {}
+    recovery_errors = []
+    for url, row in sorted(boxes.items()):
+        if row["status"] != "200":
+            continue
+        html, reason = _cached_html(row)
+        if html is None:
+            recovery_errors.append((row, reason))
+            continue
+        parsed = parse_boxscore(html, url)
+        if not parsed.game["date"] or not any(
+            t[k] is not None for t in parsed.team_stats for k in TEAM_STAT_FIELDS
+        ):
+            continue
+        try:
+            pair = tuple(
+                sorted(
+                    canonical_team_id(parsed.game[k] or "", config.team_aliases)
+                    for k in ("home_raw", "away_raw")
+                )
+            )
+            day = date.fromisoformat(parsed.game["date"])
+            season = day.year - (day.month <= 3)
+            if season != int(row["season"]) or pair[0] == pair[1]:
+                recovery_errors.append(
+                    (row, f"recovered game conflicts with manifest season/teams: {url}")
+                )
+                continue
+            recovered.setdefault((season, day.isoformat(), pair), []).append(url)
+        except ValueError as exc:
+            recovery_errors.append((row, f"unusable recovery identity ({exc}): {url}"))
     rows = []
     for school in sorted(config.schools, key=lambda school: school.id):
         for season in sorted(config.splits.seasons()):
@@ -154,6 +232,11 @@ def build_coverage_report() -> pd.DataFrame:
                 for row in errors
                 if row["school"] == school.id and int(row["season"]) == season
             ]
+            notes.extend(
+                reason
+                for entry, reason in recovery_errors
+                if entry["school"] == school.id and int(entry["season"]) == season
+            )
             chosen = None
             games = found = scores = 0
             for candidate in schedules:
@@ -168,7 +251,14 @@ def build_coverage_report() -> pd.DataFrame:
                     )
                     continue
                 count, box_count, score_count, warnings = _schedule_counts(
-                    html, candidate["url"], config.boxscore_regex, boxes
+                    html,
+                    candidate["url"],
+                    config.boxscore_regex,
+                    boxes,
+                    school.id,
+                    season,
+                    config.team_aliases,
+                    recovered,
                 )
                 if not count:
                     notes.append(f"no recognizable schedule games: {candidate['url']}")
@@ -177,8 +267,21 @@ def build_coverage_report() -> pd.DataFrame:
                 games, found, scores = count, box_count, score_count
                 notes.extend(warnings)
                 break
-            if not schedules and not notes:
-                notes.append("not crawled (no schedule manifest entry)")
+            if not schedules:
+                known = sorted(
+                    {
+                        url
+                        for (year, _, pair), urls in recovered.items()
+                        if year == season and school.id in pair
+                        for url in urls
+                    }
+                )
+                if known:
+                    notes.append(
+                        "no schedule manifest; recovered boxes available: " + ", ".join(known)
+                    )
+                elif not notes:
+                    notes.append("not crawled (no schedule manifest entry)")
             if games and not found and not scores:
                 notes.append("schedule present; no results or usable box scores yet")
             notes = sorted(set(notes))

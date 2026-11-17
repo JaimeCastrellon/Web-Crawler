@@ -20,7 +20,9 @@ def _clean(raw: str) -> str:
     previous = None
     while previous != name:
         previous = name
-        name = re.sub(r"^(?:at\b|vs\.?(?:\s|$)|#\s*\d+\b|no\.?\s*\d+\b)\s*", "", name).strip()
+        name = re.sub(
+            r"^(?:at\b|vs\.?(?:\s|$)|#\s*\d+(?:/\d+)*\b|no\.?\s*\d+\b|\(rv\))\s*", "", name
+        ).strip()
     previous = None
     while previous != name:
         previous = name

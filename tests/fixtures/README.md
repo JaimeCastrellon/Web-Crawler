@@ -65,3 +65,14 @@ challenge as data. Harvard's original URL stays in the capture list for future r
 Missing rushing/passing TD lines in the Columbia/Dartmouth archived team totals stay
 `None`; they are not inferred from player statistics or scoring plays. Printed header
 records remain source text only and are never extracted.
+
+## Brown modern away-game excerpt
+
+`boxscore_brown_2004_rhode_island_away.html` is from
+`https://brownbears.com/sports/football/stats/2004/rhode-island/boxscore/12939`,
+captured through Fetcher on 2026-11-16. It retains the line score, team statistics,
+game information, and a reduced JSON reference graph containing only home/visiting
+team names and the tenant home/away flag. Reference indices were renumbered without
+changing these values; records, player data and unrelated state were removed.
+Brown's displayed table puts Brown second despite the game being at Rhode Island.
+The explicit state correctly identifies Rhode Island as home.

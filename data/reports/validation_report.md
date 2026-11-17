@@ -1,6 +1,6 @@
 # Validation report
 
-Game rows: 10. Errors: 0. Warnings: 16.
+Game rows: 29. Errors: 0. Warnings: 22.
 
 This report checks the data currently present; it does not certify complete historical coverage.
 Ivy counts use completed games and expect seven in full seasons; current split seasons are excluded.
@@ -9,7 +9,8 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 
 | Season | Split | Games | Full stats | Score only |
 |---|---|---:|---:|---:|
-| 2004 | train | 10 | 6 | 4 |
+| 2004 | train | 19 | 15 | 4 |
+| 2025 | test | 10 | 10 | 0 |
 
 ## Issues
 
@@ -27,10 +28,16 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 
 ### ivy_game_count
 
-- **warning**: brown, season 2004: 1 completed Ivy games; expected 7 in a full season
-- **warning**: columbia, season 2004: 1 completed Ivy games; expected 7 in a full season
-- **warning**: cornell, season 2004: 1 completed Ivy games; expected 7 in a full season
-- **warning**: dartmouth, season 2004: 1 completed Ivy games; expected 7 in a full season
-- **warning**: harvard, season 2004: 1 completed Ivy games; expected 7 in a full season
-- **warning**: penn, season 2004: 1 completed Ivy games; expected 7 in a full season
-- **warning**: princeton, season 2004: 1 completed Ivy games; expected 7 in a full season
+- **warning**: columbia, season 2004: 2 completed Ivy games; expected 7 in a full season
+- **warning**: columbia, season 2025: 1 completed Ivy games; expected 7 in a full season
+- **warning**: cornell, season 2004: 2 completed Ivy games; expected 7 in a full season
+- **warning**: cornell, season 2025: 1 completed Ivy games; expected 7 in a full season
+- **warning**: dartmouth, season 2004: 2 completed Ivy games; expected 7 in a full season
+- **warning**: dartmouth, season 2025: 1 completed Ivy games; expected 7 in a full season
+- **warning**: harvard, season 2004: 2 completed Ivy games; expected 7 in a full season
+- **warning**: harvard, season 2025: 1 completed Ivy games; expected 7 in a full season
+- **warning**: penn, season 2004: 2 completed Ivy games; expected 7 in a full season
+- **warning**: penn, season 2025: 1 completed Ivy games; expected 7 in a full season
+- **warning**: princeton, season 2004: 2 completed Ivy games; expected 7 in a full season
+- **warning**: princeton, season 2025: 1 completed Ivy games; expected 7 in a full season
+- **warning**: yale, season 2025: 1 completed Ivy games; expected 7 in a full season

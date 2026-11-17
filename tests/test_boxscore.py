@@ -258,3 +258,31 @@ def test_malformed_recognized_stat_row_is_reported():
     pre = re.sub(r"(NET YARDS RUSHING[^\n]*?42) +202", r"\1", fixture("harvard_2004_yale"))
     assert pre != fixture("harvard_2004_yale")
     assert any("malformed" in w for w in parse_boxscore(pre, URL).warnings)
+
+
+def test_modern_away_game_uses_explicit_home_team_state():
+    html = fixture("brown_2004_rhode_island_away")
+    result = parse_boxscore(html, URL)
+    assert result.game["home_raw"] == "RHODE ISLAND"
+    assert result.game["away_raw"] == "Brown"
+    assert result.game["home_pts"] == 13 and result.game["away_pts"] == 20
+    assert result.game["home_q1"] == 7 and result.game["away_q4"] == 3
+    assert result.team_stats[0]["team_raw"] == "Brown" and result.team_stats[0]["is_home"] is False
+    assert (
+        result.team_stats[1]["team_raw"] == "RHODE ISLAND"
+        and result.team_stats[1]["is_home"] is True
+    )
+    assert [
+        (t["rush_yds"], t["pass_yds"], t["sacks_allowed"], t["sack_yds_lost"])
+        for t in result.team_stats
+    ] == [(182, 121, 0, 0), (221, 36, 3, 18)]
+    assert result.warnings == []
+    # Records are not present in the reduced state; adding them changes nothing.
+    changed = html.replace('"name": 4', '"name": 4, "record": 1')
+    assert changed != html
+    assert parse_boxscore(changed, URL) == result
+
+
+def test_invalid_modern_state_reports_url_instead_of_crashing():
+    html = fixture("brown_2004_rhode_island_away").replace('"homeTeam": 2', '"homeTeam": 9999')
+    assert any(URL in w and "home/away state" in w for w in parse_boxscore(html, URL).warnings)
