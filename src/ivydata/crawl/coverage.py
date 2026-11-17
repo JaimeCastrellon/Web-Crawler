@@ -170,8 +170,10 @@ def build_coverage_report() -> pd.DataFrame:
     for path in manifests:
         for row in _read_csv(path, MANIFEST_COLUMNS):
             previous = by_url.get(row["url"])
-            keys = ("kind", "season", "status", "sha256") + (
-                ("school",) if row["kind"] == "schedule" else ()
+            keys = (
+                ("kind", "status", "sha256")
+                + (() if row["kind"] == "robots" else ("season",))
+                + (("school",) if row["kind"] == "schedule" else ())
             )
             if previous and any(previous[k] != row[k] for k in keys):
                 raise ValueError(f"conflicting manifest entries: {row['url']}")
