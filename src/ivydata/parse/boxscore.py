@@ -229,6 +229,11 @@ def _preformatted(result: ParsedBoxscore, blocks: list[LexborNode]) -> bool:
     found_scores = False
     found_stats = False
     for block in blocks:
+        for line_break in block.css("br"):
+            line_break.replace_with("\n")
+        for paragraph in block.css("p, div"):
+            paragraph.insert_before("\n")
+            paragraph.insert_after("\n")
         text = block.text()
         if not found_scores:
             scores = re.findall(r"^\s*(\S[^\n]*?)\.{2,}\s+((?:\d+\s+){4,})-\s*(\d+)", text, re.M)
@@ -237,7 +242,7 @@ def _preformatted(result: ParsedBoxscore, blocks: list[LexborNode]) -> bool:
                     _score(result, side, name.strip(), quarters.split() + [final])
                 found_scores = True
         for match in re.finditer(
-            r"\b(Date|Site|Stadium|Attendance):\s*(.*?)(?=\s{2,}\w[^\n]*?:|\n|$)", text
+            r"\b(Date|Site|Stadium|Attendance):[ \t]*(.*?)(?=[ \t]{2,}\w[^\n]*?:|\n|$)", text
         ):
             _metadata(result, match[1], match[2])
         if not found_stats and "team statistics" in text.lower():
@@ -246,6 +251,18 @@ def _preformatted(result: ParsedBoxscore, blocks: list[LexborNode]) -> bool:
                 columns = re.split(r"\s{2,}", line.strip())
                 label = _key(columns[0].rstrip("."))
                 fields = _PRE_FIELDS.get(label)
+                if fields and len(columns) == 2:
+                    number = r"[+-]?\d[\d,]*"
+                    pattern = {
+                        1: number,
+                        2: rf"{number}\s*(?:-|of)\s*{number}",
+                        3: rf"{number}\s*-\s*{number}\s*-\s*{number}",
+                    }[len(fields)]
+                    if fields == ("time_of_possession_s",):
+                        pattern = r"\d+:\d{2}"
+                    pair = re.fullmatch(rf"({pattern})\s+({pattern})", columns[1], re.I)
+                    if pair:
+                        columns = [columns[0], *pair.groups()]
                 if fields and len(columns) != 3:
                     _warn(result, "malformed team-statistics row", line)
                 elif fields:

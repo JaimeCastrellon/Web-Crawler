@@ -370,6 +370,13 @@ Shared robots responses may have different school/season context in separate
 recovery manifests. Coverage ignores that context for robots, while still rejecting
 conflicting status/content hashes for the same URL.
 
+Legacy `Stats`/`Box Score` labels inside a football schedule game card can link
+to archived news reports or PDFs rather than modern `/boxscore/` paths. Discovery
+retains those URLs but ignores navigation labels and other-sport cards. Archived
+report parsing preserves HTML br/paragraph boundaries and accepts narrow two-team
+columns without splitting a conversion such as `6 of 13`. Blank metadata stays
+missing rather than consuming the next heading. Existing parser schemas are kept.
+
 ## Module interfaces
 
 **Conference recovery.** `crawl/league.py` adds pure

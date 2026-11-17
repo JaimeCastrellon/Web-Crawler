@@ -62,6 +62,24 @@ def test_links_relative_absolute_fragments_and_non_football():
     assert links == [BOX, "https://other.example/sports/football/stats/2025/yale/boxscore/2"]
 
 
+def test_legacy_stats_links_require_football_game_context():
+    html = """<nav><a href="/news/unrelated">Stats</a></nav>
+    <div class="s-game-card"><a href="/news/2007/game.aspx#stats">Stats</a>
+    <a href="/news/2007/game.aspx">Stats</a><a href="/news/recap">Recap</a></div>
+    <li class="sidearm-schedule-game"><a href="/documents/2007/game.pdf">Box Score</a></li>"""
+    config = load_config()
+    root = "https://gocolumbialions.com"
+    assert discover.find_boxscore_links(
+        html, root + "/sports/football/schedule/2007", config.boxscore_regex
+    ) == [root + "/news/2007/game.aspx", root + "/documents/2007/game.pdf"]
+    assert (
+        discover.find_boxscore_links(
+            html, root + "/sports/basketball/schedule/2007", config.boxscore_regex
+        )
+        == []
+    )
+
+
 def test_page_checks_allow_monitoring_on_populated_sports_pages():
     script = '<script src="/_Incapsula_Resource?monitor"></script>'
     assert challenge_provider(script) == "Incapsula"
