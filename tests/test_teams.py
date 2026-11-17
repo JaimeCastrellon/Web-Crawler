@@ -51,3 +51,16 @@ def test_is_ivy():
     assert all(teams.is_ivy(t) for t in teams.IVY_TEAMS)
     assert not teams.is_ivy("holy-cross")
     assert not teams.is_ivy("Yale")
+
+
+@pytest.mark.parametrize(
+    "raw",
+    [
+        "Harvard (5–3, 3–1 Ivy)",
+        "Harvard (5-3) (3-1 Ivy)",
+        "Harvard 5-3",
+        "Harvard ( 5-3, Ivy 3-1 )",
+    ],
+)
+def test_decorated_records_never_become_team_ids(raw):
+    assert teams.canonical_team_id(raw, load_config().team_aliases) == "harvard"
