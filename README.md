@@ -53,13 +53,17 @@ Details: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Sources and crawl etiqu
 
 ## Current data coverage
 
-The processed snapshot contains **29 games** from Yale 2004 and Brown 2004/2025:
-25 with team box-score statistics and four score-only. Coverage verifies three of
-the 208 configured school-seasons: Brown 2004/2025 are full, Yale 2004 is partial.
-The broader 2000–2026 crawl and recovery work remain; the separate proposed
-1,355-game scores dataset is not integrated. The validation report describes this
-partial snapshot. Pre-game records count completed games present in it; partial
-opponent schedules do not yield complete season records.
+The integrated score snapshot contains **1,355 unique games and 2,710 team rows**
+across the 26 seasons from 2000–2026 (2020 excluded). It combines saved official
+schedule exports, Wikipedia fallbacks, and checksum-verified cached sources.
+**28 games have box-score statistics**; the rest are score-only, including eight
+canceled 2001 entries and four unplayed 2026 games with no final score.
+
+Validation reports no structural errors, and source disagreements remain explicitly
+flagged for review. Broad score coverage does not mean complete official-site or
+box-score coverage: `coverage_report.csv` audits actual cached downloads, while
+`score_coverage.csv` inventories the mixed-source score dataset. Pre-game records
+count earlier completed games in the dataset; non-Ivy opponents have partial schedules.
 
 ## Quick start
 
@@ -72,9 +76,9 @@ python -m ivydata build     # offline parse → merge → pre-game records → d
 python -m ivydata validate  # quality checks + data/reports/validation_report.md
 ```
 
-The build uses only the local cache and the main/recovered URL manifests. A fresh
-checkout has no raw pages: retrieve the manifested sources and record their current
-provenance before building. Missing/corrupt successful cache entries stop the build and
+The build uses the local cache, main/recovered URL manifests, and documented saved
+row exports under `data/sources/`. A fresh checkout has no raw pages: retrieve the manifested raw sources and record
+their current provenance before rebuilding box-score output. Missing/corrupt successful cache entries stop the build and
 preserve existing processed files. Rebuilds with unchanged cache and manifests are
 byte-identical. See `data/reports/build_warnings.csv` for source failures and parse/merge
 diagnostics. `validate` returns nonzero for data errors; coverage/source warnings

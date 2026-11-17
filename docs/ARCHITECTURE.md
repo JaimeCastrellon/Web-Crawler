@@ -304,6 +304,34 @@ explicitly; wrong-season/corrupt recoveries cannot inflate coverage. A recovered
 standalone box without a season schedule is noted but does not certify full-season
 coverage. This extends the original direct-link audit without changing its schema.
 
+**Saved score-export integration.** `build` discovers four documented factual row
+exports under `data/sources/` when present. `scores` is an explicit-input compatibility
+command; both delegate to the same cache checks, canonical merge, pre-game records,
+splits, schemas, and atomic CSV publication. Export-specific optional fields live in
+`ExportScheduleRow`, a subclass, preserving the original `ScheduleRow` contract.
+Source priority is box score → cached schedule → official export → Wikipedia.
+Verified box-score statistics cannot be erased by adding score-only copies.
+
+The source inventory hashes saved export files and canonical JSON page payloads,
+retains Wikipedia revision ids, and labels the provenance tier; these hashes are
+not represented as raw HTTP-body hashes. The original browser acquisition scripts
+are not carried into the integrated workflow. New downloads use Fetcher. Linked
+box-score URLs are discovery metadata only and never source evidence until parsed.
+
+Name normalization handles the verified non-Ivy institution spellings, combined
+rankings, and homecoming annotations. The literal opponent label The Game is
+resolved to the rival only on Yale/Harvard pages. Old positional Wikipedia entries
+can prefix the opponent with @/at; their direction is retained. Missing OT labels
+remain unknown rather than fabricated zeroes. No status column depends on today's
+date. A single reviewed two-day date typo is corrected only with corroborating
+official Penn input; its original date and disagreement remain in diagnostics.
+
+`score_coverage.csv` reports mixed-source game counts and actual parsed-stat counts
+for every configured school/season. It is separate from `coverage_report.csv`,
+which audits checksum-verified downloads and schedules; broad exported score
+coverage does not certify broad raw-cache or full-stat coverage. Explicit source
+disagreements remain warnings for reviewer decisions.
+
 ## Module interfaces
 
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a

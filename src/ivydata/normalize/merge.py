@@ -54,6 +54,7 @@ class _Copy:
     neutral: bool | None
     game: dict
     stats: dict[str, dict]
+    original_date: str | None = None
 
     @property
     def pair(self) -> tuple[str, str]:
@@ -65,7 +66,8 @@ class _Copy:
             v is not None for row in self.stats.values() for v in row.values()
         )
         signature = json.dumps(self.__dict__, sort_keys=True, ensure_ascii=True)
-        return (self.kind != "boxscore", -populated, self.url, signature)
+        priority = {"boxscore": 0, "schedule": 1, "official_export": 2, "wikipedia": 3}
+        return (priority[self.kind], -populated, self.url, signature)
 
 
 def _note(result: MergeResult, message: str) -> None:
@@ -118,11 +120,24 @@ def _schedule_copy(row: ScheduleRow, aliases: dict[str, str]) -> _Copy:
     make_game_id(row.date, home, away, False)
     game = dict.fromkeys(GAME_FIELDS)
     game["date"] = row.date
+    if row.points is not None and row.opponent_points is not None:
+        game["num_ot"] = getattr(row, "num_ot", None)
     game["home_pts"] = row.opponent_points if row.location == "away" else row.points
     game["away_pts"] = row.points if row.location == "away" else row.opponent_points
     # A schedule venue can include city text; do not invent a stadium/city split.
     neutral = row.location == "neutral" or "fenway" in (row.venue or "").lower()
-    return _Copy(row.page_url, "schedule", row.date, row.season, home, away, neutral, game, {})
+    return _Copy(
+        row.page_url,
+        "schedule" if getattr(row, "source_kind", "cached") == "cached" else row.source_kind,
+        row.date,
+        row.season,
+        home,
+        away,
+        neutral,
+        game,
+        {},
+        original_date=getattr(row, "original_date", None),
+    )
 
 
 def _value(copy: _Copy, key: str, home: str, away: str):
@@ -161,7 +176,7 @@ def _merge_group(copies: list[_Copy], result: MergeResult) -> None:
                 agrees = False
         return populated[0][1] if populated else None
 
-    choose("date", [(c.url, c.date) for c in copies], True)
+    choose("date", [(c.url, c.original_date or c.date) for c in copies], True)
     choose("season", [(c.url, c.season) for c in copies], True)
     choose("neutral_site", [(c.url, c.neutral) for c in copies], True)
     if not neutral:

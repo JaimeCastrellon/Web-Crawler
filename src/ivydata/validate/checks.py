@@ -171,7 +171,12 @@ def run_checks(games: pd.DataFrame, team_stats: pd.DataFrame) -> list[Issue]:
                 _number(row[f"{side}_ot"]),
                 _number(row["num_ot"]),
             )
-            if num_ot is not None and num_ot > 0 and ot is None:
+            if (
+                num_ot is not None
+                and num_ot > 0
+                and ot is None
+                and any(q is not None for q in quarters)
+            ):
                 add(
                     "overtime",
                     row,

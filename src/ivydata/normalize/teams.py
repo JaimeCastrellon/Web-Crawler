@@ -21,11 +21,16 @@ def _clean(raw: str) -> str:
     while previous != name:
         previous = name
         name = re.sub(
-            r"^(?:at\b|vs\.?(?:\s|$)|#\s*\d+(?:/\d+)*\b|no\.?\s*\d+\b|\(rv\))\s*", "", name
+            r"^(?:at\b|vs\.?(?:\s|$)|no\.?\s*\d+\b|\(rv\)|"
+            r"(?:#(?:\d+|rv|arv|nr)|rv|arv|nr)(?:/#?(?:\d+|rv|arv|nr|--))*(?=\s|$))\s*",
+            "",
+            name,
         ).strip()
+
     previous = None
     while previous != name:
         previous = name
+        name = re.sub(r"\s*\(homecoming\)\s*$", "", name).strip()
         name = re.sub(r"\s*\(\s*\d+\s*[-–]\s*\d+[^)]*\)\s*$", "", name).strip()
     return re.sub(r"\s+\d+\s*[-–]\s*\d+(?:\s*[-–]\s*\d+)?$", "", name).strip()
 

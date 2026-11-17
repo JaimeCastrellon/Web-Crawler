@@ -70,6 +70,12 @@ def main(argv: list[str] | None = None) -> int:
     f = sub.add_parser("fixtures", help="save test fixture pages (needs internet)")
     f.add_argument("--refresh", action="store_true", help="re-fetch even if cached")
 
+    s = sub.add_parser(
+        "scores", help="build explicit saved score exports through the shared pipeline"
+    )
+    s.add_argument("--official", nargs="*", type=Path, default=[])
+    s.add_argument("--wikipedia", type=Path)
+
     c = sub.add_parser("crawl", help="fetch schedules and box scores (Task 2)")
     c.add_argument("--schools", help="comma-separated ids, default all")
     c.add_argument("--seasons", help="e.g. 2000-2026 or 2024,2025; default from splits.yaml")
@@ -124,6 +130,15 @@ def main(argv: list[str] | None = None) -> int:
         for school in sorted(report["school"].unique()):
             print(f"{school:<11}" + " ".join(f" {cells[school, year]}" for year in years))
         print("F full | P partial | S score-only | - missing; see coverage_report.csv for notes")
+        return 0
+
+    if args.cmd == "scores":
+        from ivydata.scores import build_scores
+
+        if not args.official and args.wikipedia is None:
+            p.error("scores requires --official and/or --wikipedia; use build for default exports")
+        result = build_scores(args.official, args.wikipedia, REPO_ROOT, config)
+        print(f"Built {len(result['games'])} games through the shared pipeline")
         return 0
 
     if args.cmd == "build":

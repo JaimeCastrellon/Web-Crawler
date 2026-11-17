@@ -121,3 +121,27 @@ Coverage also reads `data/manifest/recovered/*.csv` using the same URL-manifest 
 A recovered page may count for another school's schedule only after parsing its game
 date/team identities and team statistics and matching the canonical pair within one
 day. Original download errors and the matched recovery URLs remain visible in notes.
+
+## `data/manifest/score_sources.csv` — saved factual row provenance
+
+`url, school, season, kind (official_export|wikipedia), status, fetched_at, revision_id,
+export_path, export_sha256, payload_sha256, games_found`
+
+`status` and `fetched_at` are the saved export's acquisition metadata. `export_sha256`
+hashes the saved file, and `payload_sha256` hashes the canonical JSON page object
+(sorted keys, ASCII escapes, compact separators). They are not raw HTML-response
+hashes. Wikipedia entries retain revision ids and attribution. Default source paths
+are repository-relative; explicitly supplied external files retain their actual path.
+
+## `data/reports/score_coverage.csv` — mixed-source score inventory
+
+`school, season, schedule_sources, games_in_dataset, games_with_scores, games_with_stats,
+source_disagreements`
+
+Sources are pipe-separated provenance tiers; only successful nonempty exports count.
+`games_with_stats` counts actual parsed box-score data, not discovered links. This
+inventory is separate from the download-based `coverage_report.csv`.
+
+`data/manifest/boxscore_urls.txt` is a deduplicated discovery list from row exports.
+An entry alone does not establish that it was downloaded or parsed, and unfetched
+links are excluded from `games.source_urls`.

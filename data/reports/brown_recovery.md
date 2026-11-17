@@ -1,5 +1,8 @@
 # Brown recovery: 2004 and 2025
 
+This records the bounded PR #25 recovery stage; the current combined dataset also
+includes the separately reviewed historical score exports.
+
 Fetched through the configured robots-aware Fetcher, with its per-host delay and
 cache reuse. Provenance for two schedules, twenty box scores and robots.txt is in
 `data/manifest/recovered/brown_2004_2025.csv`. Raw responses remain uncommitted.
