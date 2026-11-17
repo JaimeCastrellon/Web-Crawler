@@ -242,7 +242,8 @@ def _preformatted(result: ParsedBoxscore, blocks: list[LexborNode]) -> bool:
                     _score(result, side, name.strip(), quarters.split() + [final])
                 found_scores = True
         for match in re.finditer(
-            r"\b(Date|Site|Stadium|Attendance):[ \t]*(.*?)(?=[ \t]{2,}\w[^\n]*?:|\n|$)", text
+            r"\b(Date|Site|Stadium|Attendance):[^\S\r\n]*(.*?)(?=[^\S\r\n]{2,}\w[^\n]*?:|\n|$)",
+            text,
         ):
             _metadata(result, match[1], match[2])
         if not found_stats and "team statistics" in text.lower():

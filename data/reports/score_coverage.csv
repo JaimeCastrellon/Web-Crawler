@@ -5,7 +5,7 @@ brown,2002,wikipedia,10,10,1,0
 brown,2003,wikipedia,10,10,0,0
 brown,2004,cached_schedule|wikipedia,10,10,10,0
 brown,2005,wikipedia,10,10,0,0
-brown,2006,wikipedia,10,10,7,0
+brown,2006,wikipedia,10,10,8,0
 brown,2007,wikipedia,10,10,10,0
 brown,2008,wikipedia,10,10,10,2
 brown,2009,wikipedia,10,10,10,2
@@ -83,7 +83,7 @@ dartmouth,2002,wikipedia,10,10,0,0
 dartmouth,2003,wikipedia,10,10,0,1
 dartmouth,2004,wikipedia,10,10,2,0
 dartmouth,2005,wikipedia,10,10,0,0
-dartmouth,2006,wikipedia,10,10,5,0
+dartmouth,2006,wikipedia,10,10,6,0
 dartmouth,2007,wikipedia,10,10,5,0
 dartmouth,2008,wikipedia,10,10,10,0
 dartmouth,2009,wikipedia,10,10,3,0
@@ -109,7 +109,7 @@ harvard,2002,wikipedia,10,10,0,0
 harvard,2003,wikipedia,10,10,0,0
 harvard,2004,wikipedia,10,10,2,0
 harvard,2005,wikipedia,10,10,0,0
-harvard,2006,wikipedia,10,10,4,0
+harvard,2006,wikipedia,10,10,5,0
 harvard,2007,wikipedia,10,10,4,0
 harvard,2008,wikipedia,10,10,4,2
 harvard,2009,wikipedia,10,10,2,0
@@ -161,7 +161,7 @@ princeton,2002,wikipedia,10,10,0,0
 princeton,2003,wikipedia,10,10,0,0
 princeton,2004,wikipedia,10,10,1,0
 princeton,2005,wikipedia,10,10,0,0
-princeton,2006,wikipedia,10,10,3,1
+princeton,2006,wikipedia,10,10,10,1
 princeton,2007,wikipedia,10,10,4,0
 princeton,2008,wikipedia,10,10,4,5
 princeton,2009,wikipedia,10,10,3,2
@@ -187,7 +187,7 @@ yale,2002,official_export|wikipedia,10,10,0,0
 yale,2003,official_export|wikipedia,10,10,0,1
 yale,2004,cached_schedule|official_export|wikipedia,10,10,6,0
 yale,2005,official_export|wikipedia,10,10,0,0
-yale,2006,official_export|wikipedia,10,10,3,0
+yale,2006,official_export|wikipedia,10,10,4,0
 yale,2007,official_export|wikipedia,10,10,4,1
 yale,2008,official_export|wikipedia,10,10,4,2
 yale,2009,official_export|wikipedia,10,10,2,1
