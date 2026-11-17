@@ -17,7 +17,7 @@ from selectolax.lexbor import LexborHTMLParser
 from ivydata.config import REPO_ROOT, Config, School
 from ivydata.crawl.fetcher import Fetcher, FetchResult, RobotsDisallowed
 from ivydata.crawl.manifest import Manifest
-from ivydata.crawl.pages import challenge_provider, has_schedule_games
+from ivydata.crawl.pages import challenge_provider, declared_schedule_season, has_schedule_games
 
 logger = logging.getLogger(__name__)
 ERROR_COLUMNS = ["url", "school", "season", "kind", "error"]
@@ -178,6 +178,16 @@ def crawl(
                     if result is None:
                         continue
                     html = result.text()
+                    declared = declared_schedule_season(html)
+                    if declared is not None and declared != season:
+                        failed(
+                            url,
+                            school.id,
+                            season,
+                            "schedule",
+                            f"page declares season {declared}, expected {season}",
+                        )
+                        continue
                     if not has_schedule_games(html):
                         failed(url, school.id, season, "schedule", "no recognizable schedule games")
                         continue

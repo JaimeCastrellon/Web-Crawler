@@ -166,6 +166,26 @@ logged with URLs and appear in report notes. Uncrawled seasons and future-only s
 are distinguished in notes rather than inventing a fifth coverage level. Report counts and
 notes do not create pre-game model features or copy any printed W-L records.
 
+**Schedule parsing.** `parse_schedule` is a pure offline function returning the existing
+`ScheduleParse` contract (`rows` and `warnings`). It supports legacy Sidearm rows and
+current game cards. Dates are ISO strings: explicit years/ISO timestamps are checked against
+the supplied football season; yearless January–March dates belong to the following calendar
+year. A conflicting explicit football-schedule title rejects the page rather than relabeling
+a silent redirect to the current season. Source order and raw opponent names are preserved.
+
+Missing/unplayed results remain `None`; real zero scores remain zero. When the result letter
+is omitted, W/L/T is inferred only from that game's own points. Contradictory printed results
+are retained with a warning. Location comes from explicit home/away/neutral markers; Fenway
+Park overrides Harvard's 2018 home designation to neutral and also handles the 2026 game.
+Unknown dates, opponents, locations, and result formats generate URL/raw-text warnings and
+do not prevent later rows from parsing. Multiple distinct box-score URLs retain the first
+and list all alternatives in a warning; labeled legacy/PDF box-score links are also retained.
+Header W-L records are never extracted.
+
+The explicit schedule-title season check is shared by the crawler, coverage audit, and
+parser. A current-season page returned for an unsupported historical URL is rejected during
+discovery and coverage as well, allowing the next slug candidate to be tried.
+
 ## Module interfaces
 
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a
