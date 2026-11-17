@@ -6,6 +6,7 @@ Do NOT extract the W-L records printed in the page header — they are post-game
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -253,10 +254,65 @@ def _preformatted(result: ParsedBoxscore, blocks: list[LexborNode]) -> bool:
     return found_stats
 
 
+def _modern_sides(tree: LexborHTMLParser, result: ParsedBoxscore) -> None:
+    """Modern tables put the tenant school last, even when it plays away.
+
+    Read only the named home/visiting team identities from the JSON reference
+    graph. Printed records and individual leaders are never extracted.
+    """
+    node = tree.css_first("script#__NUXT_DATA__")
+    if node is None:
+        return
+    try:
+        data = json.loads(node.text())
+        if not isinstance(data, list):
+            return
+
+        def resolve(index: int):
+            if type(index) is not int or not 0 <= index < len(data):
+                raise ValueError("invalid state reference")
+            return data[index]
+
+        declarations = []
+        for entry in data:
+            if not isinstance(entry, dict) or not {
+                "thisTeamIsHomeTeam",
+                "homeTeam",
+                "visitingTeam",
+            }.issubset(entry):
+                continue
+            home = resolve(resolve(entry["homeTeam"])["name"])
+            away = resolve(resolve(entry["visitingTeam"])["name"])
+            if not isinstance(home, str) or not isinstance(away, str):
+                raise ValueError("invalid home/visiting team names")
+            declarations.append((home.strip().casefold(), away.strip().casefold()))
+        if not declarations:
+            return
+        if len(set(declarations)) != 1:
+            raise ValueError("conflicting home/visiting team declarations")
+        home, away = declarations[0]
+        current_home = (result.game["home_raw"] or "").strip().casefold()
+        current_away = (result.game["away_raw"] or "").strip().casefold()
+        if (home, away) == (current_home, current_away):
+            return
+        if (home, away) != (current_away, current_home):
+            raise ValueError("structured team names disagree with line score")
+        for key in GAME_FIELDS:
+            if key.startswith("home_"):
+                other = "away_" + key[5:]
+                result.game[key], result.game[other] = result.game[other], result.game[key]
+        result.team_stats.reverse()
+        for index, stats in enumerate(result.team_stats):
+            stats["is_home"] = bool(index)
+    except (ValueError, TypeError, KeyError, IndexError) as exc:
+        _warn(result, "unrecognized modern home/away state", str(exc))
+
+
 def parse_boxscore(html: str, page_url: str) -> ParsedBoxscore:
     """Parse Sidearm tables or archived text reports without reading header records.
 
-    Away/home follow the line-score rows, independent of the hosting school.
+    Legacy away/home follow line-score order; modern explicit team identities
+    override tenant-first/last display order, independent of the hosting school.
     Missing fields remain None; malformed data is retained through URL warnings.
     """
     result = ParsedBoxscore(
@@ -302,6 +358,7 @@ def parse_boxscore(html: str, page_url: str) -> ParsedBoxscore:
         spans = node.css("span")
         if len(spans) == 2:
             _metadata(result, spans[0].text(), spans[1].text())
+    _modern_sides(tree, result)
     if result.game["away_raw"] is None or result.game["home_raw"] is None:
         _warn(result, "missing/unrecognized line score", tree.text(separator=" ", strip=True)[:300])
     if not stats_found:

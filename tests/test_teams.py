@@ -64,3 +64,16 @@ def test_is_ivy():
 )
 def test_decorated_records_never_become_team_ids(raw):
     assert teams.canonical_team_id(raw, load_config().team_aliases) == "harvard"
+
+
+@pytest.mark.parametrize(
+    "raw,expected",
+    [
+        ("(RV) Harvard", "harvard"),
+        ("(RV) Yale", "yale"),
+        ("vs. (RV) Dartmouth", "dartmouth"),
+        ("#8/10 Rhode Island", "rhode-island"),
+    ],
+)
+def test_brown_schedule_rankings(raw, expected):
+    assert teams.canonical_team_id(raw, load_config().team_aliases) == expected

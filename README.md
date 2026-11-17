@@ -53,12 +53,13 @@ Details: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Sources and crawl etiqu
 
 ## Current data coverage
 
-The first committed processed snapshot contains **Yale's 10 games from 2004**: six with
-team box-score statistics and four with scores only. It is a pipeline demonstration,
-not the completed 2000–2026 dataset. The wider crawl and remaining recovery work are still pending. The validation
-report describes this partial snapshot. The separate score-dataset PR is not included.
-Pre-game records count completed games present in this snapshot; other teams' partial
-schedules do not represent their full season records.
+The processed snapshot contains **29 games** from Yale 2004 and Brown 2004/2025:
+25 with team box-score statistics and four score-only. Coverage verifies three of
+the 208 configured school-seasons: Brown 2004/2025 are full, Yale 2004 is partial.
+The broader 2000–2026 crawl and recovery work remain; the separate proposed
+1,355-game scores dataset is not integrated. The validation report describes this
+partial snapshot. Pre-game records count completed games present in it; partial
+opponent schedules do not yield complete season records.
 
 ## Quick start
 

@@ -71,7 +71,7 @@ Box-score team stats (empty when `stats_level = score_only`):
 | `schedule_url` | the URL that worked (empty if none) |
 | `season_slug` | which slug pattern worked |
 | `games_on_schedule` | rows found on the schedule page |
-| `boxscores_found` | games with a distinct linked, successfully fetched, checksum-verified box-score page in the manifest/cache |
+| `boxscores_found` | games with a distinct linked or date/team-matched recovered, successfully fetched, checksum-verified box-score page in the manifest/cache |
 | `level` | `full` (all games have usable cached box scores), `partial` (some do), `score_only` (no usable box scores but schedule results exist), `missing` (no result data available) |
 | `notes` | free text, e.g. "box scores linked only from news recaps" |
 
@@ -116,3 +116,8 @@ validation report, not a model feature. It is written even when missing/corrupt 
 cache entries prevent replacing the processed tables. Structural manifest errors fail
 explicitly before processing. Pre-game counts cover completed games actually present
 in the dataset, strictly on earlier dates; incomplete schedules imply incomplete records.
+
+Coverage also reads `data/manifest/recovered/*.csv` using the same URL-manifest schema.
+A recovered page may count for another school's schedule only after parsing its game
+date/team identities and team statistics and matching the canonical pair within one
+day. Original download errors and the matched recovery URLs remain visible in notes.

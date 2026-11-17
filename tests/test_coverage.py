@@ -262,3 +262,58 @@ def test_newer_and_archived_boxscore_shapes_are_usable(audit, name, modern):
     row = coverage.build_coverage_report().query("school == 'yale'").iloc[0]
     assert row["level"] == "full"
     assert row["boxscores_found"] == 1
+
+
+def test_recovered_manifest_matches_opponent_copy_by_date_and_teams(audit):
+    root, config, record = audit
+    source = Path(__file__).parent / "fixtures"
+    schedule = config.school("yale").base_url + "/sports/football/schedule/2004"
+    record("yale", schedule, (source / "schedule_yale_2004.html").read_text())
+    box = "https://cornellbigred.com/sports/football/stats/2004-05/yale-university/boxscore/4180"
+    body = record(
+        "cornell",
+        box,
+        '<article class="box-score">'
+        + (source / "boxscore_cornell_2004_yale.html").read_text()
+        + "</article>",
+        kind="boxscore",
+        slug="2004-05",
+    )
+    # Move the box entry into a recovery-only manifest so discovery cannot rely on urls.csv.
+    import csv
+
+    path = root / "data/manifest/urls.csv"
+    with path.open(newline="") as stream:
+        rows = list(csv.DictReader(stream))
+    recovered = root / "data/manifest/recovered/cornell.csv"
+    recovered.parent.mkdir()
+    for target, selected in [
+        (path, [r for r in rows if r["url"] != box]),
+        (recovered, [r for r in rows if r["url"] == box]),
+    ]:
+        with target.open("w", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=rows[0].keys(), lineterminator="\n")
+            writer.writeheader()
+            writer.writerows(selected)
+    row = coverage.build_coverage_report().query("school == 'yale'").iloc[0]
+    assert row["level"] == "partial" and row["boxscores_found"] == 1
+    assert "recovered box score matched by teams/date" in row["notes"] and box in row["notes"]
+    # A checksum failure must remove this recovered availability again.
+    body.write_text("damaged")
+    row = coverage.build_coverage_report().query("school == 'yale'").iloc[0]
+    assert row["boxscores_found"] == 0 and row["level"] == "score_only"
+
+
+def test_wrong_season_recovery_does_not_inflate_coverage(audit):
+    _, config, record = audit
+    source = Path(__file__).parent / "fixtures"
+    record(
+        "yale",
+        config.school("yale").base_url + "/sports/football/schedule/2004",
+        (source / "schedule_yale_2004.html").read_text(),
+    )
+    url = "https://yale.example.test/wrong-season"
+    record("yale", url, (source / "boxscore_yale_2025_harvard.html").read_text(), kind="boxscore")
+    row = coverage.build_coverage_report().query("school == 'yale'").iloc[0]
+    assert row["boxscores_found"] == 0
+    assert "conflicts with manifest season" in row["notes"]

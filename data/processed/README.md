@@ -1,20 +1,20 @@
-# First processed snapshot: Yale 2004 only
+# Processed snapshot: Yale 2004 and Brown 2004/2025
 
-10 games and 20 team rows, built offline from the committed main URL manifest plus
-all six recovered-source manifests. Six games have team statistics; Dayton, Colgate,
-Lehigh and Princeton remain score-only. This is not the full historical dataset.
+29 unique games and 58 team rows, built offline from the main URL manifest and
+recovered-source manifests. Twenty-five games have team statistics; Yale's Dayton,
+Colgate, Lehigh and Princeton games from 2004 remain score-only. Brown's twenty
+2004/2025 games all have box scores. The overlapping Brown–Yale 2004 game is merged.
+This is not the full 2000–2026 historical dataset.
 
-All rows are train data under the current split configuration. Test/current files
-are intentionally header-only. Source URLs are retained per game. Pre-game records
-count only completed games observed on earlier dates in this dataset; Yale's ten-game
-schedule is present, but opponents' full schedules are not. Do not interpret those
-opponents' records as complete season records.
+The 19 games in 2004 are train data and Brown's ten 2025 games are test data under
+the current split configuration. Current files are intentionally header-only.
+Source URLs are retained per game. Pre-game records count only completed games
+observed on earlier dates: Yale 2004 and Brown 2004/2025 schedules are complete,
+but other opponents' full schedules are not. Their records are incomplete.
 
 `python -m ivydata build` regenerates this snapshot from the matching local raw cache
-(no network). Cache bodies are ignored by Git; the manifests preserve their checksums.
-A fresh download requires updated provenance if the response body changes. Known
-failed original Yale links are listed in `data/reports/build_warnings.csv`; the six
-working alternate box scores are included despite those original-link failures.
-The validation report records the known source failures and incomplete opponent
-schedules; it does not certify full historical coverage. No data from the separate score-dataset
-PR is included in this snapshot.
+without network access. Cache bodies are ignored by Git; manifests preserve their
+checksums. Fresh downloads require updated provenance if response bodies change.
+The validation report has 0 errors and 22 warnings: nine broken original Yale links
+and thirteen incomplete opponent Ivy schedules. It does not certify full historical
+coverage. The separate proposed 1,355-game score dataset in PR #13 is not integrated.

@@ -188,8 +188,10 @@ discovery and coverage as well, allowing the next slug candidate to be tried.
 
 **Box-score parsing.** `parse_boxscore` preserves its original schema and is pure/offline.
 It reads legacy and current Sidearm line-score/team-statistics tables, plus archived
-preformatted reports. The first line-score row is away and the second is home; the
-source school's hostname does not determine either team. Legacy explicit statistics
+preformatted reports. Legacy line-score rows list away first and home second. Brown's modern tables list
+the tenant school last even when it is away; the parser reads only explicit home/visiting
+team names from the saved JSON state to orient scores and statistics. The source
+school's hostname does not determine either team. Legacy explicit statistics
 column ids also support reversed column order. Game dates come from game information,
 not article publication dates. Quarter totals are checked against finals; overtime
 points are summed and the number of extra periods is retained.
@@ -284,6 +286,23 @@ CI runs `python -m ivydata validate --duplicates-only` after tests. This mode ch
 processed game ids without requiring the remaining schema or replacing the report;
 it skips only when no processed dataset directory exists. This independently fails
 CI if committed `games.csv` contains duplicate ids.
+
+**Recovered Brown source.** The recovery manifest includes Brown's 2004 and 2025
+schedules, all twenty linked box scores, and robots provenance. All twenty boxes
+were checked against schedule dates, normalized teams, and final scores, and expose
+every team-stat field. The 2025 schedule uses `(RV)` and combined ranks such as
+`#8/10`; normalization removes these decorations. A reduced away-game fixture
+retains the explicit home/visiting identities from the JSON state with reference
+indices renumbered; records, player data, and unrelated state are omitted.
+
+The coverage audit now reads recovery manifests as well as the main manifest.
+After checking cached SHA-256/status, a recovered box with parsed date/team identities
+and team statistics may match a schedule row by canonical pair within one day.
+Each URL counts at most once per schedule. Original failures remain in notes, and
+recovery matches are identified by URL. Conflicting duplicate manifest entries fail
+explicitly; wrong-season/corrupt recoveries cannot inflate coverage. A recovered
+standalone box without a season schedule is noted but does not certify full-season
+coverage. This extends the original direct-link audit without changing its schema.
 
 ## Module interfaces
 
