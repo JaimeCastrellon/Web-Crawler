@@ -93,6 +93,16 @@ its schedule URL, slug, and game count with an explanatory note. There is no 202
 
 `url, school, season, kind (schedule|boxscore|robots), status, fetched_at, sha256, season_slug`
 
+The conference recovery manifest uses the same columns. Its additional
+`league_index` and `league_rejected` kinds preserve discovery/rejected-response
+provenance and are excluded from game parsing. Those and robots rows use source
+label `league`; accepted boxscore rows name a participating Ivy school.
+
+`data/reports/league_recovery_errors.csv` uses the same five columns as
+`crawl_errors.csv` below. It retains unresolved league index/download/identity
+failures and removes them on successful retries. Offline build includes these
+URL-bearing failures in `build_warnings.csv`, hence the validation report.
+
 ## `data/reports/crawl_errors.csv` — unresolved crawl failures, one row per URL
 
 | column | description |

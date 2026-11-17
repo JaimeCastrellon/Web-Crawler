@@ -2,12 +2,14 @@
 
 1,355 unique games and 2,710 team rows across 26 seasons, excluding 2020. The shared
 build combines the original PR #13's saved row exports with verified cached schedules
-and recovered box scores. There are 37 games with box-score statistics and 1,318
+and recovered box scores. There are 131 games with box-score statistics and 1,224
 score-only entries. Eight canceled 2001 games and four future 2026 games have no final
 score and do not update pre-game records. Other played games have known final scores.
 
 The default split configuration assigns 1,196 games to train, 107 to test and 52 to
-current. All records are recomputed from completed games on strictly earlier dates.
+current. All 107 test-season games have box-score statistics from the official
+Ivy League source; the league copies add 94 previously score-only games.
+All records are recomputed from completed games on strictly earlier dates.
 Non-Ivy opponents' record fields are blank: their complete schedules are not
 collected, so their true pre-game season records are unknown.
 

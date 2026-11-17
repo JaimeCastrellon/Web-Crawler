@@ -32,8 +32,8 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 | 2021 | train | 52 | 0 | 52 |
 | 2022 | train | 52 | 0 | 52 |
 | 2023 | train | 52 | 0 | 52 |
-| 2024 | test | 52 | 1 | 51 |
-| 2025 | test | 55 | 12 | 43 |
+| 2024 | test | 52 | 52 | 0 |
+| 2025 | test | 55 | 55 | 0 |
 | 2026 | current | 52 | 0 | 52 |
 
 ## Issues

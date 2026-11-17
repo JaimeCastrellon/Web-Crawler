@@ -44,7 +44,7 @@ def test_boxscore_provenance_only_lists_verified_downloads():
             u
             for row in csv.DictReader(stream)
             for u in row["source_urls"].split("|")
-            if "/boxscore/" in u
+            if "/boxscore/" in u or "/boxscore.aspx?" in u
         }
     assert cited and cited <= verified
 

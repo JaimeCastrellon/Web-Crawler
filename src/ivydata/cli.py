@@ -81,6 +81,10 @@ def main(argv: list[str] | None = None) -> int:
     c.add_argument("--seasons", help="e.g. 2000-2026 or 2024,2025; default from splits.yaml")
     c.add_argument("--refresh", action="store_true", help="re-fetch even if cached")
 
+    league = sub.add_parser("league-boxscores", help="recover Ivy League game box scores")
+    league.add_argument("--seasons", required=True, help="explicit seasons, e.g. 2024,2025")
+    league.add_argument("--refresh", action="store_true", help="re-fetch even if cached")
+
     sub.add_parser("coverage", help="write data/reports/coverage_report.csv (Task 3)")
     b = sub.add_parser("build", help="parse cached sources and write processed CSVs")
     b.add_argument("--raw-dir", type=Path, default=REPO_ROOT / "data/raw")
@@ -130,6 +134,12 @@ def main(argv: list[str] | None = None) -> int:
         for school in sorted(report["school"].unique()):
             print(f"{school:<11}" + " ".join(f" {cells[school, year]}" for year in years))
         print("F full | P partial | S score-only | - missing; see coverage_report.csv for notes")
+        return 0
+
+    if args.cmd == "league-boxscores":
+        from ivydata.crawl.league import crawl_league
+
+        crawl_league(config, _seasons(args.seasons) or [], refresh=args.refresh)
         return 0
 
     if args.cmd == "scores":

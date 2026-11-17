@@ -354,6 +354,17 @@ instead of silently appearing unplayed.
 
 ## Module interfaces
 
+**Conference recovery.** `crawl/league.py` adds pure
+`find_league_boxscore_links(html, page_url, season)` and the explicit, resumable
+`league-boxscores --seasons ...` command. It discovers opaque `boxscore.aspx` links
+only on a correctly titled football season index. The existing pure parser and
+canonical merger process game pages; cumulative league statistics are never read
+as model features. Index/robots/rejected-response manifest rows use source label
+`league` and are excluded from game input. Accepted boxes use a participating Ivy
+team and the existing boxscore kind, so shared build and coverage can use them
+without adding a ninth school or changing output columns. Recovery failures are
+persisted per URL and included in the offline build-warning/validation reports.
+
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a
 docstring, and raises `NotImplementedError("Task N")` until implemented. Summary:
 

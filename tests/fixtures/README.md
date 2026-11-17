@@ -84,3 +84,17 @@ The explicit state correctly identifies Rhode Island as home.
 It retains the line score, team statistics, game information, and the exact
 play-by-play note "2nd overtime: Cornell wins toss, plays defense" in a reduced
 play-by-play wrapper. The single OT column contains both sessions' points.
+
+## Ivy League conference excerpts
+
+Captured through Fetcher on 2026-11-17.
+`boxscore_league_2025_brown_cornell.html` retains the two tables and game metadata
+from the league's October 25 Brown–Cornell game, with both overtime columns.
+Its parser output equals the complete cached page. The source URL is in
+`fixtures.yaml`. The page omits the school-site box-score wrapper.
+
+`league_statistics_2025.html` contains the original title and first two result rows
+from `https://ivyleague.com/stats.aspx?path=football&year=2025`, with a repeated first
+row representing the index's duplicated per-team listings. Navigation, cumulative
+season statistics and unrelated state are omitted. The index is discovery only,
+not a statistics feature source; recapture it with the league collection command.

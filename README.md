@@ -56,8 +56,9 @@ Details: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Sources and crawl etiqu
 The integrated score snapshot contains **1,355 unique games and 2,710 team rows**
 across the 26 seasons from 2000–2026 (2020 excluded). It combines saved official
 schedule exports, Wikipedia fallbacks, and checksum-verified cached sources.
-**37 games have box-score statistics**; the rest are score-only, including eight
+**131 games have box-score statistics**; the rest are score-only, including eight
 canceled 2001 entries and four unplayed 2026 games with no final score.
+The league recovery supplies all 107 games in the 2024–2025 test seasons.
 
 Validation reports no structural errors, and source disagreements remain explicitly
 flagged for review. Broad score coverage does not mean complete official-site or
@@ -72,6 +73,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 pytest                      # offline tests against saved HTML fixtures
 python -m ivydata crawl     # fetch (polite, cached in data/raw/, not committed)
+python -m ivydata league-boxscores --seasons 2024,2025  # official conference copies
 python -m ivydata build     # offline parse → merge → pre-game records → data/processed/
 python -m ivydata validate  # quality checks + data/reports/validation_report.md
 ```

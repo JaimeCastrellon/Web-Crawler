@@ -44,6 +44,19 @@ def has_schedule_games(html: str) -> bool:
 def _has_boxscore_content(tree: LexborHTMLParser) -> bool:
     if any(node.text(strip=True) for node in tree.css(BOX_SELECTOR)):
         return True
+    # Conference-hosted Sidearm boxes omit the school-site wrapper. Require
+    # populated score and statistics tables before treating scripts as monitoring.
+    scores = stats = False
+    for table in tree.css("table"):
+        caption = table.css_first("caption")
+        label = re.sub(r"\s+", " ", caption.text()).strip().lower() if caption else ""
+        rows = table.css("tbody tr")
+        if label == "team score by quarter":
+            scores |= len(rows) == 2 and all(len(row.css("th,td")) >= 6 for row in rows)
+        elif label == "team statistics":
+            stats |= any(len(row.css("th,td")) == 3 for row in rows)
+    if scores and stats:
+        return True
     text = "\n".join(node.text() for node in tree.css("pre"))
     return (
         "team statistics" in text.lower()

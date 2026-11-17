@@ -248,6 +248,17 @@ def _build(raw_dir: Path, out_dir: Path, config: Config, exported: ExportParse) 
 
     for message in exported.warnings:
         warn("", message)
+    league_errors = raw_dir.parent / "reports/league_recovery_errors.csv"
+    if league_errors.exists():
+        with league_errors.open(encoding="utf-8", newline="") as stream:
+            reader = csv.DictReader(stream)
+            if reader.fieldnames != ["url", "school", "season", "kind", "error"]:
+                raise ValueError(f"invalid league recovery error columns: {league_errors}")
+            for row in reader:
+                if None in row or any(value is None for value in row.values()):
+                    raise ValueError(f"invalid league recovery error row: {league_errors}")
+                if int(row["season"]) in config.splits.seasons():
+                    warn(row["url"], f"Ivy League recovery: {row['error']}")
     for row in rows:
         url = row["url"]
         if row["status"] != "200":
