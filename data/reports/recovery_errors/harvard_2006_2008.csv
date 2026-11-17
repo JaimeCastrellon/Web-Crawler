@@ -1,0 +1,6 @@
+url,school,season,kind,error
+https://gocrimson.com/sports/football/schedule/2008,harvard,2008,schedule,"unusable response (HTTP 200, challenge=Incapsula)"
+https://gocrimson.com/sports/football/schedule/2008-09,harvard,2008,schedule,no supported 2008 schedule; declared=2026
+https://static.gocrimson.com/custompages/sports/fball/2006-07/files/yaleharv.htm,harvard,2006,boxscore,"incomplete/wrong-season game identity, finals, or team statistics"
+https://static.gocrimson.com/custompages/sports/fball/2007-08/files/harvyale.htm,harvard,2007,boxscore,"incomplete/wrong-season game identity, finals, or team statistics"
+https://static.gocrimson.com/custompages/sports/fball/2008-09/files/yaleharv.htm,harvard,2008,boxscore,"incomplete/wrong-season game identity, finals, or team statistics"
