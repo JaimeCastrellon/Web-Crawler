@@ -51,6 +51,15 @@ config/sources.yaml ─▶ crawl (schedule pages → box-score links, cached, ra
 Details: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Sources and crawl etiquette:
 [`docs/SOURCES.md`](docs/SOURCES.md). Work plan: [`docs/TASKS.md`](docs/TASKS.md).
 
+## Current data coverage
+
+The first committed processed snapshot contains **Yale's 10 games from 2004**: six with
+team box-score statistics and four with scores only. It is a pipeline demonstration,
+not the completed 2000–2026 dataset. The wider crawl, remaining recovery work, and
+validation report are still pending. The separate score-dataset PR is not included.
+Pre-game records count completed games present in this snapshot; other teams' partial
+schedules do not represent their full season records.
+
 ## Quick start
 
 ```bash
@@ -58,8 +67,15 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 pytest                      # offline tests against saved HTML fixtures
 python -m ivydata crawl     # fetch (polite, cached in data/raw/, not committed)
-python -m ivydata build     # parse → normalize → validate → data/processed/
+python -m ivydata build     # offline parse → merge → pre-game records → data/processed/
 ```
+
+The build uses only the local cache and the main/recovered URL manifests. A fresh
+checkout has no raw pages: retrieve the manifested sources and record their current
+provenance before building. Missing/corrupt successful cache entries stop the build and
+preserve existing processed files. Rebuilds with unchanged cache and manifests are
+byte-identical. See `data/reports/build_warnings.csv` for source failures and parse/merge
+diagnostics; the full `validate` command remains task 8.
 
 ## How this repo is built
 

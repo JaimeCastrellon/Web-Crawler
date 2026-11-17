@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import shutil
+from pathlib import Path
 
 import httpx
 import yaml
@@ -74,7 +76,9 @@ def main(argv: list[str] | None = None) -> int:
     c.add_argument("--refresh", action="store_true", help="re-fetch even if cached")
 
     sub.add_parser("coverage", help="write data/reports/coverage_report.csv (Task 3)")
-    sub.add_parser("build", help="parse + merge + write data/processed/ (Task 7)")
+    b = sub.add_parser("build", help="parse cached sources and write processed CSVs")
+    b.add_argument("--raw-dir", type=Path, default=REPO_ROOT / "data/raw")
+    b.add_argument("--out-dir", type=Path, default=REPO_ROOT / "data/processed")
     sub.add_parser("validate", help="write data/reports/validation_report.md (Task 8)")
 
     args = p.parse_args(argv)
@@ -116,6 +120,18 @@ def main(argv: list[str] | None = None) -> int:
         for school in sorted(report["school"].unique()):
             print(f"{school:<11}" + " ".join(f" {cells[school, year]}" for year in years))
         print("F full | P partial | S score-only | - missing; see coverage_report.csv for notes")
+        return 0
+
+    if args.cmd == "build":
+        from ivydata.build import build
+
+        build(args.raw_dir, args.out_dir, config)
+        with (args.out_dir / "games.csv").open(encoding="utf-8", newline="") as stream:
+            count = sum(1 for _ in csv.DictReader(stream))
+        print(
+            f"Built {count} games in {args.out_dir}; "
+            f"see {args.raw_dir.parent / 'reports/build_warnings.csv'}"
+        )
         return 0
 
     raise NotImplementedError(f"`{args.cmd}` is not implemented yet — see docs/TASKS.md")
