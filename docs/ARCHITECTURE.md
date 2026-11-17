@@ -252,9 +252,9 @@ current date and in the same season. Same-date results are applied as a batch af
 all that day's pre-game rows are computed, because kickoff times are unavailable.
 Missing/unplayed scores do not become wins or games played. Counts reset by team
 and season; ties and non-Ivy games are handled separately. Existing record columns
-are overwritten by these computations. Records describe observed games in this
-dataset; incomplete schedules (especially non-Ivy opponents) do not yield complete
-season records. Header W-L records never enter the pipeline. Turnovers are derived
+are overwritten by these computations. Record columns are computed for Ivy teams. Non-Ivy opponents' complete schedules
+are outside this dataset, so their record columns stay missing rather than turning
+unobserved prior games into apparent zeroes. Header W-L records never enter the pipeline. Turnovers are derived
 only when both interceptions thrown and fumbles lost are known.
 
 Split labels come solely from the configured season ranges; skipped seasons are

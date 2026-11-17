@@ -62,8 +62,8 @@ canceled 2001 entries and four unplayed 2026 games with no final score.
 Validation reports no structural errors, and source disagreements remain explicitly
 flagged for review. Broad score coverage does not mean complete official-site or
 box-score coverage: `coverage_report.csv` audits actual cached downloads, while
-`score_coverage.csv` inventories the mixed-source score dataset. Pre-game records
-count earlier completed games in the dataset; non-Ivy opponents have partial schedules.
+`score_coverage.csv` inventories the mixed-source score dataset. Pre-game records count earlier completed Ivy-team games. Non-Ivy opponents' season
+records are blank because their full schedules are not collected.
 
 ## Quick start
 
