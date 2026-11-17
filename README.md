@@ -59,7 +59,7 @@ New collection targets **2006–2026**, newest seasons first. Previously collect
 The integrated score snapshot contains **1,355 unique games and 2,710 team rows**
 across the 26 seasons from 2000–2026 (2020 excluded). It combines saved official
 schedule exports, Wikipedia fallbacks, and checksum-verified cached sources.
-**691 games have box-score statistics**; the rest are score-only, including eight
+**698 games have box-score statistics**; the rest are score-only, including eight
 canceled 2001 entries and four unplayed 2026 games with no final score.
 The league recovery supplies all 107 games in the 2024–2025 test seasons and all
 completed games for 2017–2026 (2020 excluded). Its earlier seasons have partial coverage.

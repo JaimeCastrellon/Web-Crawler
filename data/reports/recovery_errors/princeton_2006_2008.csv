@@ -1,0 +1,25 @@
+url,school,season,kind,error
+https://goprincetontigers.com/news/2007/10/13/1279997.aspx,princeton,2007,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2007/10/20/1284529.aspx,princeton,2007,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2007/10/26/1290081.aspx,princeton,2007,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2007/10/6/1257941.aspx,princeton,2007,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2007/11/10/1309351.aspx,princeton,2007,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2007/11/17/1321103.aspx,princeton,2007,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2007/11/3/1301772.aspx,princeton,2007,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2007/9/15/1241219.aspx,princeton,2007,boxscore,challenge response
+https://goprincetontigers.com/news/2007/9/22/1246953.aspx,princeton,2007,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2007/9/29/1252029.aspx,princeton,2007,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2008/10/11/1601253.aspx,princeton,2008,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2008/10/18/1606435.aspx,princeton,2008,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2008/10/25/1611299.aspx,princeton,2008,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2008/10/4/1596530.aspx,princeton,2008,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2008/11/1/1616020.aspx,princeton,2008,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2008/11/15/1625648.aspx,princeton,2008,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2008/11/22/3621249.aspx,princeton,2008,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2008/11/7/1620584.aspx,princeton,2008,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2008/9/20/1586520.aspx,princeton,2008,boxscore,challenge response
+https://goprincetontigers.com/news/2008/9/27/1591547.aspx,princeton,2008,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/sports/football/schedule/2006,princeton,2006,schedule,no supported 2006 schedule; declared=2026
+https://goprincetontigers.com/sports/football/schedule/2007,princeton,2007,schedule,no supported 2007 schedule; declared=2026
+https://goprincetontigers.com/sports/football/schedule/2008,princeton,2008,schedule,no supported 2008 schedule; declared=2026
+https://goprincetontigers.com/sports/football/schedule/2008-09,princeton,2008,schedule,"discovery-only schedule has unparsed rows: https://goprincetontigers.com/sports/football/schedule/2008-09 row 1: missing opponent name; raw=The Citadel Charleston, S.C. L, 24-37 Sep 20 (Sat) 1 p.m. Recap Stats"

@@ -31,3 +31,15 @@ def test_archived_html_breaks_and_narrow_conversion_columns_preserve_exact_value
     assert not any("record" in key or "wins" in key for key in result.game)
     missing = parse_boxscore(html.replace("Attendance: 7926", "Attendance:"), URL)
     assert missing.game["attendance"] is None and not missing.warnings
+
+
+def test_nonbreaking_spaces_separate_metadata_without_consuming_blank_lines():
+    html = FIXTURE.read_text()
+    expected = parse_boxscore(html, URL)
+    result = parse_boxscore(html.replace("  ", "&nbsp;&nbsp;"), URL)
+    assert not result.warnings
+    assert result.game == expected.game and result.team_stats == expected.team_stats
+    missing = parse_boxscore(
+        html.replace("Attendance: 7926", "Attendance:").replace("  ", "&nbsp;&nbsp;"), URL
+    )
+    assert missing.game["attendance"] is None and not missing.warnings
