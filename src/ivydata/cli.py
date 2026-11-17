@@ -79,7 +79,11 @@ def main(argv: list[str] | None = None) -> int:
     b = sub.add_parser("build", help="parse cached sources and write processed CSVs")
     b.add_argument("--raw-dir", type=Path, default=REPO_ROOT / "data/raw")
     b.add_argument("--out-dir", type=Path, default=REPO_ROOT / "data/processed")
-    sub.add_parser("validate", help="write data/reports/validation_report.md (Task 8)")
+    v = sub.add_parser("validate", help="check processed data and write a validation report")
+    v.add_argument("--data-dir", type=Path, default=REPO_ROOT / "data/processed")
+    v.add_argument("--report", type=Path)
+    v.add_argument("--warnings-file", type=Path)
+    v.add_argument("--duplicates-only", action="store_true", help="CI id check; writes no report")
 
     args = p.parse_args(argv)
     config = load_config()
@@ -133,6 +137,37 @@ def main(argv: list[str] | None = None) -> int:
             f"see {args.raw_dir.parent / 'reports/build_warnings.csv'}"
         )
         return 0
+
+    if args.cmd == "validate":
+        import pandas as pd
+
+        from ivydata.validate.checks import (
+            duplicate_game_ids,
+            read_build_warnings,
+            run_checks,
+            write_report,
+        )
+
+        games_path = args.data_dir / "games.csv"
+        if args.duplicates_only and not args.data_dir.exists():
+            print("No processed dataset present; duplicate check skipped")
+            return 0
+        games = pd.read_csv(games_path)
+        if args.duplicates_only:
+            issues = duplicate_game_ids(games)
+            for issue in issues:
+                print(f"{issue.check}: {issue.game_id}: {issue.message}")
+            return int(bool(issues))
+        teams = pd.read_csv(args.data_dir / "team_game_stats.csv")
+        issues = run_checks(games, teams)
+        warnings_path = args.warnings_file or args.data_dir.parent / "reports/build_warnings.csv"
+        issues.extend(read_build_warnings(warnings_path))
+        report_path = args.report or args.data_dir.parent / "reports/validation_report.md"
+        write_report(issues, games, str(report_path))
+        errors = sum(i.severity == "error" for i in issues)
+        warnings = sum(i.severity == "warning" for i in issues)
+        print(f"Validated {len(games)} games: {errors} errors, {warnings} warnings; {report_path}")
+        return int(errors > 0)
 
     raise NotImplementedError(f"`{args.cmd}` is not implemented yet — see docs/TASKS.md")
 
