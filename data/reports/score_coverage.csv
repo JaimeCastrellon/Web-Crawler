@@ -1,7 +1,7 @@
 school,season,schedule_sources,games_in_dataset,games_with_scores,games_with_stats,source_disagreements
 brown,2000,wikipedia,10,10,0,0
 brown,2001,wikipedia,10,9,0,0
-brown,2002,wikipedia,10,10,0,0
+brown,2002,wikipedia,10,10,1,0
 brown,2003,wikipedia,10,10,0,0
 brown,2004,cached_schedule|wikipedia,10,10,10,0
 brown,2005,wikipedia,10,10,0,0
@@ -53,14 +53,14 @@ columbia,2025,wikipedia,10,10,1,0
 columbia,2026,wikipedia,10,9,0,0
 cornell,2000,official_export|wikipedia,10,10,0,1
 cornell,2001,official_export|wikipedia,10,9,0,0
-cornell,2002,official_export|wikipedia,10,10,0,0
+cornell,2002,official_export|wikipedia,10,10,1,0
 cornell,2003,official_export|wikipedia,10,10,0,0
 cornell,2004,official_export|wikipedia,10,10,2,0
 cornell,2005,official_export|wikipedia,10,10,0,0
 cornell,2006,official_export|wikipedia,10,10,0,0
-cornell,2007,official_export|wikipedia,10,10,0,2
+cornell,2007,official_export|wikipedia,10,10,2,2
 cornell,2008,official_export|wikipedia,10,10,0,0
-cornell,2009,official_export|wikipedia,10,10,0,1
+cornell,2009,official_export|wikipedia,10,10,2,1
 cornell,2010,official_export|wikipedia,10,10,0,0
 cornell,2011,official_export|wikipedia,10,10,0,0
 cornell,2012,official_export|wikipedia,10,10,0,0
@@ -86,7 +86,7 @@ dartmouth,2005,wikipedia,10,10,0,0
 dartmouth,2006,wikipedia,10,10,0,0
 dartmouth,2007,wikipedia,10,10,0,0
 dartmouth,2008,wikipedia,10,10,0,0
-dartmouth,2009,wikipedia,10,10,0,0
+dartmouth,2009,wikipedia,10,10,1,0
 dartmouth,2010,wikipedia,10,10,0,0
 dartmouth,2011,wikipedia,10,10,0,0
 dartmouth,2012,wikipedia,10,10,0,0
@@ -136,7 +136,7 @@ penn,2003,official_export|wikipedia,10,10,0,0
 penn,2004,official_export|wikipedia,10,10,2,0
 penn,2005,official_export|wikipedia,10,10,0,0
 penn,2006,official_export|wikipedia,10,10,0,1
-penn,2007,official_export|wikipedia,10,10,0,1
+penn,2007,official_export|wikipedia,10,10,1,1
 penn,2008,official_export|wikipedia,10,10,0,1
 penn,2009,official_export|wikipedia,10,10,0,0
 penn,2010,official_export|wikipedia,10,10,0,2
@@ -164,7 +164,7 @@ princeton,2005,wikipedia,10,10,0,0
 princeton,2006,wikipedia,10,10,0,1
 princeton,2007,wikipedia,10,10,0,0
 princeton,2008,wikipedia,10,10,0,5
-princeton,2009,wikipedia,10,10,0,2
+princeton,2009,wikipedia,10,10,1,2
 princeton,2010,wikipedia,10,10,0,1
 princeton,2011,wikipedia,10,10,0,0
 princeton,2012,wikipedia,10,10,0,0
@@ -188,7 +188,7 @@ yale,2003,official_export|wikipedia,10,10,0,1
 yale,2004,cached_schedule|official_export|wikipedia,10,10,6,0
 yale,2005,official_export|wikipedia,10,10,0,0
 yale,2006,official_export|wikipedia,10,10,0,0
-yale,2007,official_export|wikipedia,10,10,0,1
+yale,2007,official_export|wikipedia,10,10,1,1
 yale,2008,official_export|wikipedia,10,10,0,2
 yale,2009,official_export|wikipedia,10,10,0,1
 yale,2010,official_export|wikipedia,10,10,0,0
