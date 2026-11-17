@@ -361,6 +361,15 @@ box date remains in source-agreement diagnostics; the evidence URL/hash/time and
 selected value are retained in the review ledgers. Nearby games alone never cause
 an automatic date correction. Output columns and parser interfaces are unchanged.
 
+Per-source school recovery errors under `data/reports/recovery_errors/*.csv` use
+the existing crawl-error columns and flow into the same offline validation report
+as league errors. Attempt inventories distinguish actually fetched responses from
+URLs deliberately deferred after unusable responses; the latter have no fabricated
+HTTP status or hash. Only verified, parsed boxes enter each recovery manifest.
+Shared robots responses may have different school/season context in separate
+recovery manifests. Coverage ignores that context for robots, while still rejecting
+conflicting status/content hashes for the same URL.
+
 ## Module interfaces
 
 **Conference recovery.** `crawl/league.py` adds pure

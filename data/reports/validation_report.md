@@ -1,6 +1,6 @@
 # Validation report
 
-Game rows: 1355. Errors: 0. Warnings: 75.
+Game rows: 1355. Errors: 0. Warnings: 84.
 
 This report checks the data currently present; it does not certify complete historical coverage.
 Ivy counts use completed games and expect seven in full seasons; current split seasons are excluded.
@@ -15,9 +15,9 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 | 2003 | train | 52 | 0 | 52 |
 | 2004 | train | 52 | 15 | 37 |
 | 2005 | train | 52 | 0 | 52 |
-| 2006 | train | 52 | 1 | 51 |
-| 2007 | train | 52 | 2 | 50 |
-| 2008 | train | 52 | 1 | 51 |
+| 2006 | train | 52 | 5 | 47 |
+| 2007 | train | 52 | 12 | 40 |
+| 2008 | train | 52 | 11 | 41 |
 | 2009 | train | 52 | 21 | 31 |
 | 2010 | train | 52 | 19 | 33 |
 | 2011 | train | 52 | 19 | 33 |
@@ -51,9 +51,10 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: 20061104-penn-at-princeton: conflicting home_pts: https://pennathletics.com/sports/football/stats/2006/princeton/boxscore/8129=31; https://pennathletics.com/sports/football/schedule/2006=31; https://en.wikipedia.org/wiki/2006_Penn_Quakers_football_team=22; https://en.wikipedia.org/wiki/2006_Princeton_Tigers_football_team=31
 - **warning**: 20070922-cornell-at-yale: conflicting home_team: https://cornellbigred.com/sports/football/stats/2007-08/yale-university/boxscore/3522='yale'; https://cornellbigred.com/sports/football/schedule/2007-08='yale'; https://yalebulldogs.com/sports/football/schedule/2007='yale'; https://en.wikipedia.org/wiki/2007_Cornell_Big_Red_football_team='cornell'; https://en.wikipedia.org/wiki/2007_Yale_Bulldogs_football_team='yale'
 - **warning**: 20071117-cornell-at-penn: conflicting home_team: https://cornellbigred.com/sports/football/stats/2007-08/university-of-pennsylvania/boxscore/3530='penn'; https://pennathletics.com/sports/football/stats/2007/cornell/boxscore/6967='penn'; https://cornellbigred.com/sports/football/schedule/2007-08='penn'; https://pennathletics.com/sports/football/schedule/2007='cornell'; https://en.wikipedia.org/wiki/2007_Cornell_Big_Red_football_team='penn'; https://en.wikipedia.org/wiki/2007_Penn_Quakers_football_team='penn'
+- **warning**: 20080920-stony-brook-at-brown: conflicting home_pts: https://brownbears.com/sports/football/stats/2008/stony-brook/boxscore/1433=17; https://en.wikipedia.org/wiki/2008_Brown_Bears_football_team=12
 - **warning**: 20080920-yale-at-georgetown: conflicting home_team: https://yalebulldogs.com/sports/football/schedule/2008='georgetown'; https://en.wikipedia.org/wiki/2008_Yale_Bulldogs_football_team='yale'
 - **warning**: 20081004-princeton-at-columbia: conflicting home_team: https://en.wikipedia.org/wiki/2008_Columbia_Lions_football_team='columbia'; https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team='princeton'
-- **warning**: 20081018-brown-at-princeton: conflicting home_team: https://en.wikipedia.org/wiki/2008_Brown_Bears_football_team='princeton'; https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team='brown'
+- **warning**: 20081018-brown-at-princeton: conflicting home_team: https://brownbears.com/sports/football/stats/2008/princeton/boxscore/1437='princeton'; https://en.wikipedia.org/wiki/2008_Brown_Bears_football_team='princeton'; https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team='brown'
 - **warning**: 20081025-harvard-at-princeton: conflicting home_team: https://en.wikipedia.org/wiki/2008_Harvard_Crimson_football_team='princeton'; https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team='harvard'
 - **warning**: 20081107-penn-at-princeton: conflicting home_team: https://pennathletics.com/sports/football/stats/2008/princeton/boxscore/8815='princeton'; https://pennathletics.com/sports/football/schedule/2008='princeton'; https://en.wikipedia.org/wiki/2008_Penn_Quakers_football_team='princeton'; https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team='penn'
 - **warning**: 20081115-princeton-at-yale: conflicting home_team: https://yalebulldogs.com/sports/football/schedule/2008='yale'; https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team='princeton'; https://en.wikipedia.org/wiki/2008_Yale_Bulldogs_football_team='yale'
@@ -84,6 +85,13 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: Ivy League recovery: no football box-score links in 2006 index: https://ivyleague.com/stats.aspx?path=football&amp;year=2006 Source: https://ivyleague.com/stats.aspx?path=football&amp;year=2006
 - **warning**: Ivy League recovery: no football box-score links in 2007 index: https://ivyleague.com/stats.aspx?path=football&amp;year=2007 Source: https://ivyleague.com/stats.aspx?path=football&amp;year=2007
 - **warning**: Ivy League recovery: no football box-score links in 2008 index: https://ivyleague.com/stats.aspx?path=football&amp;year=2008 Source: https://ivyleague.com/stats.aspx?path=football&amp;year=2008
+- **warning**: brown recovery: deferred after unusable box-score response on same school/season Source: https://brownbears.com/sports/football/stats/2006/columbia/boxscore/12866
+- **warning**: brown recovery: deferred after unusable box-score response on same school/season Source: https://brownbears.com/sports/football/stats/2006/cornell/boxscore/12862
+- **warning**: brown recovery: deferred after unusable box-score response on same school/season Source: https://brownbears.com/sports/football/stats/2006/dartmouth/boxscore/12865
+- **warning**: brown recovery: deferred after unusable box-score response on same school/season Source: https://brownbears.com/sports/football/stats/2006/penn/boxscore/12863
+- **warning**: brown recovery: deferred after unusable box-score response on same school/season Source: https://brownbears.com/sports/football/stats/2006/yale/boxscore/12864
+- **warning**: brown recovery: unusable response (HTTP 500, challenge=None) Source: https://brownbears.com/sports/football/stats/2006/princeton/boxscore/12861
+- **warning**: https://brownbears.com/sports/football/stats/2007/duquesne/boxscore/12826: invalid punts/punt_yds: 'undefined-undefined'
 - **warning**: https://en.wikipedia.org/wiki/2001_Dartmouth_Big_Green_football_team: reviewed date correction 2001-09-27 -&gt; 2001-09-29; corroborated by https://pennathletics.com/sports/football/schedule/2001; original disagreement retained
 - **warning**: reviewed box-score date 2018-09-14 -&gt; 2018-09-15; verified official schedule: https://gocrimson.com/sports/football/schedule/2018; original disagreement retained Source: https://ivyleague.com/boxscore.aspx?id=JcLFfL9RUu0H5ystoOMbjQ7A58QMysWHEEqi7hufVoTI16ISPxsV8Z%2bOa0ZKvNuKPMMP9TbOLpFLjoR2T14sHpDP7ush9LNGOJ6R%2f1w%2fvh7O4h0b0ivvzjdjvnrbKi5N7XFlbMTGnv5TtnG2YjN1nKnXHOAyIeZ8mFePZCOexJKXHqqtXtfNLe8ivT0V0C6V&amp;path=football
 
@@ -98,9 +106,10 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning** — 20061104-penn-at-princeton: Sources disagree: https://en.wikipedia.org/wiki/2006_Penn_Quakers_football_team\|https://en.wikipedia.org/wiki/2006_Princeton_Tigers_football_team\|https://pennathletics.com/sports/football/schedule/2006\|https://pennathletics.com/sports/football/stats/2006/princeton/boxscore/8129 Source: https://en.wikipedia.org/wiki/2006_Penn_Quakers_football_team
 - **warning** — 20070922-cornell-at-yale: Sources disagree: https://cornellbigred.com/sports/football/schedule/2007-08\|https://cornellbigred.com/sports/football/stats/2007-08/yale-university/boxscore/3522\|https://en.wikipedia.org/wiki/2007_Cornell_Big_Red_football_team\|https://en.wikipedia.org/wiki/2007_Yale_Bulldogs_football_team\|https://yalebulldogs.com/sports/football/schedule/2007 Source: https://cornellbigred.com/sports/football/schedule/2007-08
 - **warning** — 20071117-cornell-at-penn: Sources disagree: https://cornellbigred.com/sports/football/schedule/2007-08\|https://cornellbigred.com/sports/football/stats/2007-08/university-of-pennsylvania/boxscore/3530\|https://en.wikipedia.org/wiki/2007_Cornell_Big_Red_football_team\|https://en.wikipedia.org/wiki/2007_Penn_Quakers_football_team\|https://pennathletics.com/sports/football/schedule/2007\|https://pennathletics.com/sports/football/stats/2007/cornell/boxscore/6967 Source: https://cornellbigred.com/sports/football/schedule/2007-08
+- **warning** — 20080920-stony-brook-at-brown: Sources disagree: https://brownbears.com/sports/football/stats/2008/stony-brook/boxscore/1433\|https://en.wikipedia.org/wiki/2008_Brown_Bears_football_team Source: https://brownbears.com/sports/football/stats/2008/stony-brook/boxscore/1433
 - **warning** — 20080920-yale-at-georgetown: Sources disagree: https://en.wikipedia.org/wiki/2008_Yale_Bulldogs_football_team\|https://yalebulldogs.com/sports/football/schedule/2008 Source: https://en.wikipedia.org/wiki/2008_Yale_Bulldogs_football_team
 - **warning** — 20081004-princeton-at-columbia: Sources disagree: https://en.wikipedia.org/wiki/2008_Columbia_Lions_football_team\|https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team Source: https://en.wikipedia.org/wiki/2008_Columbia_Lions_football_team
-- **warning** — 20081018-brown-at-princeton: Sources disagree: https://en.wikipedia.org/wiki/2008_Brown_Bears_football_team\|https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team Source: https://en.wikipedia.org/wiki/2008_Brown_Bears_football_team
+- **warning** — 20081018-brown-at-princeton: Sources disagree: https://brownbears.com/sports/football/stats/2008/princeton/boxscore/1437\|https://en.wikipedia.org/wiki/2008_Brown_Bears_football_team\|https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team Source: https://brownbears.com/sports/football/stats/2008/princeton/boxscore/1437
 - **warning** — 20081025-harvard-at-princeton: Sources disagree: https://en.wikipedia.org/wiki/2008_Harvard_Crimson_football_team\|https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team Source: https://en.wikipedia.org/wiki/2008_Harvard_Crimson_football_team
 - **warning** — 20081107-penn-at-princeton: Sources disagree: https://en.wikipedia.org/wiki/2008_Penn_Quakers_football_team\|https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team\|https://pennathletics.com/sports/football/schedule/2008\|https://pennathletics.com/sports/football/stats/2008/princeton/boxscore/8815 Source: https://en.wikipedia.org/wiki/2008_Penn_Quakers_football_team
 - **warning** — 20081115-princeton-at-yale: Sources disagree: https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team\|https://en.wikipedia.org/wiki/2008_Yale_Bulldogs_football_team\|https://yalebulldogs.com/sports/football/schedule/2008 Source: https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team

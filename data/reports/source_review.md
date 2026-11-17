@@ -73,3 +73,9 @@ hash/time and selected value. Including the Harvard date, this expansion adds fi
 reviewed fields/games to the initial pass (32 fields across 31 games total).
 Neutral-game home designations now follow the newly available official boxes;
 team-aligned points stay unchanged for those orientation changes.
+
+## Brown 2006–2008 source review
+
+- `20080920-stony-brook-at-brown`: home_pts = 17; selected field checked against the cached official evidence in the ledger.
+
+Raw disagreement flags remain unchanged by review.

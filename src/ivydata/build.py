@@ -250,17 +250,23 @@ def _build(raw_dir: Path, out_dir: Path, config: Config, exported: ExportParse) 
 
     for message in exported.warnings:
         warn("", message)
-    league_errors = raw_dir.parent / "reports/league_recovery_errors.csv"
-    if league_errors.exists():
-        with league_errors.open(encoding="utf-8", newline="") as stream:
+    recovery_errors = [
+        raw_dir.parent / "reports/league_recovery_errors.csv",
+        *sorted((raw_dir.parent / "reports/recovery_errors").glob("*.csv")),
+    ]
+    for error_path in recovery_errors:
+        if not error_path.exists():
+            continue
+        with error_path.open(encoding="utf-8", newline="") as stream:
             reader = csv.DictReader(stream)
             if reader.fieldnames != ["url", "school", "season", "kind", "error"]:
-                raise ValueError(f"invalid league recovery error columns: {league_errors}")
+                raise ValueError(f"invalid recovery error columns: {error_path}")
             for row in reader:
                 if None in row or any(value is None for value in row.values()):
-                    raise ValueError(f"invalid league recovery error row: {league_errors}")
+                    raise ValueError(f"invalid recovery error row: {error_path}")
                 if int(row["season"]) in config.splits.seasons():
-                    warn(row["url"], f"Ivy League recovery: {row['error']}")
+                    source = "Ivy League" if row["school"] == "league" else row["school"]
+                    warn(row["url"], f"{source} recovery: {row['error']}")
     for row in rows:
         url = row["url"]
         if row["status"] != "200":

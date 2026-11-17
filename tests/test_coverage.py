@@ -89,6 +89,27 @@ def test_coverage_levels(games, boxes, scores, expected):
     assert coverage.coverage_level(games, boxes, scores) == expected
 
 
+@pytest.mark.parametrize("different_hash", [False, True])
+def test_shared_robots_allows_context_changes_but_not_conflicting_content(audit, different_hash):
+    root, _, record = audit
+    url = "https://brownbears.com/robots.txt"
+    body = record("brown", url, "User-agent: *\nAllow: /\n", kind="robots")
+    recovery = Manifest(root / "data/manifest/recovered/other_context.csv")
+    digest = "0" * 64 if different_hash else sha256(body.read_bytes()).hexdigest()
+    recovery.record(
+        FetchResult(url, 200, body, digest, True, "2026-11-17T20:00:00Z"),
+        "penn",
+        2008,
+        "robots",
+    )
+    recovery.save()
+    if different_hash:
+        with pytest.raises(ValueError, match="conflicting manifest"):
+            coverage.build_coverage_report()
+    else:
+        assert len(coverage.build_coverage_report()) == 4
+
+
 @pytest.mark.parametrize("counts", [(-1, 0, 0), (1, -1, 0), (1, 0, -1), (1, 2, 0), (1, 0, 2)])
 def test_invalid_counts_fail(counts):
     with pytest.raises(ValueError):

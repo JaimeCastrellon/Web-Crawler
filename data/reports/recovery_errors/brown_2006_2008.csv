@@ -1,0 +1,7 @@
+url,school,season,kind,error
+https://brownbears.com/sports/football/stats/2006/columbia/boxscore/12866,brown,2006,boxscore,deferred after unusable box-score response on same school/season
+https://brownbears.com/sports/football/stats/2006/cornell/boxscore/12862,brown,2006,boxscore,deferred after unusable box-score response on same school/season
+https://brownbears.com/sports/football/stats/2006/dartmouth/boxscore/12865,brown,2006,boxscore,deferred after unusable box-score response on same school/season
+https://brownbears.com/sports/football/stats/2006/penn/boxscore/12863,brown,2006,boxscore,deferred after unusable box-score response on same school/season
+https://brownbears.com/sports/football/stats/2006/princeton/boxscore/12861,brown,2006,boxscore,"unusable response (HTTP 500, challenge=None)"
+https://brownbears.com/sports/football/stats/2006/yale/boxscore/12864,brown,2006,boxscore,deferred after unusable box-score response on same school/season

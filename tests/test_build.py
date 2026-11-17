@@ -354,19 +354,20 @@ def test_partial_nonivy_schedule_does_not_invent_season_records():
     assert yale.losses_before.tolist() == [0, 1]
 
 
-def test_league_recovery_failures_reach_validation_warnings(dataset):
+@pytest.mark.parametrize(
+    "relative,school,url",
+    [
+        ("league_recovery_errors.csv", "league", "https://ivyleague.com/boxscore.aspx?id=failed"),
+        ("recovery_errors/brown_2006_2008.csv", "brown", "https://brownbears.com/failed"),
+    ],
+)
+def test_recovery_failures_reach_validation_warnings(dataset, relative, school, url):
     raw, out, _ = dataset
-    report = raw.parent / "reports/league_recovery_errors.csv"
+    report = raw.parent / "reports" / relative
     report.parent.mkdir(parents=True, exist_ok=True)
-    report.write_text(
-        "url,school,season,kind,error\n"
-        "https://ivyleague.com/boxscore.aspx?id=failed,league,2004,boxscore,robots denied\n"
-    )
+    report.write_text(f"url,school,season,kind,error\n{url},{school},2004,boxscore,robots denied\n")
     build(raw, out, CONFIG)
     warnings = read(raw.parent / "reports/build_warnings.csv")
-    assert any(
-        "robots denied" in row["message"] and "ivyleague.com" in row["source_url"]
-        for row in warnings
-    )
+    assert any("robots denied" in row["message"] and row["source_url"] == url for row in warnings)
     assert cli.main(["validate", "--data-dir", str(out)]) == 0
     assert "robots denied" in (raw.parent / "reports/validation_report.md").read_text()

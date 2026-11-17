@@ -103,6 +103,13 @@ label `league`; accepted boxscore rows name a participating Ivy school.
 failures and removes them on successful retries. Offline build includes these
 URL-bearing failures in `build_warnings.csv`, hence the validation report.
 
+School recoveries use the same error schema in
+`data/reports/recovery_errors/<source>_2006_2008.csv`. All such files are included
+in build/validation diagnostics. Their attempt inventories under
+`data/reports/recovery/` distinguish accepted boxes, discovery pages, rejected
+responses and deferred/unfetched URLs. Unfetched attempts have empty status/hash/
+timestamp cells; they are never represented as successful downloads or zero stats.
+
 ## `data/reports/crawl_errors.csv` — unresolved crawl failures, one row per URL
 
 | column | description |
