@@ -1,0 +1,7 @@
+url,school,season,kind,status,fetched_at,sha256,season_slug
+https://pennathletics.com/sports/football/stats/2006/princeton/boxscore/8129,penn,2006,boxscore,200,2026-11-17T04:20:40.705247+00:00,df8d0ff65a6ba5ef81d68e3f97a0c725618e81b608281342a5e23ff63f61f082,2006
+https://pennathletics.com/sports/football/stats/2007/cornell/boxscore/6967,penn,2007,boxscore,200,2026-11-17T04:21:10.813486+00:00,7dbbe9f65ceac40b47d8df103f6777715215eab5a33b36c300d41b3f8f1dd6d9,2007
+https://pennathletics.com/sports/football/stats/2008/princeton/boxscore/8815,penn,2008,boxscore,200,2026-11-17T04:21:40.514587+00:00,7de72d8ae6b38b3d2deb8e66ddb3ab2163cb8411d786fcf2858f94d20489106f,2008
+https://pennathletics.com/sports/football/stats/2010/princeton/boxscore/6433,penn,2010,boxscore,200,2026-11-17T04:22:40.639521+00:00,9f91cdf6e729844694f156c4b9693d8be935689bad63d6bd9100f59bfbdf9344,2010
+https://pennathletics.com/sports/football/stats/2010/villanova/boxscore/8294,penn,2010,boxscore,200,2026-11-17T04:22:10.594226+00:00,2c28b735dec6156a7e768d813d643540c74bd081e6beec2e744c70f58a309d3a,2010
+https://pennathletics.com/robots.txt,penn,2010,robots,200,2026-11-16T20:37:58.890199+00:00,79b35179aadb2908fd84f52828cbe2f64acd521f39ed37fa602e5b48a56a7f50,

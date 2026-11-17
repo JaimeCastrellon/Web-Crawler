@@ -707,8 +707,8 @@ game_id,season,date,split,stats_level,team,opponent,is_home,neutral_site,points,
 20061104-columbia-at-harvard,2006,2006-11-04,train,score_only,harvard,columbia,true,false,24,7,7,6,1,0,3,1,,,,,,,,,,,,,,,,,,,,,,,,,
 20061104-dartmouth-at-cornell,2006,2006-11-04,train,score_only,cornell,dartmouth,true,false,28,25,7,3,4,0,1,3,,,,,,,,,,,,,,,,,,,,,,,,,
 20061104-dartmouth-at-cornell,2006,2006-11-04,train,score_only,dartmouth,cornell,false,false,25,28,7,1,6,0,1,3,,,,,,,,,,,,,,,,,,,,,,,,,
-20061104-penn-at-princeton,2006,2006-11-04,train,score_only,penn,princeton,false,false,30,31,7,4,3,0,2,2,,,,,,,,,,,,,,,,,,,,,,,,,
-20061104-penn-at-princeton,2006,2006-11-04,train,score_only,princeton,penn,true,false,31,30,7,6,1,0,3,1,,,,,,,,,,,,,,,,,,,,,,,,,
+20061104-penn-at-princeton,2006,2006-11-04,train,full,penn,princeton,false,false,30,31,7,4,3,0,2,2,22,27,174,2,23,44,355,2,1,71,529,1,1,5,55,3,12,2,3,1,4,3,102,1552,2
+20061104-penn-at-princeton,2006,2006-11-04,train,full,princeton,penn,true,false,31,30,7,6,1,0,3,1,25,49,218,1,21,36,227,3,0,85,445,0,0,6,60,8,18,2,3,1,5,5,224,2048,0
 20061104-yale-at-brown,2006,2006-11-04,train,score_only,brown,yale,true,false,24,27,7,3,4,0,2,2,,,,,,,,,,,,,,,,,,,,,,,,,
 20061104-yale-at-brown,2006,2006-11-04,train,score_only,yale,brown,false,false,27,24,7,6,1,0,4,0,,,,,,,,,,,,,,,,,,,,,,,,,
 20061111-brown-at-dartmouth,2006,2006-11-11,train,score_only,brown,dartmouth,false,false,13,19,8,3,5,0,2,3,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -911,8 +911,8 @@ game_id,season,date,split,stats_level,team,opponent,is_home,neutral_site,points,
 20081101-harvard-at-dartmouth,2008,2008-11-01,train,score_only,harvard,dartmouth,false,false,35,7,6,5,1,0,2,1,,,,,,,,,,,,,,,,,,,,,,,,,
 20081101-princeton-at-cornell,2008,2008-11-01,train,score_only,cornell,princeton,true,false,26,31,6,3,3,0,1,2,,,,,,,,,,,,,,,,,,,,,,,,,
 20081101-princeton-at-cornell,2008,2008-11-01,train,score_only,princeton,cornell,false,false,31,26,6,2,4,0,1,2,,,,,,,,,,,,,,,,,,,,,,,,,
-20081107-penn-at-princeton,2008,2008-11-07,train,score_only,penn,princeton,false,false,14,9,7,4,3,0,3,1,,,,,,,,,,,,,,,,,,,,,,,,,
-20081107-penn-at-princeton,2008,2008-11-07,train,score_only,princeton,penn,true,false,9,14,7,3,4,0,2,2,,,,,,,,,,,,,,,,,,,,,,,,,
+20081107-penn-at-princeton,2008,2008-11-07,train,full,penn,princeton,false,false,14,9,7,4,3,0,3,1,16,40,166,1,16,21,132,1,1,61,298,0,0,5,45,8,13,0,0,0,0,4,138,2067,1
+20081107-penn-at-princeton,2008,2008-11-07,train,full,princeton,penn,true,false,9,14,7,3,4,0,2,2,17,24,105,1,15,25,204,0,0,49,309,1,1,3,24,3,10,0,0,2,10,4,181,1533,1
 20081108-columbia-at-harvard,2008,2008-11-08,train,score_only,columbia,harvard,false,false,28,42,7,1,6,0,1,3,,,,,,,,,,,,,,,,,,,,,,,,,
 20081108-columbia-at-harvard,2008,2008-11-08,train,score_only,harvard,columbia,true,false,42,28,7,6,1,0,3,1,,,,,,,,,,,,,,,,,,,,,,,,,
 20081108-dartmouth-at-cornell,2008,2008-11-08,train,score_only,cornell,dartmouth,true,false,37,14,7,3,4,0,1,3,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -1059,8 +1059,8 @@ game_id,season,date,split,stats_level,team,opponent,is_home,neutral_site,points,
 20100925-harvard-at-brown,2010,2010-09-25,train,score_only,harvard,brown,false,false,14,29,1,1,0,0,0,0,,,,,,,,,,,,,,,,,,,,,,,,,
 20100925-lafayette-at-princeton,2010,2010-09-25,train,score_only,lafayette,princeton,false,false,33,36,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 20100925-lafayette-at-princeton,2010,2010-09-25,train,score_only,princeton,lafayette,true,false,36,33,1,0,1,0,0,0,,,,,,,,,,,,,,,,,,,,,,,,,
-20100925-penn-at-villanova,2010,2010-09-25,train,score_only,penn,villanova,false,false,10,22,1,1,0,0,0,0,,,,,,,,,,,,,,,,,,,,,,,,,
-20100925-penn-at-villanova,2010,2010-09-25,train,score_only,villanova,penn,true,false,22,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+20100925-penn-at-villanova,2010,2010-09-25,train,full,penn,villanova,false,false,10,22,1,1,0,0,0,0,17,37,100,1,14,24,170,0,1,61,270,1,0,4,20,5,12,1,2,1,2,3,144,1961,1
+20100925-penn-at-villanova,2010,2010-09-25,train,full,villanova,penn,true,false,22,10,,,,,,,13,39,157,1,10,12,155,1,0,51,312,1,1,7,63,4,10,1,1,2,7,4,176,1639,1
 20100925-sacred-heart-at-dartmouth,2010,2010-09-25,train,score_only,dartmouth,sacred-heart,true,false,21,19,1,1,0,0,0,0,,,,,,,,,,,,,,,,,,,,,,,,,
 20100925-sacred-heart-at-dartmouth,2010,2010-09-25,train,score_only,sacred-heart,dartmouth,false,false,19,21,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 20100925-towson-at-columbia,2010,2010-09-25,train,score_only,columbia,towson,true,false,24,10,1,0,1,0,0,0,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -1123,8 +1123,8 @@ game_id,season,date,split,stats_level,team,opponent,is_home,neutral_site,points,
 20101106-columbia-at-harvard,2010,2010-11-06,train,score_only,harvard,columbia,true,false,23,7,7,5,2,0,3,1,,,,,,,,,,,,,,,,,,,,,,,,,
 20101106-dartmouth-at-cornell,2010,2010-11-06,train,score_only,cornell,dartmouth,true,false,10,28,7,2,5,0,1,3,,,,,,,,,,,,,,,,,,,,,,,,,
 20101106-dartmouth-at-cornell,2010,2010-11-06,train,score_only,dartmouth,cornell,false,false,28,10,7,4,3,0,1,3,,,,,,,,,,,,,,,,,,,,,,,,,
-20101106-penn-at-princeton,2010,2010-11-06,train,score_only,penn,princeton,false,false,52,10,7,6,1,0,4,0,,,,,,,,,,,,,,,,,,,,,,,,,
-20101106-penn-at-princeton,2010,2010-11-06,train,score_only,princeton,penn,true,false,10,52,7,1,6,0,0,4,,,,,,,,,,,,,,,,,,,,,,,,,
+20101106-penn-at-princeton,2010,2010-11-06,train,full,penn,princeton,false,false,52,10,7,6,1,0,4,0,29,50,396,5,14,26,204,2,1,76,600,1,1,7,84,6,10,0,0,1,5,2,79,1961,2
+20101106-penn-at-princeton,2010,2010-11-06,train,full,princeton,penn,true,false,10,52,7,1,6,0,0,4,14,38,60,0,13,33,110,1,0,71,170,2,1,3,30,3,17,0,3,5,29,7,276,1639,1
 20101106-yale-at-brown,2010,2010-11-06,train,score_only,brown,yale,true,false,24,27,7,4,3,0,3,1,,,,,,,,,,,,,,,,,,,,,,,,,
 20101106-yale-at-brown,2010,2010-11-06,train,score_only,yale,brown,false,false,27,24,7,5,2,0,3,1,,,,,,,,,,,,,,,,,,,,,,,,,
 20101113-brown-at-dartmouth,2010,2010-11-13,train,score_only,brown,dartmouth,false,false,35,28,8,4,4,0,3,2,,,,,,,,,,,,,,,,,,,,,,,,,

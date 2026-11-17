@@ -342,8 +342,9 @@ processed snapshot so changed selections require a new review.
 Older box scores sometimes combine two overtime sessions in a single OT column.
 Explicit ordinal notes in the game's play-by-play refine the count. A single OT
 column without such notes is marked internally as aggregate/lower-bound evidence;
-a larger explicitly reported count from another copy can refine it, with the
-original discrepancy retained. Overtime points stay summed, never duplicated.
+a larger explicitly reported count from another copy can refine it. A lower bound
+is not a contrary exact count and does not create a false disagreement; incompatible
+explicit source counts remain reported. Overtime points stay summed, never duplicated.
 The 2009 Cornell–Dartmouth fixture covers this layout; Cornell's official history
 confirms the two sessions in the otherwise ambiguous 2002 Brown game.
 
