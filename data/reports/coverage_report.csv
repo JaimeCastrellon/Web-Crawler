@@ -1,7 +1,7 @@
 school,season,schedule_url,season_slug,games_on_schedule,boxscores_found,level,notes
 brown,2000,,,0,0,missing,not crawled (no schedule manifest entry)
 brown,2001,,,0,0,missing,not crawled (no schedule manifest entry)
-brown,2002,,,0,0,missing,not crawled (no schedule manifest entry)
+brown,2002,,,0,0,missing,no schedule manifest; recovered boxes available: https://cornellbigred.com/sports/football/stats/2002-03/brown-university/boxscore/4164
 brown,2003,,,0,0,missing,not crawled (no schedule manifest entry)
 brown,2004,https://brownbears.com/sports/football/schedule/2004,2004,10,10,full,
 brown,2005,,,0,0,missing,not crawled (no schedule manifest entry)
@@ -53,14 +53,14 @@ columbia,2025,,,0,0,missing,no schedule manifest; recovered boxes available: htt
 columbia,2026,,,0,0,missing,not crawled (no schedule manifest entry)
 cornell,2000,,,0,0,missing,not crawled (no schedule manifest entry)
 cornell,2001,,,0,0,missing,not crawled (no schedule manifest entry)
-cornell,2002,,,0,0,missing,not crawled (no schedule manifest entry)
+cornell,2002,,,0,0,missing,no schedule manifest; recovered boxes available: https://cornellbigred.com/sports/football/stats/2002-03/brown-university/boxscore/4164
 cornell,2003,,,0,0,missing,not crawled (no schedule manifest entry)
 cornell,2004,,,0,0,missing,"no schedule manifest; recovered boxes available: https://brownbears.com/sports/football/stats/2004/cornell/boxscore/12942, https://cornellbigred.com/sports/football/stats/2004-05/yale-university/boxscore/4180"
 cornell,2005,,,0,0,missing,not crawled (no schedule manifest entry)
 cornell,2006,,,0,0,missing,not crawled (no schedule manifest entry)
-cornell,2007,,,0,0,missing,not crawled (no schedule manifest entry)
+cornell,2007,,,0,0,missing,"no schedule manifest; recovered boxes available: https://cornellbigred.com/sports/football/stats/2007-08/university-of-pennsylvania/boxscore/3530, https://cornellbigred.com/sports/football/stats/2007-08/yale-university/boxscore/3522"
 cornell,2008,,,0,0,missing,not crawled (no schedule manifest entry)
-cornell,2009,,,0,0,missing,not crawled (no schedule manifest entry)
+cornell,2009,,,0,0,missing,"no schedule manifest; recovered boxes available: https://cornellbigred.com/sports/football/stats/2009-10/dartmouth-college/boxscore/8094, https://cornellbigred.com/sports/football/stats/2009-10/princeton-university/boxscore/8093"
 cornell,2010,,,0,0,missing,not crawled (no schedule manifest entry)
 cornell,2011,,,0,0,missing,not crawled (no schedule manifest entry)
 cornell,2012,,,0,0,missing,not crawled (no schedule manifest entry)
@@ -86,7 +86,7 @@ dartmouth,2005,,,0,0,missing,not crawled (no schedule manifest entry)
 dartmouth,2006,,,0,0,missing,not crawled (no schedule manifest entry)
 dartmouth,2007,,,0,0,missing,not crawled (no schedule manifest entry)
 dartmouth,2008,,,0,0,missing,not crawled (no schedule manifest entry)
-dartmouth,2009,,,0,0,missing,not crawled (no schedule manifest entry)
+dartmouth,2009,,,0,0,missing,no schedule manifest; recovered boxes available: https://cornellbigred.com/sports/football/stats/2009-10/dartmouth-college/boxscore/8094
 dartmouth,2010,,,0,0,missing,not crawled (no schedule manifest entry)
 dartmouth,2011,,,0,0,missing,not crawled (no schedule manifest entry)
 dartmouth,2012,,,0,0,missing,not crawled (no schedule manifest entry)
@@ -136,7 +136,7 @@ penn,2003,,,0,0,missing,not crawled (no schedule manifest entry)
 penn,2004,,,0,0,missing,"no schedule manifest; recovered boxes available: https://brownbears.com/sports/football/stats/2004/penn/boxscore/12943, https://pennathletics.com/sports/football/stats/2004/yale/boxscore/10596"
 penn,2005,,,0,0,missing,not crawled (no schedule manifest entry)
 penn,2006,,,0,0,missing,not crawled (no schedule manifest entry)
-penn,2007,,,0,0,missing,not crawled (no schedule manifest entry)
+penn,2007,,,0,0,missing,no schedule manifest; recovered boxes available: https://cornellbigred.com/sports/football/stats/2007-08/university-of-pennsylvania/boxscore/3530
 penn,2008,,,0,0,missing,not crawled (no schedule manifest entry)
 penn,2009,,,0,0,missing,not crawled (no schedule manifest entry)
 penn,2010,,,0,0,missing,not crawled (no schedule manifest entry)
@@ -164,7 +164,7 @@ princeton,2005,,,0,0,missing,not crawled (no schedule manifest entry)
 princeton,2006,,,0,0,missing,not crawled (no schedule manifest entry)
 princeton,2007,,,0,0,missing,not crawled (no schedule manifest entry)
 princeton,2008,,,0,0,missing,not crawled (no schedule manifest entry)
-princeton,2009,,,0,0,missing,not crawled (no schedule manifest entry)
+princeton,2009,,,0,0,missing,no schedule manifest; recovered boxes available: https://cornellbigred.com/sports/football/stats/2009-10/princeton-university/boxscore/8093
 princeton,2010,,,0,0,missing,not crawled (no schedule manifest entry)
 princeton,2011,,,0,0,missing,not crawled (no schedule manifest entry)
 princeton,2012,,,0,0,missing,not crawled (no schedule manifest entry)
@@ -188,7 +188,7 @@ yale,2003,,,0,0,missing,not crawled (no schedule manifest entry)
 yale,2004,https://yalebulldogs.com/sports/football/schedule/2004,2004,10,6,partial,HTTP 500: https://yalebulldogs.com/sports/football/stats/2004/brown/boxscore/10168 | HTTP 500: https://yalebulldogs.com/sports/football/stats/2004/colgate/boxscore/10163 | HTTP 500: https://yalebulldogs.com/sports/football/stats/2004/columbia/boxscore/10167 | HTTP 500: https://yalebulldogs.com/sports/football/stats/2004/dartmouth/boxscore/10164 | HTTP 500: https://yalebulldogs.com/sports/football/stats/2004/dayton/boxscore/10161 | HTTP 500: https://yalebulldogs.com/sports/football/stats/2004/harvard/boxscore/10170 | HTTP 500: https://yalebulldogs.com/sports/football/stats/2004/lehigh/boxscore/10165 | HTTP 500: https://yalebulldogs.com/sports/football/stats/2004/penn/boxscore/10166 | HTTP 500: https://yalebulldogs.com/sports/football/stats/2004/princeton/boxscore/10169 | recovered box score matched by teams/date: https://brownbears.com/sports/football/stats/2004/yale/boxscore/12944 | recovered box score matched by teams/date: https://cornellbigred.com/sports/football/stats/2004-05/yale-university/boxscore/4180 | recovered box score matched by teams/date: https://dartmouthsports.com/news/2004/10/8/547065 | recovered box score matched by teams/date: https://gocolumbialions.com/sports/2018/5/28/1361469 | recovered box score matched by teams/date: https://pennathletics.com/sports/football/stats/2004/yale/boxscore/10596 | recovered box score matched by teams/date: https://static.gocrimson.com/custompages/sports/fball/2004-05/files/yaleharv.htm
 yale,2005,,,0,0,missing,not crawled (no schedule manifest entry)
 yale,2006,,,0,0,missing,not crawled (no schedule manifest entry)
-yale,2007,,,0,0,missing,not crawled (no schedule manifest entry)
+yale,2007,,,0,0,missing,no schedule manifest; recovered boxes available: https://cornellbigred.com/sports/football/stats/2007-08/yale-university/boxscore/3522
 yale,2008,,,0,0,missing,not crawled (no schedule manifest entry)
 yale,2009,,,0,0,missing,not crawled (no schedule manifest entry)
 yale,2010,,,0,0,missing,not crawled (no schedule manifest entry)
