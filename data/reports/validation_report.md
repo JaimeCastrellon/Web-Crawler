@@ -1,6 +1,6 @@
 # Validation report
 
-Game rows: 1355. Errors: 0. Warnings: 99.
+Game rows: 1355. Errors: 0. Warnings: 110.
 
 This report checks the data currently present; it does not certify complete historical coverage.
 Ivy counts use completed games and expect seven in full seasons; current split seasons are excluded.
@@ -15,9 +15,9 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 | 2003 | train | 52 | 0 | 52 |
 | 2004 | train | 52 | 15 | 37 |
 | 2005 | train | 52 | 0 | 52 |
-| 2006 | train | 52 | 13 | 39 |
-| 2007 | train | 52 | 20 | 32 |
-| 2008 | train | 52 | 12 | 40 |
+| 2006 | train | 52 | 20 | 32 |
+| 2007 | train | 52 | 27 | 25 |
+| 2008 | train | 52 | 21 | 31 |
 | 2009 | train | 52 | 21 | 31 |
 | 2010 | train | 52 | 19 | 33 |
 | 2011 | train | 52 | 19 | 33 |
@@ -54,7 +54,9 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: 20080920-stony-brook-at-brown: conflicting home_pts: https://brownbears.com/sports/football/stats/2008/stony-brook/boxscore/1433=17; https://en.wikipedia.org/wiki/2008_Brown_Bears_football_team=12
 - **warning**: 20080920-yale-at-georgetown: conflicting home_team: https://yalebulldogs.com/sports/football/schedule/2008='georgetown'; https://en.wikipedia.org/wiki/2008_Yale_Bulldogs_football_team='yale'
 - **warning**: 20081004-princeton-at-columbia: conflicting home_team: https://en.wikipedia.org/wiki/2008_Columbia_Lions_football_team='columbia'; https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team='princeton'
+- **warning**: 20081011-cornell-at-harvard: conflicting date: https://cornellbigred.com/sports/football/stats/2008-09/harvard-university/boxscore/8080='2008-10-10'; https://cornellbigred.com/sports/football/schedule/2008-09='2008-10-11'; https://en.wikipedia.org/wiki/2008_Cornell_Big_Red_football_team='2008-10-11'; https://en.wikipedia.org/wiki/2008_Harvard_Crimson_football_team='2008-10-11'
 - **warning**: 20081018-brown-at-princeton: conflicting home_team: https://brownbears.com/sports/football/stats/2008/princeton/boxscore/1437='princeton'; https://en.wikipedia.org/wiki/2008_Brown_Bears_football_team='princeton'; https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team='brown'
+- **warning**: 20081025-cornell-at-brown: conflicting city: https://brownbears.com/sports/football/stats/2008/cornell/boxscore/1438='Providence, R.I.'; https://cornellbigred.com/sports/football/stats/2008-09/brown-university/boxscore/8082='Providence, RI'
 - **warning**: 20081025-harvard-at-princeton: conflicting home_team: https://en.wikipedia.org/wiki/2008_Harvard_Crimson_football_team='princeton'; https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team='harvard'
 - **warning**: 20081107-penn-at-princeton: conflicting home_team: https://pennathletics.com/sports/football/stats/2008/princeton/boxscore/8815='princeton'; https://pennathletics.com/sports/football/schedule/2008='princeton'; https://en.wikipedia.org/wiki/2008_Penn_Quakers_football_team='princeton'; https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team='penn'
 - **warning**: 20081115-princeton-at-yale: conflicting home_team: https://yalebulldogs.com/sports/football/schedule/2008='yale'; https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team='princeton'; https://en.wikipedia.org/wiki/2008_Yale_Bulldogs_football_team='yale'
@@ -106,8 +108,16 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: columbia recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://gocolumbialions.com/news/2006/9/16/609379.aspx
 - **warning**: columbia recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://gocolumbialions.com/news/2006/9/23/612859.aspx
 - **warning**: columbia recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://gocolumbialions.com/news/2007/11/10/1309397.aspx
+- **warning**: cornell recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://cornellbigred.com/sports/football/stats/2006-07/colgate-university/boxscore/4203
+- **warning**: cornell recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://cornellbigred.com/sports/football/stats/2006-07/university-of-albany/boxscore/4201
 - **warning**: https://brownbears.com/sports/football/stats/2007/duquesne/boxscore/12826: invalid punts/punt_yds: 'undefined-undefined'
+- **warning**: https://dartmouthsports.com/sports/football/schedule/2021 row 1: multiple box-score URLs ['https://dartmouthsports.com/sports/football/stats/2021/valparaiso/boxscore/9748', 'https://dartmouthsports.com/documents/2021/9/18/210918_Valparaiso_Box.pdf']; raw=at Valparaiso Valparaiso, Ind. / Brown Field W, 28-18 Sep 18 (Sat) 2:00 PM Game Center Box Score Recap Photos Box Score Game Info Source: https://dartmouthsports.com/sports/football/schedule/2021
+- **warning**: https://dartmouthsports.com/sports/football/schedule/2021 row 2: multiple box-score URLs ['https://dartmouthsports.com/sports/football/stats/2021/sacred-heart/boxscore/9749', 'https://dartmouthsports.com/documents/2021/9/25/210925_SHU_Box.pdf']; raw=vs Sacred Heart Buddy Teevens Stadium at Memorial Field Hanover, N.H. Faculty and Staff Appreciation Day Presented by Ledyard National Bank W, 41-3 Sep 25 (Sat) 1:30 PM Game Center Box Score Recap Box Score (HTML) Box Score Faculty and Staff Appreciation Day Presented by Ledyard National Bank Game Info Source: https://dartmouthsports.com/sports/football/schedule/2021
+- **warning**: https://dartmouthsports.com/sports/football/schedule/2021 row 3: multiple box-score URLs ['https://dartmouthsports.com/sports/football/stats/2021/penn/boxscore/9750', 'https://dartmouthsports.com/documents/2021/10/2/Penn_Box.pdf']; raw=at Penn Philadelphia, Pa. / Franklin Field W, 31-7 Oct 1 (Fri) 7:00 PM Game Center Box Score Recap Box Score (HTML) Box Score Game Info Source: https://dartmouthsports.com/sports/football/schedule/2021
+- **warning**: https://dartmouthsports.com/sports/football/schedule/2021 row 7: multiple box-score URLs ['https://dartmouthsports.com/sports/football/stats/2021/harvard/boxscore/9754', 'https://dartmouthsports.com/documents/2021/10/30/211030_Harvard_Box.pdf']; raw=at #21 Harvard Cambridge, Mass. / Harvard Stadium W, 20-17 Oct 30 (Sat) 12:00 PM Game Center Box Score Recap Box Score (HTML) Box Score Game Info Source: https://dartmouthsports.com/sports/football/schedule/2021
+- **warning**: https://dartmouthsports.com/sports/football/schedule/2021 row 9: multiple box-score URLs ['https://dartmouthsports.com/sports/football/stats/2021/cornell/boxscore/9756', 'https://dartmouthsports.com/documents/2021/11/13/211113_Cornell_Box.pdf']; raw=vs Cornell Buddy Teevens Stadium at Memorial Field Hanover, N.H. Military Appreciation Day Presented by Casella W, 41-7 Nov 13 (Sat) 1:30 PM Game Center Box Score Recap Box Score Highlights Military Appreciation Day Presented by Casella Game Info Source: https://dartmouthsports.com/sports/football/schedule/2021
 - **warning**: https://en.wikipedia.org/wiki/2001_Dartmouth_Big_Green_football_team: reviewed date correction 2001-09-27 -&gt; 2001-09-29; corroborated by https://pennathletics.com/sports/football/schedule/2001; original disagreement retained
+- **warning**: reviewed box-score date 2008-10-10 -&gt; 2008-10-11; verified official schedule: https://cornellbigred.com/sports/football/schedule/2008-09; original disagreement retained Source: https://cornellbigred.com/sports/football/stats/2008-09/harvard-university/boxscore/8080
 - **warning**: reviewed box-score date 2018-09-14 -&gt; 2018-09-15; verified official schedule: https://gocrimson.com/sports/football/schedule/2018; original disagreement retained Source: https://ivyleague.com/boxscore.aspx?id=JcLFfL9RUu0H5ystoOMbjQ7A58QMysWHEEqi7hufVoTI16ISPxsV8Z%2bOa0ZKvNuKPMMP9TbOLpFLjoR2T14sHpDP7ush9LNGOJ6R%2f1w%2fvh7O4h0b0ivvzjdjvnrbKi5N7XFlbMTGnv5TtnG2YjN1nKnXHOAyIeZ8mFePZCOexJKXHqqtXtfNLe8ivT0V0C6V&amp;path=football
 
 ### source_disagreement
@@ -124,6 +134,7 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning** — 20080920-stony-brook-at-brown: Sources disagree: https://brownbears.com/sports/football/stats/2008/stony-brook/boxscore/1433\|https://en.wikipedia.org/wiki/2008_Brown_Bears_football_team Source: https://brownbears.com/sports/football/stats/2008/stony-brook/boxscore/1433
 - **warning** — 20080920-yale-at-georgetown: Sources disagree: https://en.wikipedia.org/wiki/2008_Yale_Bulldogs_football_team\|https://yalebulldogs.com/sports/football/schedule/2008 Source: https://en.wikipedia.org/wiki/2008_Yale_Bulldogs_football_team
 - **warning** — 20081004-princeton-at-columbia: Sources disagree: https://en.wikipedia.org/wiki/2008_Columbia_Lions_football_team\|https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team Source: https://en.wikipedia.org/wiki/2008_Columbia_Lions_football_team
+- **warning** — 20081011-cornell-at-harvard: Sources disagree: https://cornellbigred.com/sports/football/schedule/2008-09\|https://cornellbigred.com/sports/football/stats/2008-09/harvard-university/boxscore/8080\|https://en.wikipedia.org/wiki/2008_Cornell_Big_Red_football_team\|https://en.wikipedia.org/wiki/2008_Harvard_Crimson_football_team Source: https://cornellbigred.com/sports/football/schedule/2008-09
 - **warning** — 20081018-brown-at-princeton: Sources disagree: https://brownbears.com/sports/football/stats/2008/princeton/boxscore/1437\|https://en.wikipedia.org/wiki/2008_Brown_Bears_football_team\|https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team Source: https://brownbears.com/sports/football/stats/2008/princeton/boxscore/1437
 - **warning** — 20081025-harvard-at-princeton: Sources disagree: https://en.wikipedia.org/wiki/2008_Harvard_Crimson_football_team\|https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team Source: https://en.wikipedia.org/wiki/2008_Harvard_Crimson_football_team
 - **warning** — 20081107-penn-at-princeton: Sources disagree: https://en.wikipedia.org/wiki/2008_Penn_Quakers_football_team\|https://en.wikipedia.org/wiki/2008_Princeton_Tigers_football_team\|https://pennathletics.com/sports/football/schedule/2008\|https://pennathletics.com/sports/football/stats/2008/princeton/boxscore/8815 Source: https://en.wikipedia.org/wiki/2008_Penn_Quakers_football_team
