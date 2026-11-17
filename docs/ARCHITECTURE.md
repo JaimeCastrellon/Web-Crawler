@@ -232,6 +232,38 @@ least one parsed team-statistic value is `full`; otherwise it remains `score_onl
 The result contains one game row and exactly two team rows per valid game, sorted
 by date/game id/team. Pre-game records and turnovers remain build-stage work.
 
+**Offline build.** `python -m ivydata build` reads `data/manifest/urls.csv` and
+`data/manifest/recovered/*.csv`, then parses only their cached schedule/box-score
+responses. `--raw-dir` and `--out-dir` override the default paths; manifests and the
+build-warning report are siblings of the raw directory. No HTTP client is created.
+Robots/other manifest kinds, skipped seasons, and seasons outside the configured
+build range are excluded. Conflicting duplicate provenance entries fail explicitly.
+Successful bodies must match the manifest SHA-256; missing/corrupt bodies abort
+without replacing processed CSVs. HTTP errors, known challenges, unsupported PDFs,
+wrong-season pages, and parse/merge warnings are logged and retained in the sorted
+`build_warnings.csv`. A nonempty source selection with no usable games also fails
+without replacing existing processed data. An empty manifest produces header-only
+tables. Unmanifested cache files are not implicitly included.
+
+Pre-game records count only rows with both final scores known, strictly before the
+current date and in the same season. Same-date results are applied as a batch after
+all that day's pre-game rows are computed, because kickoff times are unavailable.
+Missing/unplayed scores do not become wins or games played. Counts reset by team
+and season; ties and non-Ivy games are handled separately. Existing record columns
+are overwritten by these computations. Records describe observed games in this
+dataset; incomplete schedules (especially non-Ivy opponents) do not yield complete
+season records. Header W-L records never enter the pipeline. Turnovers are derived
+only when both interceptions thrown and fumbles lost are known.
+
+Split labels come solely from the configured season ranges; skipped seasons are
+removed and ambiguous/missing assignments fail. Explicit CSV schemas omit internal
+parser fields, preserve empty missing cells and integer values, and write lowercase
+booleans with UTF-8/LF output. All tables are rendered before publication; each file
+is replaced atomically. Full tables and per-split tables are sorted by date/game id
+and team where applicable. Empty splits still get headers, and repeated builds
+from unchanged cache/manifests/config are byte-identical. The build-warning report
+is available for task 8's validation work, which remains separate.
+
 ## Module interfaces
 
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a

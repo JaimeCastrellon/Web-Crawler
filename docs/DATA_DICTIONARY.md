@@ -103,3 +103,16 @@ Rows are sorted by (`school`, numeric `season`, `kind`, `url`). Successful retri
 their error row; failures outside the current selection remain. Requests that fail before
 an HTTP response exists appear here without a fabricated manifest status. Robots responses
 are recorded in the URL manifest using their actual cached status.
+
+## `data/reports/build_warnings.csv` — offline build diagnostics
+
+| column | description |
+|---|---|
+| `source_url` | source URL for download/cache/parse diagnostics; empty for merge messages that contain their source URLs within the message |
+| `message` | HTTP/cache failure, unsupported or wrong-season page, parse warning, or merge conflict with source context |
+
+Rows are deduplicated and sorted by (`source_url`, `message`). This is an input to the
+validation report, not a model feature. It is written even when missing/corrupt successful
+cache entries prevent replacing the processed tables. Structural manifest errors fail
+explicitly before processing. Pre-game counts cover completed games actually present
+in the dataset, strictly on earlier dates; incomplete schedules imply incomplete records.
