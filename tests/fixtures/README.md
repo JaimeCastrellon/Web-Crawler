@@ -98,3 +98,13 @@ from `https://ivyleague.com/stats.aspx?path=football&year=2025`, with a repeated
 row representing the index's duplicated per-team listings. Navigation, cumulative
 season statistics and unrelated state are omitted. The index is discovery only,
 not a statistics feature source; recapture it with the league collection command.
+
+## Reviewed league date excerpt
+
+`boxscore_league_2018_san_diego_date.html` retains the league's September 14 date,
+quarter scores and team statistics for the 2018 San Diego–Harvard game. Its parser
+output equals the complete cached page. `schedule_harvard_2018_san_diego.html`
+retains the official Harvard title and that game's original card, proving
+September 15 and a 36–14 Harvard win. Tests generate their own proof checksums
+and verify that unrelated, changed or damaged evidence cannot correct a date.
+Both capture URLs are in `fixtures.yaml`.

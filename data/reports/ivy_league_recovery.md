@@ -1,49 +1,53 @@
-# Ivy League conference box-score recovery
+# Expanded Ivy League conference box-score recovery
 
-Checked 2026-11-17 after the initial 37-game collection. The conference source had
-not previously been integrated. Its populated season indexes are:
+Collection scope agreed 2026-11-17: retain previously collected older rows; new
+requests target 2006–2026, newest first. The initial 37 detailed-stat games rose
+to 131 after the first 2024–2025 recovery. This expansion brings the total to
+596 detailed-stat games, still 1,355 games / 2,710 team rows.
 
-- https://ivyleague.com/stats.aspx?path=football&year=2024 — 52 distinct game links.
-- https://ivyleague.com/stats.aspx?path=football&year=2025 — 55 distinct game links.
+## Accepted league pages
 
-All 107 game pages were captured through Fetcher with the configured User-Agent,
-robots permission, the league's five-second delay and checksum-verified caching.
-An initial transport disconnect completed on a subsequent uncached retry. Populated
-conference tables also required a page-shape correction: these boxes omit the
-school-site wrapper and include monitoring scripts. Script-only challenges remain
-rejected. All index and accepted box hashes/timestamps, plus robots provenance, are
-in `data/manifest/recovered/ivy_league_boxscores.csv`. Raw HTML stays ignored.
+574 official league box scores are checksum-verified in the recovery manifest.
+They include all 107 test-season games and all known completed games for 2017–2026
+(excluding 2020). Earlier modern indexes are partial: 2012–2016 expose ten Penn
+games each, and 2009–2011 expose nineteen distinct Brown/Penn games each.
+2006–2008 indexes have no football box-score links; those limitations remain
+explicit in the recovery-error and validation reports.
 
-## Dataset result
+The expanded snapshot adds 465 detailed-stat games relative to the initial
+131-game state of this PR. Previously collected non-league boxes remain intact.
+All 5,136 team-stat cells for the 2024–2025 test seasons are populated. Missing
+values elsewhere remain missing, and four upcoming 2026 games keep blank results.
 
-- Still 1,355 unique games and 2,710 team rows. No new duplicate games.
-- Detailed-stat games rise from 37 to 131, adding 94 games; 13 already had school copies.
-- All 52 games in 2024 and all 55 in 2025 now have team box-score statistics.
-- All 5,136 team-stat cells in those two seasons are populated; missing values
-  elsewhere remain missing. No cumulative season totals or printed W-L records are used.
-- Existing dates, team identities, final scores, home/neutral designations, split
-  labels and pre-game record columns are unchanged. The 24 disputed-game flags remain.
-- Four verified abbreviations (UAlbany, Central Conn. St., Youngstown St., Montana St.)
-  map to existing canonical opponents instead of introducing duplicate games.
-- League pages mirror official game reports, so matching copies are provenance
-  corroboration rather than independent measurements.
+All HTTP used Fetcher with the configured User-Agent, robots permission and the
+league's five-second Crawl-delay. Cache hits were reused without refresh. The
+season order is newest first. Index leaders and cumulative totals are discovery
+context only; printed W-L records never enter features. League mirrors are not
+independent statistical measurements of the school-hosted copy. Raw pages remain
+ignored; only small curated fixtures and factual output/provenance are committed.
 
-`python -m ivydata league-boxscores --seasons 2024,2025` resumes from the cache;
-`build`, `coverage`, and `validate` remain offline. Recovery errors are retained in
-`league_recovery_errors.csv` and included by the build in validation warnings.
-After the successful recovery that file contains only its header.
+## Review findings
 
-## Checks and remaining work
+- Verified abbreviations/mascot names preserve canonical identities, including
+  Morgan St., URI, CCSU, USD, Princeton Tigers and Penn Quakers.
+- The league's 2018 San Diego–Harvard box has a one-day date error. A cached
+  official Harvard schedule proves September 15 with the same teams and 36–14
+  final. The bounded, checksum-checked review retains the raw date disagreement.
+- Four additional field reviews correct Brown's 2009 Stony Brook visit, Penn's
+  2011 Villanova visit, Brown's 34 points vs Holy Cross in 2009, and Brown's
+  21 points at Columbia in 2011. The field ledger records source hashes/times.
+- Neutral-game designated home teams now follow the official boxes. Team-aligned
+  points remain unchanged for those orientation updates.
+- Three signed sack-yard totals are negative and their play descriptions report
+  gains. Signed values are preserved. Validation now correctly applies the
+  project's negative-yardage allowance to sack_yds_lost as well.
 
-300 offline tests pass, including actual league fixtures, two-overtime scoring,
-strict season/sport/host link selection, failure persistence/resume, validation
-reporting, interruption/resume, canonical aliases and one-to-one provenance for all 107 games.
-Validation reports 0 errors and 61 warnings. All 14 generated CSV/report outputs remain byte-identical after repeated offline
-build, coverage and validation. Format/lint/duplicate checks pass.
+Validation: 0 errors, 75 warnings. There are 29 source-disagreement flags, all
+covered by the review ledger; reviews do not erase contrary claims. The ledger
+now covers 32 fields across 31 games, including the two OT-only cases.
+316 offline tests pass; normal format/lint/duplicate checks and rebuild
+determinism are checked before publication. No output columns changed.
 
-The modern season selector advertises 2009–2026 (no 2020); older advertised seasons
-remain to be collected. A populated 2008 summary exists on static.ivyleague.com,
-but the analogous 2004 path returns a 68-byte not-found body despite HTTP 200.
-The two probe hashes/timestamps are in `league_archive_probe.csv`; neither summary
-is imported into model data. Yale's 2004 Dayton/Colgate/Lehigh/Princeton gaps remain.
-Issue #9 stays open for broader train/current collection and remaining source review.
+`python -m ivydata league-boxscores --seasons 2006-2026` is resumable. Offline
+`build`, `coverage`, and `validate` reuse the local cache. Early school-source
+recoveries are being published separately. Earlier 2000–2005 gaps are deferred.

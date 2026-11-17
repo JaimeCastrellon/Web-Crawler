@@ -1,4 +1,5 @@
 # Season-based splits for the modeling team. Change the cutoffs here only.
+# Retain collected 2000–2005 history; new collection targets 2006 onward (AGENTS.md).
 first_season: 2000
 last_season: 2026
 

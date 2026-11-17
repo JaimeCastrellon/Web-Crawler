@@ -21,6 +21,7 @@ from ivydata.config import Config
 from ivydata.crawl.manifest import MANIFEST_COLUMNS
 from ivydata.crawl.pages import challenge_provider
 from ivydata.normalize.merge import merge_games
+from ivydata.normalize.reviews import apply_box_date_review, load_box_date_reviews
 from ivydata.normalize.teams import is_ivy
 from ivydata.parse.boxscore import TEAM_STAT_FIELDS, parse_boxscore
 from ivydata.parse.schedule import parse_schedule
@@ -238,6 +239,7 @@ def _build(raw_dir: Path, out_dir: Path, config: Config, exported: ExportParse) 
         (manifest_dir / "recovered").glob("*.csv")
     )
     rows = _manifest_rows(raw_dir, config) if has_manifest or not exported.rows else []
+    date_reviews = load_box_date_reviews(raw_dir.parent / "manifest/reviewed_box_dates.csv")
     warnings: list[dict[str, str]] = []
     cache_errors = []
     boxes, schedules = [], list(exported.rows)
@@ -291,6 +293,8 @@ def _build(raw_dir: Path, out_dir: Path, config: Config, exported: ExportParse) 
                 warn(url, message)
         else:
             box = parse_boxscore(html, url)
+            if url in date_reviews:
+                warn(url, apply_box_date_review(box, date_reviews[url], raw_dir, config))
             day = box.game["date"]
             if day is not None and _iso_day(day).year - (_iso_day(day).month <= 3) != int(
                 row["season"]

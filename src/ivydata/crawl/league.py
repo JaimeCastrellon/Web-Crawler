@@ -63,7 +63,7 @@ def crawl_league(config: Config, seasons: list[int], refresh: bool = False) -> N
     The league is a source, not a ninth team. Box manifest rows use an Ivy team
     actually playing that game; index/robots rows use the source label ``league``.
     """
-    years = sorted(set(seasons) - config.splits.skip_seasons)
+    years = sorted(set(seasons) - config.splits.skip_seasons, reverse=True)
     if set(years) - set(config.splits.seasons()):
         raise ValueError("league seasons must fall within configured splits")
     directory = REPO_ROOT / "data"

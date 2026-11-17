@@ -145,6 +145,14 @@ def test_cli_explicit_selection_and_bad_index(fake_league):
         league.crawl_league(load_config(), [1999])
 
 
+def test_collection_visits_newest_seasons_first_and_skips_2020(fake_league):
+    _, links, responses, instances = fake_league
+    newer = "https://ivyleague.com/stats.aspx?path=football&year=2026"
+    responses[newer] = (404, "not yet available")
+    league.crawl_league(load_config(), [2020, 2025, 2026, 2025])
+    assert instances[-1].calls == [newer, INDEX_URL, *links]
+
+
 def test_interrupted_box_validation_is_visible_until_resumed(fake_league, monkeypatch):
     root, links, _, instances = fake_league
     original = league.parse_boxscore
@@ -170,6 +178,12 @@ def test_interrupted_box_validation_is_visible_until_resumed(fake_league, monkey
         ("Central Conn. St.", "central-connecticut-state"),
         ("Youngstown St.", "youngstown-state"),
         ("Montana St.", "montana-state"),
+        ("Morgan St.", "morgan-state"),
+        ("Princeton Tigers", "princeton"),
+        ("Penn Quakers", "penn"),
+        ("CCSU", "central-connecticut-state"),
+        ("USD", "san-diego"),
+        ("URI", "rhode-island"),
     ],
 )
 def test_league_abbreviations_preserve_existing_game_identities(raw, expected):
@@ -179,7 +193,11 @@ def test_league_abbreviations_preserve_existing_game_identities(raw, expected):
 def test_committed_league_boxes_cover_both_test_seasons_without_duplicate_games():
     root = Path(__file__).resolve().parents[1]
     with (root / "data/manifest/recovered/ivy_league_boxscores.csv").open() as stream:
-        boxes = [r for r in csv.DictReader(stream) if r["kind"] == "boxscore"]
+        boxes = [
+            r
+            for r in csv.DictReader(stream)
+            if r["kind"] == "boxscore" and r["season"] in ("2024", "2025")
+        ]
     assert len(boxes) == 107 and all(r["status"] == "200" for r in boxes)
     with (root / "data/processed/games.csv").open() as stream:
         games = list(csv.DictReader(stream))

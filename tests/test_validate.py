@@ -129,7 +129,7 @@ def test_impossible_stats_are_reported(column, value):
 
 def test_negative_yards_and_missing_values_are_allowed():
     games, teams = frames()
-    for column in ("rush_yds", "pass_yds", "total_yds", "punt_yds"):
+    for column in ("rush_yds", "pass_yds", "total_yds", "punt_yds", "sack_yds_lost"):
         teams.loc[0, column] = -17
     assert not any(i.check == "impossible_value" for i in run_checks(games, teams))
 

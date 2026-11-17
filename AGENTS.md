@@ -9,6 +9,11 @@ tables (`games`, `team_game_stats`), merge the duplicate copies of Ivy-vs-Ivy ga
 and write CSVs to `data/processed/`. The output feeds a separate SVD-based model that predicts
 Harvard–Yale. This repo is **data only** — no modeling code.
 
+**Collection scope (user decision, 2026-11-17):** retain the older rows already collected,
+but new collection targets **2006–2026**, newest seasons first. Do not spend new requests
+on 2000–2005 gaps, including the previously tracked Yale 2004 gaps. The dataset/split
+start stays 2000 to retain existing history; it is not the new collection boundary.
+
 ## Setup & commands
 ```bash
 pip install -e ".[dev]"

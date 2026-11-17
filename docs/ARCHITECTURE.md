@@ -352,6 +352,15 @@ A known stat label with missing values warns without losing section context.
 Unrecognized nonempty exported result text also produces a URL/raw-text warning
 instead of silently appearing unplayed.
 
+**Reviewed box-score dates.** `normalize/reviews.py` reads optional explicit reviews
+from `data/manifest/reviewed_box_dates.csv`. A one-day correction is applied only
+when the box still reports the reviewed original date and a checksum/metadata-
+verified official school schedule proves the selected date, both teams and finals.
+Missing/damaged or nonmatching evidence fails before CSV publication. The original
+box date remains in source-agreement diagnostics; the evidence URL/hash/time and
+selected value are retained in the review ledgers. Nearby games alone never cause
+an automatic date correction. Output columns and parser interfaces are unchanged.
+
 ## Module interfaces
 
 **Conference recovery.** `crawl/league.py` adds pure

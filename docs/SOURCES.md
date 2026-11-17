@@ -62,6 +62,9 @@ fixtures, especially Harvard's. A cached challenge response requires an explicit
 
 ## Official Ivy League conference source
 
+New collection is limited to 2006 onward, newest seasons first. Older rows and
+provenance are retained, while 2000–2005 gaps are deferred by the user's decision.
+
 `https://ivyleague.com/stats.aspx?path=football&year=2025` supplies links to
 55 distinct game box scores; the equivalent 2024 index supplies 52. Live checks
 on 2026-11-17 used Fetcher, the configured User-Agent, cached robots permission,
