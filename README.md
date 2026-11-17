@@ -56,6 +56,8 @@ Details: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Sources and crawl etiqu
 New collection targets **2006–2026**, newest seasons first. Previously collected
 2000–2005 records remain in the dataset; older gaps are deferred.
 
+[Collection progress and remaining gaps](data/reports/collection_2006_onward.md).
+
 The integrated score snapshot contains **1,355 unique games and 2,710 team rows**
 across the 26 seasons from 2000–2026 (2020 excluded). It combines saved official
 schedule exports, Wikipedia fallbacks, and checksum-verified cached sources.

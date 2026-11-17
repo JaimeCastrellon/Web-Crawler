@@ -1,6 +1,6 @@
 # Validation report
 
-Game rows: 1355. Errors: 0. Warnings: 167.
+Game rows: 1355. Errors: 0. Warnings: 176.
 
 This report checks the data currently present; it does not certify complete historical coverage.
 Ivy counts use completed games and expect seven in full seasons; current split seasons are excluded.
@@ -175,6 +175,15 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: reviewed box-score date 2006-09-15 -&gt; 2006-09-16; verified official schedule: https://pennathletics.com/sports/football/schedule/2006; original disagreement retained Source: https://pennathletics.com/sports/football/stats/2006/lafayette/boxscore/9663
 - **warning**: reviewed box-score date 2008-10-10 -&gt; 2008-10-11; verified official schedule: https://cornellbigred.com/sports/football/schedule/2008-09; original disagreement retained Source: https://cornellbigred.com/sports/football/stats/2008-09/harvard-university/boxscore/8080
 - **warning**: reviewed box-score date 2018-09-14 -&gt; 2018-09-15; verified official schedule: https://gocrimson.com/sports/football/schedule/2018; original disagreement retained Source: https://ivyleague.com/boxscore.aspx?id=JcLFfL9RUu0H5ystoOMbjQ7A58QMysWHEEqi7hufVoTI16ISPxsV8Z%2bOa0ZKvNuKPMMP9TbOLpFLjoR2T14sHpDP7ush9LNGOJ6R%2f1w%2fvh7O4h0b0ivvzjdjvnrbKi5N7XFlbMTGnv5TtnG2YjN1nKnXHOAyIeZ8mFePZCOexJKXHqqtXtfNLe8ivT0V0C6V&amp;path=football
+- **warning**: yale recovery: deferred after unusable box-score response on same school/season Source: https://yalebulldogs.com/sports/football/stats/2006/brown/boxscore/10178
+- **warning**: yale recovery: deferred after unusable box-score response on same school/season Source: https://yalebulldogs.com/sports/football/stats/2006/columbia/boxscore/10177
+- **warning**: yale recovery: deferred after unusable box-score response on same school/season Source: https://yalebulldogs.com/sports/football/stats/2006/dartmouth/boxscore/10174
+- **warning**: yale recovery: deferred after unusable box-score response on same school/season Source: https://yalebulldogs.com/sports/football/stats/2006/harvard/boxscore/10180
+- **warning**: yale recovery: deferred after unusable box-score response on same school/season Source: https://yalebulldogs.com/sports/football/stats/2006/lafayette/boxscore/10173
+- **warning**: yale recovery: deferred after unusable box-score response on same school/season Source: https://yalebulldogs.com/sports/football/stats/2006/lehigh/boxscore/10175
+- **warning**: yale recovery: deferred after unusable box-score response on same school/season Source: https://yalebulldogs.com/sports/football/stats/2006/penn/boxscore/10176
+- **warning**: yale recovery: deferred after unusable box-score response on same school/season Source: https://yalebulldogs.com/sports/football/stats/2006/princeton/boxscore/10179
+- **warning**: yale recovery: unusable response (HTTP 500, challenge=Incapsula) Source: https://yalebulldogs.com/sports/football/stats/2006/san-diego/boxscore/10171
 
 ### source_disagreement
 
