@@ -79,3 +79,9 @@ team-aligned points stay unchanged for those orientation changes.
 - `20080920-stony-brook-at-brown`: home_pts = 17; selected field checked against the cached official evidence in the ledger.
 
 Raw disagreement flags remain unchanged by review.
+
+## Cornell 2006–2008 source review
+
+- `20081011-cornell-at-harvard`: date = 2008-10-11; selected field checked against the cached official evidence in the ledger.
+
+Raw disagreement flags remain unchanged by review.
