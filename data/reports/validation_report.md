@@ -23,9 +23,9 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 | 2011 | train | 52 | 19 | 33 |
 | 2012 | train | 52 | 10 | 42 |
 | 2013 | train | 52 | 10 | 42 |
-| 2014 | train | 52 | 10 | 42 |
-| 2015 | train | 52 | 10 | 42 |
-| 2016 | train | 52 | 10 | 42 |
+| 2014 | train | 52 | 18 | 34 |
+| 2015 | train | 52 | 18 | 34 |
+| 2016 | train | 52 | 18 | 34 |
 | 2017 | train | 52 | 52 | 0 |
 | 2018 | train | 52 | 52 | 0 |
 | 2019 | train | 52 | 52 | 0 |

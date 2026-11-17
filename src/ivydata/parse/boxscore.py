@@ -111,6 +111,13 @@ def _metadata(result: ParsedBoxscore, label: str, value: str) -> None:
                 return
             except ValueError:
                 continue
+        partial = re.fullmatch(r"(\d{1,2})/(\d{1,2})", value)
+        titles = getattr(result, "_title_dates", ())
+        if partial and len(titles) == 1:
+            candidate = datetime.fromisoformat(titles[0])
+            if (candidate.month, candidate.day) == (int(partial[1]), int(partial[2])):
+                result.game[field] = titles[0]
+                return
         _warn(result, "invalid date", value)
     elif field == "attendance":
         parsed = _numbers(value, 1)
@@ -359,6 +366,23 @@ def parse_boxscore(html: str, page_url: str) -> ParsedBoxscore:
         ],
     )
     tree = LexborHTMLParser(html)
+    titles = [node.text() for node in tree.css("title")]
+    titles.extend(
+        node.attributes.get("content", "")
+        for node in tree.css("meta[property='og:title'], meta[name='og:title']")
+    )
+    title_dates = set()
+    for title in titles:
+        if not re.search(r"\bfootball\b", title, re.I) or not re.search(
+            r"\bbox\s*score\b", title, re.I
+        ):
+            continue
+        for value in re.findall(r"\b\d{1,2}/\d{1,2}/\d{4}\b", title):
+            try:
+                title_dates.add(datetime.strptime(value, "%m/%d/%Y").date().isoformat())
+            except ValueError:
+                continue
+    result._title_dates = tuple(sorted(title_dates))
     score_found = False
     stats_found = False
     for table in tree.css("table"):
