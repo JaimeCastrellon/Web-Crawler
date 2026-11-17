@@ -33,7 +33,7 @@ columbia,2004,wikipedia,10,10,2,0
 columbia,2005,wikipedia,10,10,0,0
 columbia,2006,wikipedia,10,10,8,0
 columbia,2007,wikipedia,10,10,10,0
-columbia,2008,wikipedia,10,10,3,1
+columbia,2008,wikipedia,10,10,4,1
 columbia,2009,wikipedia,10,10,2,0
 columbia,2010,wikipedia,10,10,2,0
 columbia,2011,wikipedia,10,10,2,1
@@ -83,9 +83,9 @@ dartmouth,2002,wikipedia,10,10,0,0
 dartmouth,2003,wikipedia,10,10,0,1
 dartmouth,2004,wikipedia,10,10,2,0
 dartmouth,2005,wikipedia,10,10,0,0
-dartmouth,2006,wikipedia,10,10,2,0
-dartmouth,2007,wikipedia,10,10,3,0
-dartmouth,2008,wikipedia,10,10,2,0
+dartmouth,2006,wikipedia,10,10,4,0
+dartmouth,2007,wikipedia,10,10,4,0
+dartmouth,2008,wikipedia,10,10,10,0
 dartmouth,2009,wikipedia,10,10,3,0
 dartmouth,2010,wikipedia,10,10,2,0
 dartmouth,2011,wikipedia,10,10,2,0
@@ -111,7 +111,7 @@ harvard,2004,wikipedia,10,10,2,0
 harvard,2005,wikipedia,10,10,0,0
 harvard,2006,wikipedia,10,10,3,0
 harvard,2007,wikipedia,10,10,3,0
-harvard,2008,wikipedia,10,10,2,2
+harvard,2008,wikipedia,10,10,3,2
 harvard,2009,wikipedia,10,10,2,0
 harvard,2010,wikipedia,10,10,2,0
 harvard,2011,wikipedia,10,10,2,0
@@ -137,7 +137,7 @@ penn,2004,official_export|wikipedia,10,10,2,0
 penn,2005,official_export|wikipedia,10,10,0,0
 penn,2006,official_export|wikipedia,10,10,3,1
 penn,2007,official_export|wikipedia,10,10,3,1
-penn,2008,official_export|wikipedia,10,10,3,1
+penn,2008,official_export|wikipedia,10,10,4,1
 penn,2009,official_export|wikipedia,10,10,10,0
 penn,2010,official_export|wikipedia,10,10,10,2
 penn,2011,official_export|wikipedia,10,10,10,1
@@ -163,7 +163,7 @@ princeton,2004,wikipedia,10,10,1,0
 princeton,2005,wikipedia,10,10,0,0
 princeton,2006,wikipedia,10,10,3,1
 princeton,2007,wikipedia,10,10,3,0
-princeton,2008,wikipedia,10,10,3,5
+princeton,2008,wikipedia,10,10,4,5
 princeton,2009,wikipedia,10,10,3,2
 princeton,2010,wikipedia,10,10,2,1
 princeton,2011,wikipedia,10,10,2,0
@@ -189,7 +189,7 @@ yale,2004,cached_schedule|official_export|wikipedia,10,10,6,0
 yale,2005,official_export|wikipedia,10,10,0,0
 yale,2006,official_export|wikipedia,10,10,2,0
 yale,2007,official_export|wikipedia,10,10,3,1
-yale,2008,official_export|wikipedia,10,10,2,2
+yale,2008,official_export|wikipedia,10,10,3,2
 yale,2009,official_export|wikipedia,10,10,2,1
 yale,2010,official_export|wikipedia,10,10,2,0
 yale,2011,official_export|wikipedia,10,10,2,0
