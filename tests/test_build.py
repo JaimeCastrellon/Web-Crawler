@@ -336,3 +336,19 @@ def test_unsafe_output_and_split_paths_fail_before_writing(dataset):
     with pytest.raises(ValueError, match="directory names"):
         build(raw, out, config)
     assert not out.exists()
+
+
+def test_partial_nonivy_schedule_does_not_invent_season_records():
+    frame = records(
+        [
+            ("2024-09-01", 2024, "holy-cross", "yale", 7, 0),
+            ("2024-09-08", 2024, "holy-cross", "harvard", 0, 7),
+            ("2024-09-01", 2024, "yale", "holy-cross", 0, 7),
+            ("2024-09-08", 2024, "yale", "brown", 14, 7),
+        ]
+    )
+    result = add_pregame_records(frame)
+    assert result[result.team == "holy-cross"][PREGAME_FIELDS].isna().all().all()
+    yale = result[result.team == "yale"]
+    assert yale.games_before.tolist() == [0, 1]
+    assert yale.losses_before.tolist() == [0, 1]

@@ -79,3 +79,12 @@ def test_review_ledger_matches_current_selected_values():
         if row["review_status"] == "verified_cached":
             assert len(row["evidence_sha256"]) == 64 and row["evidence_fetched_at"]
             assert row["evidence_url"].startswith("https://")
+
+
+def test_nonivy_season_records_are_unknown_in_partial_coverage():
+    from ivydata.build import PREGAME_FIELDS
+    from ivydata.normalize.teams import IVY_TEAMS
+
+    teams = pd.read_csv(ROOT / "data/processed/team_game_stats.csv")
+    assert teams[~teams.team.isin(IVY_TEAMS)][PREGAME_FIELDS].isna().all().all()
+    assert teams[teams.team.isin(IVY_TEAMS)][PREGAME_FIELDS].notna().all().all()
