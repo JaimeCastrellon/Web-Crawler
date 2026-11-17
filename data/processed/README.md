@@ -15,5 +15,6 @@ opponents' records as complete season records.
 A fresh download requires updated provenance if the response body changes. Known
 failed original Yale links are listed in `data/reports/build_warnings.csv`; the six
 working alternate box scores are included despite those original-link failures.
-The full validation report remains task 8. No data from the separate score-dataset
+The validation report records the known source failures and incomplete opponent
+schedules; it does not certify full historical coverage. No data from the separate score-dataset
 PR is included in this snapshot.

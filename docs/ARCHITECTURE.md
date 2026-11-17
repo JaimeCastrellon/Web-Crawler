@@ -264,6 +264,27 @@ and team where applicable. Empty splits still get headers, and repeated builds
 from unchanged cache/manifests/config are byte-identical. The build-warning report
 is available for task 8's validation work, which remains separate.
 
+**Validation.** `python -m ivydata validate` checks the processed tables offline and
+writes a deterministic Markdown report with counts by season/split, full/score-only
+counts, and grouped errors/warnings. Existing build diagnostics are included with
+their URLs. `--data-dir`, `--report`, and `--warnings-file` allow explicit paths.
+Errors return a nonzero exit status; incomplete Ivy schedules and source failures
+are warnings so partial historical snapshots remain reviewable.
+
+Checks cover schema/identity, duplicate game ids and team rows, missing/orphan or
+misassigned team pairs, source disagreement flags, quarter/OT totals, date/season
+consistency, impossible integer/boolean values, conversion/fumble bounds, turnover
+arithmetic, and incorrect Ivy flags. Negative yardage is allowed. Missing quarter
+values are not treated as zero. Completed Ivy games are counted for all eight teams
+in each represented historical season against the expected seven; current split
+seasons are excluded from that full-season expectation. The report describes only
+observed data and does not certify complete historical coverage.
+
+CI runs `python -m ivydata validate --duplicates-only` after tests. This mode checks
+processed game ids without requiring the remaining schema or replacing the report;
+it skips only when no processed dataset directory exists. This independently fails
+CI if committed `games.csv` contains duplicate ids.
+
 ## Module interfaces
 
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a
