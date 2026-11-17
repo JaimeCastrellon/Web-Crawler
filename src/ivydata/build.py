@@ -12,6 +12,7 @@ from datetime import date
 from hashlib import sha1, sha256
 from pathlib import Path
 from tempfile import NamedTemporaryFile
+from typing import TYPE_CHECKING
 from urllib.parse import urlsplit
 
 import pandas as pd
@@ -23,6 +24,9 @@ from ivydata.normalize.merge import merge_games
 from ivydata.normalize.teams import is_ivy
 from ivydata.parse.boxscore import TEAM_STAT_FIELDS, parse_boxscore
 from ivydata.parse.schedule import parse_schedule
+
+if TYPE_CHECKING:
+    from ivydata.scores import ExportParse
 
 logger = logging.getLogger(__name__)
 PREGAME_FIELDS = [
@@ -106,9 +110,9 @@ def add_pregame_records(team_stats: pd.DataFrame) -> pd.DataFrame:
         for row in day_rows.itertuples(index=False):
             previous = counts[(row.season, row.team)]
             for key, value in zip(PREGAME_FIELDS, previous, strict=True):
-                records[key].append(value)
+                records[key].append(value if is_ivy(row.team) else None)
         for row in day_rows.itertuples(index=False):
-            if pd.isna(row.points) or pd.isna(row.points_allowed):
+            if not is_ivy(row.team) or pd.isna(row.points) or pd.isna(row.points_allowed):
                 continue
             counter = counts[(row.season, row.team)]
             counter[0] += 1
@@ -214,6 +218,14 @@ def _publish(path: Path, text: str) -> None:
 def build(raw_dir: Path, out_dir: Path, config: Config) -> None:
     """Write games.csv, team_game_stats.csv and train/ test/ current/ subfolders.
     Deterministic: same raw cache -> byte-identical output."""
+    from ivydata.scores import default_export_paths, load_score_exports
+
+    raw_dir, out_dir = Path(raw_dir), Path(out_dir)
+    parsed = load_score_exports(default_export_paths(raw_dir.parent / "sources"), config)
+    _build(raw_dir, out_dir, config, parsed)
+
+
+def _build(raw_dir: Path, out_dir: Path, config: Config, exported: ExportParse) -> dict:
     raw_dir, out_dir = Path(raw_dir), Path(out_dir)
     if raw_dir.resolve() == out_dir.resolve() or raw_dir.resolve() in out_dir.resolve().parents:
         raise ValueError("output directory must be outside the raw cache")
@@ -221,15 +233,21 @@ def build(raw_dir: Path, out_dir: Path, config: Config) -> None:
         not name or Path(name).name != name or name in (".", "..") for name in config.splits.ranges
     ):
         raise ValueError("split names must be single directory names")
-    rows = _manifest_rows(raw_dir, config)
+    manifest_dir = raw_dir.parent / "manifest"
+    has_manifest = (manifest_dir / "urls.csv").exists() or any(
+        (manifest_dir / "recovered").glob("*.csv")
+    )
+    rows = _manifest_rows(raw_dir, config) if has_manifest or not exported.rows else []
     warnings: list[dict[str, str]] = []
     cache_errors = []
-    boxes, schedules = [], []
+    boxes, schedules = [], list(exported.rows)
 
     def warn(url: str, message: str) -> None:
         logger.warning("%s: %s", url, message)
         warnings.append({"source_url": url, "message": message})
 
+    for message in exported.warnings:
+        warn("", message)
     for row in rows:
         url = row["url"]
         if row["status"] != "200":
@@ -283,7 +301,7 @@ def build(raw_dir: Path, out_dir: Path, config: Config) -> None:
             f"{len(cache_errors)} missing/corrupt successful cache entries; "
             "processed files were not replaced; see build_warnings.csv"
         )
-    if rows and not merged.games:
+    if (rows or exported.rows) and not merged.games:
         raise ValueError(
             "no usable games in selected sources; processed files were not replaced; "
             "see build_warnings.csv"
@@ -321,3 +339,74 @@ def build(raw_dir: Path, out_dir: Path, config: Config) -> None:
         )
     for path, text in rendered.items():
         _publish(path, text)
+
+    if exported.pages:
+        from ivydata.scores import SOURCE_COLUMNS
+
+        provenance = pd.DataFrame(exported.pages, columns=SOURCE_COLUMNS).sort_values(
+            ["school", "season", "kind", "url"], kind="stable"
+        )
+        _publish(
+            raw_dir.parent / "manifest/score_sources.csv", _csv_text(provenance, SOURCE_COLUMNS)
+        )
+    if exported.pages:
+        discovered = sorted(
+            {
+                r.boxscore_url
+                for r in exported.rows
+                if r.boxscore_url and urlsplit(r.boxscore_url).scheme in ("http", "https")
+            }
+        )
+        _publish(raw_dir.parent / "manifest/boxscore_urls.txt", "\n".join(discovered) + "\n")
+        coverage = []
+        for school in sorted(config.schools, key=lambda s: s.id):
+            for year in config.splits.seasons():
+                selected = games[
+                    (games["season"] == year)
+                    & ((games["home_team"] == school.id) | (games["away_team"] == school.id))
+                ]
+                sources = {
+                    p["kind"]
+                    for p in exported.pages
+                    if p["school"] == school.id
+                    and int(p["season"]) == year
+                    and p["status"] == 200
+                    and p["games_found"] > 0
+                }
+                if any(
+                    r["kind"] == "schedule"
+                    and r["school"] == school.id
+                    and int(r["season"]) == year
+                    for r in rows
+                ):
+                    sources.add("cached_schedule")
+                coverage.append(
+                    {
+                        "school": school.id,
+                        "season": year,
+                        "schedule_sources": "|".join(sorted(sources)),
+                        "games_in_dataset": len(selected),
+                        "games_with_scores": int(selected["home_pts"].notna().sum()),
+                        "games_with_stats": int((selected["stats_level"] == "full").sum()),
+                        "source_disagreements": int(selected["sources_agree"].eq(False).sum()),
+                    }
+                )
+        columns = [
+            "school",
+            "season",
+            "schedule_sources",
+            "games_in_dataset",
+            "games_with_scores",
+            "games_with_stats",
+            "source_disagreements",
+        ]
+        _publish(
+            raw_dir.parent / "reports/score_coverage.csv",
+            _csv_text(pd.DataFrame(coverage), columns),
+        )
+    return {
+        "games": games.to_dict(orient="records"),
+        "team_rows": teams.to_dict(orient="records"),
+        "conflicts": merged.conflicts,
+        "warnings": [r["message"] for r in warnings],
+    }

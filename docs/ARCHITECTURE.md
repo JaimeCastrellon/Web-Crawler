@@ -252,9 +252,9 @@ current date and in the same season. Same-date results are applied as a batch af
 all that day's pre-game rows are computed, because kickoff times are unavailable.
 Missing/unplayed scores do not become wins or games played. Counts reset by team
 and season; ties and non-Ivy games are handled separately. Existing record columns
-are overwritten by these computations. Records describe observed games in this
-dataset; incomplete schedules (especially non-Ivy opponents) do not yield complete
-season records. Header W-L records never enter the pipeline. Turnovers are derived
+are overwritten by these computations. Record columns are computed for Ivy teams. Non-Ivy opponents' complete schedules
+are outside this dataset, so their record columns stay missing rather than turning
+unobserved prior games into apparent zeroes. Header W-L records never enter the pipeline. Turnovers are derived
 only when both interceptions thrown and fumbles lost are known.
 
 Split labels come solely from the configured season ranges; skipped seasons are
@@ -303,6 +303,53 @@ recovery matches are identified by URL. Conflicting duplicate manifest entries f
 explicitly; wrong-season/corrupt recoveries cannot inflate coverage. A recovered
 standalone box without a season schedule is noted but does not certify full-season
 coverage. This extends the original direct-link audit without changing its schema.
+
+**Saved score-export integration.** `build` discovers four documented factual row
+exports under `data/sources/` when present. `scores` is an explicit-input compatibility
+command; both delegate to the same cache checks, canonical merge, pre-game records,
+splits, schemas, and atomic CSV publication. Export-specific optional fields live in
+`ExportScheduleRow`, a subclass, preserving the original `ScheduleRow` contract.
+Source priority is box score → cached schedule → official export → Wikipedia.
+Verified box-score statistics cannot be erased by adding score-only copies.
+
+The source inventory hashes saved export files and canonical JSON page payloads,
+retains Wikipedia revision ids, and labels the provenance tier; these hashes are
+not represented as raw HTTP-body hashes. The original browser acquisition scripts
+are not carried into the integrated workflow. New downloads use Fetcher. Linked
+box-score URLs are discovery metadata only and never source evidence until parsed.
+
+Name normalization handles the verified non-Ivy institution spellings, combined
+rankings, and homecoming annotations. The literal opponent label The Game is
+resolved to the rival only on Yale/Harvard pages. Old positional Wikipedia entries
+can prefix the opponent with @/at; their direction is retained. Missing OT labels
+remain unknown rather than fabricated zeroes. No status column depends on today's
+date. A single reviewed two-day date typo is corrected only with corroborating
+official Penn input; its original date and disagreement remain in diagnostics.
+
+`score_coverage.csv` reports mixed-source game counts and actual parsed-stat counts
+for every configured school/season. It is separate from `coverage_report.csv`,
+which audits checksum-verified downloads and schedules; broad exported score
+coverage does not certify broad raw-cache or full-stat coverage. Explicit source
+disagreements remain warnings for reviewer decisions.
+
+**Review decisions and aggregate overtime.** `source_review.csv` records the selected
+value and evidence tier for each disputed field; raw source disagreement flags are
+not erased after review. `verified_cached` requires a populated official page checked
+against its cached hash. `corroborated_exports` is a lower tier: matching saved row
+copies, without new raw-response verification. The ledger is checked against the
+processed snapshot so changed selections require a new review.
+
+Older box scores sometimes combine two overtime sessions in a single OT column.
+Explicit ordinal notes in the game's play-by-play refine the count. A single OT
+column without such notes is marked internally as aggregate/lower-bound evidence;
+a larger explicitly reported count from another copy can refine it, with the
+original discrepancy retained. Overtime points stay summed, never duplicated.
+The 2009 Cornell–Dartmouth fixture covers this layout; Cornell's official history
+confirms the two sessions in the otherwise ambiguous 2002 Brown game.
+
+A known stat label with missing values warns without losing section context.
+Unrecognized nonempty exported result text also produces a URL/raw-text warning
+instead of silently appearing unplayed.
 
 ## Module interfaces
 

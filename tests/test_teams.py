@@ -77,3 +77,19 @@ def test_decorated_records_never_become_team_ids(raw):
 )
 def test_brown_schedule_rankings(raw, expected):
     assert teams.canonical_team_id(raw, load_config().team_aliases) == expected
+
+
+@pytest.mark.parametrize(
+    "raw,expected",
+    [
+        ("#24/ARV Dartmouth College", "dartmouth"),
+        ("#25/-- Colgate University", "colgate"),
+        ("RV/NR Yale University", "yale"),
+        ("#22/#25 Harvard University", "harvard"),
+        ("#RV Colgate University", "colgate"),
+        ("Fordham University (Homecoming)", "fordham"),
+        ("University at Albany", "albany"),
+    ],
+)
+def test_saved_export_name_variants(raw, expected):
+    assert teams.canonical_team_id(raw, load_config().team_aliases) == expected

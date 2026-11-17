@@ -67,3 +67,21 @@ fixtures, especially Harvard's. A cached challenge response requires an explicit
 - Cache every response; a rebuild never re-fetches.
 - Raw HTML stays local (`data/raw/` is gitignored). We publish only derived factual data
   plus the URL manifest for provenance.
+
+## Saved row exports from the score proposal
+
+The original PR #13 supplied 78 official schedule-page exports (Yale, Cornell, Penn)
+and 208 Wikipedia team-season exports, captured on 2026-11-16. These are extracted
+factual schedule rows, not raw HTML. They were acquired through an earlier browser
+workflow and do not provide raw-response checksums. The integrated build labels
+them as official_export/Wikipedia, hashes files and page payloads separately, and
+keeps Wikipedia article URLs/revision ids and CC BY-SA 4.0 attribution. Future HTTP
+collection uses the robots-aware Fetcher; old browser request scripts are not used.
+
+Where available, parsed box scores and verified cached official schedules outrank
+these exports. Source discrepancies are retained rather than resolved by widening
+the date/team matching rules. The reviewed 2001 Penn–Dartmouth date correction is
+conditional on corroborating official Penn input, and its raw disagreement stays
+visible. Official Brown/Dartmouth 2021 schedules confirm two other disputed dates.
+Merrimack's official Harvard 2025 box score fills a missing result so later Harvard
+pre-game records can be computed without header records.

@@ -19,7 +19,7 @@ brown,2016,,,0,0,missing,not crawled (no schedule manifest entry)
 brown,2017,,,0,0,missing,not crawled (no schedule manifest entry)
 brown,2018,,,0,0,missing,not crawled (no schedule manifest entry)
 brown,2019,,,0,0,missing,not crawled (no schedule manifest entry)
-brown,2021,,,0,0,missing,not crawled (no schedule manifest entry)
+brown,2021,https://brownbears.com/sports/football/schedule/2021,2021,10,0,score_only,box score not fetched: https://brownbears.com/sports/football/stats/2021/bryant/boxscore/11252 | box score not fetched: https://brownbears.com/sports/football/stats/2021/colgate/boxscore/11253 | box score not fetched: https://brownbears.com/sports/football/stats/2021/columbia/boxscore/11258 | box score not fetched: https://brownbears.com/sports/football/stats/2021/cornell/boxscore/11255 | box score not fetched: https://brownbears.com/sports/football/stats/2021/dartmouth/boxscore/11259 | box score not fetched: https://brownbears.com/sports/football/stats/2021/harvard/boxscore/11251 | box score not fetched: https://brownbears.com/sports/football/stats/2021/penn/boxscore/11256 | box score not fetched: https://brownbears.com/sports/football/stats/2021/princeton/boxscore/11254 | box score not fetched: https://brownbears.com/sports/football/stats/2021/rhode-island/boxscore/11250 | box score not fetched: https://brownbears.com/sports/football/stats/2021/yale/boxscore/11257
 brown,2022,,,0,0,missing,not crawled (no schedule manifest entry)
 brown,2023,,,0,0,missing,not crawled (no schedule manifest entry)
 brown,2024,,,0,0,missing,not crawled (no schedule manifest entry)
@@ -97,10 +97,10 @@ dartmouth,2016,,,0,0,missing,not crawled (no schedule manifest entry)
 dartmouth,2017,,,0,0,missing,not crawled (no schedule manifest entry)
 dartmouth,2018,,,0,0,missing,not crawled (no schedule manifest entry)
 dartmouth,2019,,,0,0,missing,not crawled (no schedule manifest entry)
-dartmouth,2021,,,0,0,missing,not crawled (no schedule manifest entry)
+dartmouth,2021,https://dartmouthsports.com/sports/football/schedule/2021,2021,10,0,score_only,box score not fetched: https://dartmouthsports.com/sports/football/stats/2021/brown/boxscore/9757 | box score not fetched: https://dartmouthsports.com/sports/football/stats/2021/columbia/boxscore/9753 | box score not fetched: https://dartmouthsports.com/sports/football/stats/2021/cornell/boxscore/9756 | box score not fetched: https://dartmouthsports.com/sports/football/stats/2021/harvard/boxscore/9754 | box score not fetched: https://dartmouthsports.com/sports/football/stats/2021/new-hampshire/boxscore/9752 | box score not fetched: https://dartmouthsports.com/sports/football/stats/2021/penn/boxscore/9750 | box score not fetched: https://dartmouthsports.com/sports/football/stats/2021/princeton/boxscore/9755 | box score not fetched: https://dartmouthsports.com/sports/football/stats/2021/sacred-heart/boxscore/9749 | box score not fetched: https://dartmouthsports.com/sports/football/stats/2021/valparaiso/boxscore/9748 | box score not fetched: https://dartmouthsports.com/sports/football/stats/2021/yale/boxscore/9751
 dartmouth,2022,,,0,0,missing,not crawled (no schedule manifest entry)
 dartmouth,2023,,,0,0,missing,not crawled (no schedule manifest entry)
-dartmouth,2024,,,0,0,missing,not crawled (no schedule manifest entry)
+dartmouth,2024,,,0,0,missing,no schedule manifest; recovered boxes available: https://yalebulldogs.com/sports/football/stats/2024/dartmouth/boxscore/18407
 dartmouth,2025,,,0,0,missing,no schedule manifest; recovered boxes available: https://brownbears.com/sports/football/stats/2025/dartmouth/boxscore/12656
 dartmouth,2026,,,0,0,missing,not crawled (no schedule manifest entry)
 harvard,2000,,,0,0,missing,not crawled (no schedule manifest entry)
@@ -127,7 +127,7 @@ harvard,2021,,,0,0,missing,not crawled (no schedule manifest entry)
 harvard,2022,,,0,0,missing,not crawled (no schedule manifest entry)
 harvard,2023,,,0,0,missing,not crawled (no schedule manifest entry)
 harvard,2024,,,0,0,missing,not crawled (no schedule manifest entry)
-harvard,2025,,,0,0,missing,no schedule manifest; recovered boxes available: https://brownbears.com/sports/football/stats/2025/harvard/boxscore/12648
+harvard,2025,,,0,0,missing,"no schedule manifest; recovered boxes available: https://brownbears.com/sports/football/stats/2025/harvard/boxscore/12648, https://merrimackathletics.com/sports/football/stats/2025/harvard-university/boxscore/13034, https://yalebulldogs.com/sports/football/stats/2025/harvard/boxscore/19317"
 harvard,2026,,,0,0,missing,not crawled (no schedule manifest entry)
 penn,2000,,,0,0,missing,not crawled (no schedule manifest entry)
 penn,2001,,,0,0,missing,not crawled (no schedule manifest entry)
@@ -204,6 +204,6 @@ yale,2019,,,0,0,missing,not crawled (no schedule manifest entry)
 yale,2021,,,0,0,missing,not crawled (no schedule manifest entry)
 yale,2022,,,0,0,missing,not crawled (no schedule manifest entry)
 yale,2023,,,0,0,missing,not crawled (no schedule manifest entry)
-yale,2024,,,0,0,missing,not crawled (no schedule manifest entry)
-yale,2025,,,0,0,missing,no schedule manifest; recovered boxes available: https://brownbears.com/sports/football/stats/2025/yale/boxscore/12654
+yale,2024,,,0,0,missing,no schedule manifest; recovered boxes available: https://yalebulldogs.com/sports/football/stats/2024/dartmouth/boxscore/18407
+yale,2025,,,0,0,missing,"no schedule manifest; recovered boxes available: https://brownbears.com/sports/football/stats/2025/yale/boxscore/12654, https://yalebulldogs.com/sports/football/stats/2025/harvard/boxscore/19317"
 yale,2026,,,0,0,missing,not crawled (no schedule manifest entry)

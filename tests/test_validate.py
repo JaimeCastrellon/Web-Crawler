@@ -274,3 +274,12 @@ def test_validate_cli_and_ci_duplicate_guard(tmp_path, capsys):
     assert report.read_bytes() == before
     assert cli.main(["validate", "--data-dir", str(tmp_path / "absent"), "--duplicates-only"]) == 0
     assert cli.main(["validate", "--data-dir", str(directory)]) == 1
+
+
+def test_score_only_overtime_without_period_scores_is_not_fabricated():
+    games, teams = frames()
+    for side in ("home", "away"):
+        for i in range(1, 5):
+            games.loc[0, f"{side}_q{i}"] = None
+    games.loc[0, "num_ot"] = 1
+    assert not any(i.check in ("overtime", "quarter_sum") for i in run_checks(games, teams))

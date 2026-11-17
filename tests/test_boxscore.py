@@ -286,3 +286,44 @@ def test_modern_away_game_uses_explicit_home_team_state():
 def test_invalid_modern_state_reports_url_instead_of_crashing():
     html = fixture("brown_2004_rhode_island_away").replace('"homeTeam": 2', '"homeTeam": 9999')
     assert any(URL in w and "home/away state" in w for w in parse_boxscore(html, URL).warnings)
+
+
+def test_stat_label_without_values_warns_without_losing_section():
+    tree = LexborHTMLParser(fixture("penn_2004_yale"))
+    row = tree.css_first("#rushing-attempts").parent
+    row.inner_html = '<td id="rushing-attempts">Attempts</td>'
+    result = parse_boxscore(tree.html, URL)
+    assert all(t["rush_att"] is None for t in result.team_stats)
+    assert result.team_stats[0]["rush_td"] == 2
+    assert any(
+        URL in w and "malformed team-statistics row" in w and "Attempts" in w
+        for w in result.warnings
+    )
+
+
+def test_aggregate_ot_column_can_contain_two_periods():
+    html = (
+        fixture("yale_2024_dartmouth")
+        + '<section id="play-by-play">2nd overtime: home wins toss</section>'
+    )
+    result = parse_boxscore(html, URL)
+    assert result.game["num_ot"] == 2
+    assert result.game["home_ot"] == 6 and result.game["away_ot"] == 7
+    assert result.warnings == []
+
+
+def test_cornell_2009_two_sessions_in_single_ot_column():
+    result = parse_boxscore(fixture("cornell_2009_dartmouth_aggregate_ot"), URL)
+    assert result.game["date"] == "2009-11-07"
+    assert result.game["home_raw"] == "Dartmouth" and result.game["away_raw"] == "Cornell"
+    assert (result.game["home_pts"], result.game["away_pts"]) == (20, 17)
+    assert (result.game["home_ot"], result.game["away_ot"], result.game["num_ot"]) == (10, 7, 2)
+    assert result.warnings == []
+
+
+def test_quarter_navigation_is_not_an_overtime_count():
+    html = (
+        fixture("yale_2024_dartmouth")
+        + '<section id="play-by-play">4th\nOT<br>2nd overtime: home wins toss</section>'
+    )
+    assert parse_boxscore(html, URL).game["num_ot"] == 2
