@@ -21,9 +21,9 @@ Missing = empty cell (never `0`). Team ids are lowercase slugs (`yale`, `holy-cr
 | `num_ot` | int | number of overtime periods (0 if none) |
 | `ivy_game` | bool | both teams are Ivy League members |
 | `attendance` | int | as printed |
-| `stats_level` | str | `full` (box score parsed) or `score_only` (schedule result only) |
+| `stats_level` | str | `full` (at least one box-score team-statistic value parsed) or `score_only` (no team statistics) |
 | `split` | str | `train` / `test` / `current` from `config/splits.yaml` |
-| `sources_agree` | bool | for games with two sources: did score + date match? empty if one source |
+| `sources_agree` | bool | agreement of available dates, seasons, team-aligned finals and home/neutral designations across sources; empty if one source |
 | `source_urls` | str | `|`-separated URLs used |
 
 ## `team_game_stats.csv` — one row per team per game (two rows per game)
