@@ -319,3 +319,11 @@ def test_cornell_2009_two_sessions_in_single_ot_column():
     assert (result.game["home_pts"], result.game["away_pts"]) == (20, 17)
     assert (result.game["home_ot"], result.game["away_ot"], result.game["num_ot"]) == (10, 7, 2)
     assert result.warnings == []
+
+
+def test_quarter_navigation_is_not_an_overtime_count():
+    html = (
+        fixture("yale_2024_dartmouth")
+        + '<section id="play-by-play">4th\nOT<br>2nd overtime: home wins toss</section>'
+    )
+    assert parse_boxscore(html, URL).game["num_ot"] == 2

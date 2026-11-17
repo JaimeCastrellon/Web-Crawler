@@ -314,7 +314,9 @@ def _overtime_detail(tree: LexborHTMLParser, result: ParsedBoxscore) -> None:
     # Explicit period notes in this game's play-by-play are stronger evidence.
     periods = []
     for node in tree.css("#play-by-play"):
-        for match in re.finditer(r"\b(\d+)(?:st|nd|rd|th)?\s*(?:overtime|OT)\b", node.text(), re.I):
+        for match in re.finditer(
+            r"\b(\d+)(?:st|nd|rd|th)[ \t]+overtime\b", node.text(separator=" "), re.I
+        ):
             if 1 <= int(match[1]) <= 20:
                 periods.append(int(match[1]))
     current = result.game["num_ot"]
