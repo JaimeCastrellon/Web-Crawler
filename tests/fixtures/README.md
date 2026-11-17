@@ -38,3 +38,30 @@ game attributes, dates, scores, and links within the retained elements are uncha
 
 Recapturing creates full local pages; reduce them to these elements before committing.
 Harvard's 2025 box-score URL returned an empty Incapsula challenge and is not included.
+
+## Committed box-score excerpts
+
+Captured through Fetcher on 2026-11-16. URLs are recorded by matching fixture name
+in `fixtures.yaml`. Legacy/current excerpts retain the line-score table, team-statistics
+table, and game information; archived reports retain their scoring/team-statistics `pre`
+blocks. Navigation, scripts, images, and unrelated attributes were removed. Re-capture
+produces full local pages; curate them again before committing. Full cached pages and
+these excerpts produce identical parser output for all eight examples.
+
+| fixture | layout / notable case |
+|---|---|
+| `boxscore_yale_2025_harvard.html` | legacy; Harvard–Yale 2025, Yale official copy |
+| `boxscore_yale_2024_dartmouth.html` | legacy; one overtime period |
+| `boxscore_penn_2004_yale.html` | legacy; Penn hosts the page but Yale is home |
+| `boxscore_cornell_2004_yale.html` | legacy; source uses the `2004-05` slug |
+| `boxscore_brown_2004_yale.html` | modern Sidearm tables and game information |
+| `boxscore_columbia_2004_yale.html` | archived text report |
+| `boxscore_harvard_2004_yale.html` | archived text report |
+| `boxscore_dartmouth_2004_yale.html` | archived text report; game date differs from article date |
+
+Task 5 originally requests Harvard's 2025 copy. That URL returns an Incapsula challenge,
+so the fixture uses Yale's official copy of the same game rather than labeling a
+challenge as data. Harvard's original URL stays in the capture list for future retries.
+Missing rushing/passing TD lines in the Columbia/Dartmouth archived team totals stay
+`None`; they are not inferred from player statistics or scoring plays. Printed header
+records remain source text only and are never extracted.

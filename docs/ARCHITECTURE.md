@@ -186,6 +186,25 @@ The explicit schedule-title season check is shared by the crawler, coverage audi
 parser. A current-season page returned for an unsupported historical URL is rejected during
 discovery and coverage as well, allowing the next slug candidate to be tried.
 
+**Box-score parsing.** `parse_boxscore` preserves its original schema and is pure/offline.
+It reads legacy and current Sidearm line-score/team-statistics tables, plus archived
+preformatted reports. The first line-score row is away and the second is home; the
+source school's hostname does not determine either team. Legacy explicit statistics
+column ids also support reversed column order. Game dates come from game information,
+not article publication dates. Quarter totals are checked against finals; overtime
+points are summed and the number of extra periods is retained.
+
+Missing lines remain `None`, real zeroes remain zero, and time of possession becomes
+seconds. Defensive sacks made are assigned to the opponent's `sacks_allowed` and
+`sack_yds_lost`; they are not copied into the team's own offensive stats. The parser
+does not extract header W-L records. `turnovers` remains a later build-stage derivation
+from `pass_int` and `fumbles_lost`, preserving the parser's existing field contract.
+Unknown pages, malformed recognized values/rows, missing dates, and quarter mismatches
+return warnings with the source URL and raw text. Coverage/challenge page-shape checks
+also recognize modern box-score containers and archived reports with both team
+statistics and two quarter-score lines. Alternate-source manifest integration is still
+part of the remaining coverage-gap/build work.
+
 ## Module interfaces
 
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a

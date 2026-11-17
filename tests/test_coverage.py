@@ -246,3 +246,19 @@ def test_malformed_input_fails_without_replacing_report(audit):
     with pytest.raises(ValueError, match="invalid CSV columns"):
         coverage.build_coverage_report()
     assert report.read_bytes() == before
+
+
+@pytest.mark.parametrize("name,modern", [("brown_2004_yale", True), ("harvard_2004_yale", False)])
+def test_newer_and_archived_boxscore_shapes_are_usable(audit, name, modern):
+    _, config, record = audit
+    base = config.school("yale").base_url
+    url = base + "/sports/football/stats/2004/harvard/boxscore/1"
+    html = (Path(__file__).parent / "fixtures" / f"boxscore_{name}.html").read_text()
+    if modern:
+        html = '<div id="boxscorePageId">' + html + "</div>"
+    html += '<script src="/_Incapsula_Resource?monitor"></script>'
+    record("yale", base + "/sports/football/schedule/2004", game(url))
+    record("yale", url, html, kind="boxscore")
+    row = coverage.build_coverage_report().query("school == 'yale'").iloc[0]
+    assert row["level"] == "full"
+    assert row["boxscores_found"] == 1

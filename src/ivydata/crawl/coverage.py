@@ -17,7 +17,12 @@ from selectolax.lexbor import LexborHTMLParser
 from ivydata.config import REPO_ROOT, load_config
 from ivydata.crawl.discover import ERROR_COLUMNS, find_boxscore_links
 from ivydata.crawl.manifest import MANIFEST_COLUMNS
-from ivydata.crawl.pages import GAME_SELECTOR, challenge_provider, declared_schedule_season
+from ivydata.crawl.pages import (
+    GAME_SELECTOR,
+    challenge_provider,
+    declared_schedule_season,
+    has_boxscore_content,
+)
 
 Level = Literal["full", "partial", "score_only", "missing"]
 REPORT_COLUMNS = [
@@ -103,15 +108,7 @@ def _schedule_counts(
                     checked[url] = False, f"box score not fetched: {url}"
                 else:
                     box, reason = _cached_html(boxes[url])
-                    usable = bool(
-                        box
-                        and any(
-                            node.text(strip=True)
-                            for node in LexborHTMLParser(box).css(
-                                "article.box-score, .s-boxscore, .s-box-score"
-                            )
-                        )
-                    )
+                    usable = bool(box and has_boxscore_content(box))
                     checked[url] = (
                         usable,
                         reason or ("" if usable else f"unrecognized box-score content: {url}"),
