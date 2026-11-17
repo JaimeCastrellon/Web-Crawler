@@ -205,6 +205,33 @@ also recognize modern box-score containers and archived reports with both team
 statistics and two quarter-score lines. Alternate-source manifest integration is still
 part of the remaining coverage-gap/build work.
 
+**Normalization and merging.** Team names are matched case-insensitively through the
+alias configuration after removing rankings, at/vs prefixes, and trailing numerical
+records. Unknown names become lowercase ASCII slugs and are logged once; unusable
+identities produce URL-bearing merge conflicts rather than fabricated team ids.
+
+Copies are grouped by canonical team pair over a maximum one-day date span. A
+three-day chain is kept separate with an ambiguity warning rather than collapsing
+distinct games. Selection is deterministic: box scores before schedules, then more
+complete copies, then source URL and content. Missing fields may be filled from
+other copies; present values are never overwritten by a lower-priority copy.
+Scores/quarters/statistics are aligned by canonical team, even if a source reverses
+home/away. Box scores retain the designated home team at neutral sites; without a
+box score, a neutral schedule's home designation is chosen deterministically from
+the sorted team pair. Fenway is neutral. A schedule's combined venue text is not
+invented into separate stadium/city values.
+
+Each merged game retains sorted, distinct URLs actually parsed (a schedule's
+unfetched box-score link is not counted as another source). `sources_agree` is empty
+for a single source, and otherwise reports agreement of available dates, seasons,
+team-aligned finals and home/neutral designations. Missing values alone do not create
+a disagreement. Other field/statistic discrepancies are reported separately without
+changing the score/date agreement flag. Parser warnings and unusable rows are also
+carried into `MergeResult.conflicts` for the later validation report. A game with at
+least one parsed team-statistic value is `full`; otherwise it remains `score_only`.
+The result contains one game row and exactly two team rows per valid game, sorted
+by date/game id/team. Pre-game records and turnovers remain build-stage work.
+
 ## Module interfaces
 
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a
