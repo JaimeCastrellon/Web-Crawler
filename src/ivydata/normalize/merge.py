@@ -106,6 +106,7 @@ def _box_copy(box: ParsedBoxscore, aliases: dict[str, str], result: MergeResult)
         neutral,
         game,
         stats,
+        original_date=getattr(box, "_original_date", None),
         aggregate_ot=getattr(box, "_aggregate_ot", False),
     )
 

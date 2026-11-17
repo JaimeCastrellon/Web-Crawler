@@ -352,3 +352,21 @@ def test_partial_nonivy_schedule_does_not_invent_season_records():
     yale = result[result.team == "yale"]
     assert yale.games_before.tolist() == [0, 1]
     assert yale.losses_before.tolist() == [0, 1]
+
+
+def test_league_recovery_failures_reach_validation_warnings(dataset):
+    raw, out, _ = dataset
+    report = raw.parent / "reports/league_recovery_errors.csv"
+    report.parent.mkdir(parents=True, exist_ok=True)
+    report.write_text(
+        "url,school,season,kind,error\n"
+        "https://ivyleague.com/boxscore.aspx?id=failed,league,2004,boxscore,robots denied\n"
+    )
+    build(raw, out, CONFIG)
+    warnings = read(raw.parent / "reports/build_warnings.csv")
+    assert any(
+        "robots denied" in row["message"] and "ivyleague.com" in row["source_url"]
+        for row in warnings
+    )
+    assert cli.main(["validate", "--data-dir", str(out)]) == 0
+    assert "robots denied" in (raw.parent / "reports/validation_report.md").read_text()

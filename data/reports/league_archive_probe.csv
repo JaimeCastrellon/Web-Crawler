@@ -1,0 +1,3 @@
+url,status,fetched_at,sha256,assessment
+https://static.ivyleague.com/custompages/sports/fball/2008-09/files/stats/confstat.htm,200,2026-11-17T19:32:16.985560+00:00,5883023f742c8db8a2ee45e7492124f075d016137f1ae087927155c196e63e94,populated 2008 summary; not imported as box scores
+https://static.ivyleague.com/custompages/sports/fball/2004-05/files/stats/confstat.htm,200,2026-11-17T19:32:19.850688+00:00,4959ceaf93e930861b8d313f681b1eba00d0a7dc214da3ac19fec3e63b598190,68-byte not-found body despite HTTP 200; excluded

@@ -352,7 +352,27 @@ A known stat label with missing values warns without losing section context.
 Unrecognized nonempty exported result text also produces a URL/raw-text warning
 instead of silently appearing unplayed.
 
+**Reviewed box-score dates.** `normalize/reviews.py` reads optional explicit reviews
+from `data/manifest/reviewed_box_dates.csv`. A one-day correction is applied only
+when the box still reports the reviewed original date and a checksum/metadata-
+verified official school schedule proves the selected date, both teams and finals.
+Missing/damaged or nonmatching evidence fails before CSV publication. The original
+box date remains in source-agreement diagnostics; the evidence URL/hash/time and
+selected value are retained in the review ledgers. Nearby games alone never cause
+an automatic date correction. Output columns and parser interfaces are unchanged.
+
 ## Module interfaces
+
+**Conference recovery.** `crawl/league.py` adds pure
+`find_league_boxscore_links(html, page_url, season)` and the explicit, resumable
+`league-boxscores --seasons ...` command. It discovers opaque `boxscore.aspx` links
+only on a correctly titled football season index. The existing pure parser and
+canonical merger process game pages; cumulative league statistics are never read
+as model features. Index/robots/rejected-response manifest rows use source label
+`league` and are excluded from game input. Accepted boxes use a participating Ivy
+team and the existing boxscore kind, so shared build and coverage can use them
+without adding a ninth school or changing output columns. Recovery failures are
+persisted per URL and included in the offline build-warning/validation reports.
 
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a
 docstring, and raises `NotImplementedError("Task N")` until implemented. Summary:

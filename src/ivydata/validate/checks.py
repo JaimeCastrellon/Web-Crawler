@@ -125,14 +125,13 @@ def run_checks(games: pd.DataFrame, team_stats: pd.DataFrame) -> list[Issue]:
             for key in fields:
                 value = row[key]
                 number = _number(value)
-                if not _missing(value) and (
-                    number is None or (number < 0 and not key.endswith("_yds"))
-                ):
+                yardage = key.endswith("_yds") or key == "sack_yds_lost"
+                if not _missing(value) and (number is None or (number < 0 and not yardage)):
                     add(
                         "impossible_value",
                         row,
                         f"{label} {row.get('team', '')}: {key}={value!r}; expected an integer"
-                        + (" (negative yards allowed)" if key.endswith("_yds") else " >= 0"),
+                        + (" (negative yards allowed)" if yardage else " >= 0"),
                     )
             for key in (
                 ("neutral_site", "ivy_game", "sources_agree")

@@ -12,6 +12,10 @@ criteria here.
 
 Dependency order: 1 → 2 → 3; 1 → 4, 5 (need fixtures); 4 + 5 → 6 → 7 → 8; 3 → 9.
 
+**Updated collection priority (2026-11-17):** new collection covers 2006–2026,
+newest first. Keep the already collected 2000–2005 rows and provenance. Earlier
+coverage gaps are deferred, including Yale 2004; they no longer block this scope.
+
 ---
 
 ## Task 1: Fetcher (polite HTTP + cache) and fixture capture

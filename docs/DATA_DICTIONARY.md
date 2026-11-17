@@ -62,7 +62,7 @@ Box-score team stats (empty when `stats_level = score_only`):
 | `penalties`, `penalty_yds` | int | |
 | `third_down_conv`, `third_down_att` | int | |
 | `fourth_down_conv`, `fourth_down_att` | int | |
-| `sacks_allowed`, `sack_yds_lost` | int | if reported |
+| `sacks_allowed`, `sack_yds_lost` | int | if reported; sack yardage is signed net loss and can be negative when the recorded play gains yards |
 | `punts`, `punt_yds` | int | |
 | `time_of_possession_s` | int | seconds |
 
@@ -92,6 +92,16 @@ its schedule URL, slug, and game count with an explanatory note. There is no 202
 ## `data/manifest/urls.csv` — one row per fetched URL
 
 `url, school, season, kind (schedule|boxscore|robots), status, fetched_at, sha256, season_slug`
+
+The conference recovery manifest uses the same columns. Its additional
+`league_index` and `league_rejected` kinds preserve discovery/rejected-response
+provenance and are excluded from game parsing. Those and robots rows use source
+label `league`; accepted boxscore rows name a participating Ivy school.
+
+`data/reports/league_recovery_errors.csv` uses the same five columns as
+`crawl_errors.csv` below. It retains unresolved league index/download/identity
+failures and removes them on successful retries. Offline build includes these
+URL-bearing failures in `build_warnings.csv`, hence the validation report.
 
 ## `data/reports/crawl_errors.csv` — unresolved crawl failures, one row per URL
 
@@ -150,6 +160,13 @@ An entry alone does not establish that it was downloaded or parsed, and unfetche
 links are excluded from `games.source_urls`.
 
 ## `data/reports/source_review.csv` — field-level review ledger
+
+`data/manifest/reviewed_box_dates.csv` contains explicit, evidence-checked date
+corrections with columns `url, original_date, date, school, evidence_url,
+evidence_sha256, evidence_fetched_at`. Evidence must be a cached official schedule
+matching the game teams/finals, and the correction is limited to one day within
+the same football season. Original box dates remain visible as disagreements.
+These review fields are provenance, not additional model columns.
 
 `game_id, field, selected_value, review_status, evidence_url, evidence_sha256,
 evidence_fetched_at, notes`

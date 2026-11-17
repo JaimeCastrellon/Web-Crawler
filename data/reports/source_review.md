@@ -2,7 +2,7 @@
 
 This ledger preserves raw source disagreement flags. It records evidence for selected values; it does not rewrite the saved exports or erase contrary claims.
 
-Reviewed 27 disputed fields across 26 games (including two overtime-only disagreements).
+The initial pass reviewed 27 disputed fields across 26 games (including two overtime-only disagreements).
 
 `verified_cached` means the disputed fields were checked against a populated, checksum-verified official page or box score. `corroborated_exports` means at least two saved exported copies support the selected value. `needs_primary_evidence` remains open.
 
@@ -44,7 +44,7 @@ A small parser defect found during review is fixed: a recognized stat label with
 
 ## Review outcome
 
-Twenty games (21 disputed fields) have cached official evidence. Six other disputed
+In the initial pass, twenty games (21 disputed fields) had cached official evidence. Six other disputed
 fields are corroborated by saved exported copies and remain at that lower evidence
 tier. Raw disagreements stay visible even where the selected value is supported.
 The ledger covers the 24 score/date/site-flagged games plus two OT-only cases.
@@ -55,3 +55,21 @@ was accepted as evidence. Dartmouth's populated history table supplied the match
 Columbia's 2008 cards omit some location/name markup and are not fully supported
 yet; the relevant Princeton 2008 rows supplied the opposing official evidence.
 No incomplete schedule was registered for the model build during this review.
+
+## Expanded 2006-onward collection review
+
+The 2018 San Diego–Harvard league box reports September 14. The cached official
+Harvard schedule proves September 15 with the same teams and 36–14 final. The
+selected date stays September 15; an explicit checksum-bound review preserves
+the box's raw contrary date in diagnostics. Its evidence hash/time are in
+`reviewed_box_dates.csv` and the field ledger. This adds one reviewed field/game
+to the initial pass; neither matching copies nor a correction erase disagreement.
+
+The expanded league pass also checks four newly disputed fields against populated
+box scores with matching quarter totals: Brown was away at Stony Brook in 2009;
+Penn was away at Villanova in 2011; Brown scored 34 against Holy Cross in 2009;
+Brown scored 21 at Columbia in 2011. The field ledger retains each actual response
+hash/time and selected value. Including the Harvard date, this expansion adds five
+reviewed fields/games to the initial pass (32 fields across 31 games total).
+Neutral-game home designations now follow the newly available official boxes;
+team-aligned points stay unchanged for those orientation changes.

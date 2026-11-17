@@ -44,7 +44,7 @@ def test_boxscore_provenance_only_lists_verified_downloads():
             u
             for row in csv.DictReader(stream)
             for u in row["source_urls"].split("|")
-            if "/boxscore/" in u
+            if "/boxscore/" in u or "/boxscore.aspx?" in u
         }
     assert cited and cited <= verified
 
@@ -70,6 +70,9 @@ def test_review_ledger_matches_current_selected_values():
         games = {g["game_id"]: g for g in csv.DictReader(stream)}
     with (ROOT / "data/reports/source_review.csv").open() as stream:
         rows = list(csv.DictReader(stream))
+    assert {gid for gid, game in games.items() if game["sources_agree"] == "false"} <= {
+        row["game_id"] for row in rows
+    }
     assert rows and len({(r["game_id"], r["field"]) for r in rows}) == len(rows)
     assert {"needs_primary_evidence", "corroborated_exports", "verified_cached"} >= {
         r["review_status"] for r in rows

@@ -60,6 +60,38 @@ fixtures, especially Harvard's. A cached challenge response requires an explicit
    site's terms and robots.txt first; prefer a different source if they prohibit automated
    access. Record any fallback source in `source_urls`.
 
+## Official Ivy League conference source
+
+New collection is limited to 2006 onward, newest seasons first. Older rows and
+provenance are retained, while 2000–2005 gaps are deferred by the user's decision.
+
+`https://ivyleague.com/stats.aspx?path=football&year=2025` supplies links to
+55 distinct game box scores; the equivalent 2024 index supplies 52. Live checks
+on 2026-11-17 used Fetcher, the configured User-Agent, cached robots permission,
+and the league's five-second Crawl-delay. The season selector advertises
+2009–2026, excluding 2020; that is a discovery lead, not proof that every older
+game has been collected. League boxes mirror official game statistics and should
+not be treated as independent measurements of the school-hosted copy.
+
+`python -m ivydata league-boxscores --seasons 2024,2025` captures these game pages
+resumably. Whole-season leaders, team totals, and printed W-L records are not
+inputs. Index titles must match the requested season; each accepted box must have
+a matching game season, distinct teams including an Ivy member, finals, and team
+statistics. The league source is not added as a ninth school. The recovery manifest
+records each box under an actual participating Ivy team.
+
+The conference box-score layout omits the school-site wrapper. Populated quarter
+and team-statistics tables establish usable sports content despite monitoring
+scripts; a protection script alone never qualifies. Unsupported pages and access
+failures remain in `league_recovery_errors.csv` and flow into build/validation
+warnings. Raw pages remain ignored.
+
+An older populated summary is available at
+`https://static.ivyleague.com/custompages/sports/fball/2008-09/files/stats/confstat.htm`.
+The analogous `2004-05/files/stats/confstat.htm` request returned a 68-byte
+"not found" body despite HTTP 200. Neither summary was imported as game statistics;
+the four unresolved Yale 2004 boxes still need another archive route.
+
 ## Etiquette (enforced in `Fetcher`)
 - Honor `robots.txt` and any `Crawl-delay`.
 - One request at a time per host, ≥ 3 seconds apart.
