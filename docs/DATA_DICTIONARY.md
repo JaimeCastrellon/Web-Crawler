@@ -145,3 +145,15 @@ inventory is separate from the download-based `coverage_report.csv`.
 `data/manifest/boxscore_urls.txt` is a deduplicated discovery list from row exports.
 An entry alone does not establish that it was downloaded or parsed, and unfetched
 links are excluded from `games.source_urls`.
+
+## `data/reports/source_review.csv` — field-level review ledger
+
+`game_id, field, selected_value, review_status, evidence_url, evidence_sha256,
+evidence_fetched_at, notes`
+
+`selected_value` matches the current games.csv field. `verified_cached` records
+checks against a populated, checksum-verified official page; `corroborated_exports`
+means matching saved row exports and is a lower evidence tier. Export support URLs
+are pipe-separated. The cached evidence hash/time are filled only for cached
+verification. Reviews preserve raw source disagreements; the ledger is not a
+model feature and does not change sources_agree to true.

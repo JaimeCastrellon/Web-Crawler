@@ -63,3 +63,19 @@ def test_export_hashes_and_fallback_revisions_are_traceable():
         assert len(row["payload_sha256"]) == 64
         if row["kind"] == "wikipedia":
             assert row["revision_id"]
+
+
+def test_review_ledger_matches_current_selected_values():
+    with (ROOT / "data/processed/games.csv").open() as stream:
+        games = {g["game_id"]: g for g in csv.DictReader(stream)}
+    with (ROOT / "data/reports/source_review.csv").open() as stream:
+        rows = list(csv.DictReader(stream))
+    assert rows and len({(r["game_id"], r["field"]) for r in rows}) == len(rows)
+    assert {"needs_primary_evidence", "corroborated_exports", "verified_cached"} >= {
+        r["review_status"] for r in rows
+    }
+    for row in rows:
+        assert games[row["game_id"]][row["field"]] == row["selected_value"]
+        if row["review_status"] == "verified_cached":
+            assert len(row["evidence_sha256"]) == 64 and row["evidence_fetched_at"]
+            assert row["evidence_url"].startswith("https://")

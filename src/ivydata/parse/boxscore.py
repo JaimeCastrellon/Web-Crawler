@@ -202,7 +202,8 @@ def _table_stats(result: ParsedBoxscore, table: LexborNode) -> None:
     section = ""
     for row in table.css("tbody tr"):
         cells = row.css("th,td")
-        if len(cells) == 1:
+        sections = {key[0] for key in _SECTION_FIELDS} | {"kickoffs", "returns"}
+        if len(cells) == 1 and _key(_text(cells[0])) in sections:
             section = _key(_text(cells[0]))
             continue
         if not cells:
@@ -308,6 +309,20 @@ def _modern_sides(tree: LexborHTMLParser, result: ParsedBoxscore) -> None:
         _warn(result, "unrecognized modern home/away state", str(exc))
 
 
+def _overtime_detail(tree: LexborHTMLParser, result: ParsedBoxscore) -> None:
+    # Older Sidearm line scores combine all extra sessions in one OT column.
+    # Explicit period notes in this game's play-by-play are stronger evidence.
+    periods = []
+    for node in tree.css("#play-by-play"):
+        for match in re.finditer(r"\b(\d+)(?:st|nd|rd|th)?\s*(?:overtime|OT)\b", node.text(), re.I):
+            if 1 <= int(match[1]) <= 20:
+                periods.append(int(match[1]))
+    current = result.game["num_ot"]
+    if periods:
+        result.game["num_ot"] = max([current or 0, *periods])
+    result._aggregate_ot = current == 1 and not periods
+
+
 def parse_boxscore(html: str, page_url: str) -> ParsedBoxscore:
     """Parse Sidearm tables or archived text reports without reading header records.
 
@@ -359,6 +374,7 @@ def parse_boxscore(html: str, page_url: str) -> ParsedBoxscore:
         if len(spans) == 2:
             _metadata(result, spans[0].text(), spans[1].text())
     _modern_sides(tree, result)
+    _overtime_detail(tree, result)
     if result.game["away_raw"] is None or result.game["home_raw"] is None:
         _warn(result, "missing/unrecognized line score", tree.text(separator=" ", strip=True)[:300])
     if not stats_found:

@@ -76,3 +76,11 @@ team names and the tenant home/away flag. Reference indices were renumbered with
 changing these values; records, player data and unrelated state were removed.
 Brown's displayed table puts Brown second despite the game being at Rhode Island.
 The explicit state correctly identifies Rhode Island as home.
+
+## Cornell aggregate-overtime excerpt
+
+`boxscore_cornell_2009_dartmouth_aggregate_ot.html` comes from
+`https://cornellbigred.com/sports/football/stats/2009-10/dartmouth-college/boxscore/8094`.
+It retains the line score, team statistics, game information, and the exact
+play-by-play note "2nd overtime: Cornell wins toss, plays defense" in a reduced
+play-by-play wrapper. The single OT column contains both sessions' points.

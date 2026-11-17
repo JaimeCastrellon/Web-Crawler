@@ -332,6 +332,25 @@ which audits checksum-verified downloads and schedules; broad exported score
 coverage does not certify broad raw-cache or full-stat coverage. Explicit source
 disagreements remain warnings for reviewer decisions.
 
+**Review decisions and aggregate overtime.** `source_review.csv` records the selected
+value and evidence tier for each disputed field; raw source disagreement flags are
+not erased after review. `verified_cached` requires a populated official page checked
+against its cached hash. `corroborated_exports` is a lower tier: matching saved row
+copies, without new raw-response verification. The ledger is checked against the
+processed snapshot so changed selections require a new review.
+
+Older box scores sometimes combine two overtime sessions in a single OT column.
+Explicit ordinal notes in the game's play-by-play refine the count. A single OT
+column without such notes is marked internally as aggregate/lower-bound evidence;
+a larger explicitly reported count from another copy can refine it, with the
+original discrepancy retained. Overtime points stay summed, never duplicated.
+The 2009 Cornell–Dartmouth fixture covers this layout; Cornell's official history
+confirms the two sessions in the otherwise ambiguous 2002 Brown game.
+
+A known stat label with missing values warns without losing section context.
+Unrecognized nonempty exported result text also produces a URL/raw-text warning
+instead of silently appearing unplayed.
+
 ## Module interfaces
 
 The stub modules in `src/ivydata/` are the contract: each has typed signatures and a

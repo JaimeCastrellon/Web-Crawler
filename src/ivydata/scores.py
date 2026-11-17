@@ -134,7 +134,16 @@ def rows_from_export(export: dict, config: Config) -> ExportParse:
                 if d is None:
                     warnings.append(f"{url}: unparseable date {r.get('date')!r} ({r.get('opp')})")
                     continue
-                res, pts, opp_pts, num_ot, status = parse_result(r.get("res", ""))
+                raw_result = r.get("res", "")
+                res, pts, opp_pts, num_ot, status = parse_result(raw_result)
+                if (
+                    raw_result.strip()
+                    and res is None
+                    and not re.search(
+                        r"cancel|postpon|suspend|scheduled|\bTBA\b|\bTBD\b", raw_result, re.I
+                    )
+                ):
+                    warnings.append(f"{url}: unrecognized result {raw_result!r} ({r.get('opp')})")
                 opponent = r.get("opp", "")
                 if opponent.strip().casefold() == "the game" and school_id in ("yale", "harvard"):
                     opponent = "Harvard" if school_id == "yale" else "Yale"

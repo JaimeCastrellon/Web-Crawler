@@ -363,3 +363,15 @@ def test_export_import_preserves_verified_cached_boxscore_stats(tmp_path):
         )
     assert team["pass_yds"] == "412" and team["sacks_allowed"] == "1"
     assert url in game["source_urls"] and "/b/1" not in game["source_urls"]
+
+
+def test_unrecognized_export_result_is_preserved_in_url_warning():
+    from ivydata.scores import rows_from_export
+
+    export = _export()
+    page = export["schools"]["yale"]["pages"][0]
+    page["rows"][0]["res"] = "Final: 43-44"
+    parsed = rows_from_export(export, CFG)
+    row = next(r for r in parsed.rows if r.school == "yale" and r.opponent_raw == "Dartmouth")
+    assert row.points is None
+    assert any("yalebulldogs.com" in w and "Final: 43-44" in w for w in parsed.warnings)

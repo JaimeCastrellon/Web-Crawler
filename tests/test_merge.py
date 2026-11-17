@@ -272,3 +272,14 @@ def test_bad_statistics_identity_does_not_discard_valid_game():
 def test_empty_inputs():
     result = merge_games([], [], ALIASES)
     assert result.games == result.team_stats == result.conflicts == []
+
+
+def test_explicit_ot_count_refines_single_aggregate_box_column():
+    from ivydata.scores import ExportScheduleRow
+
+    b = box(num_ot=1)
+    b._aggregate_ot = True
+    row = ExportScheduleRow(**schedule().__dict__, num_ot=2)
+    result = merge_games([b], [row], ALIASES)
+    assert result.games[0]["num_ot"] == 2
+    assert any("conflicting num_ot" in c for c in result.conflicts)
