@@ -108,3 +108,12 @@ retains the official Harvard title and that game's original card, proving
 September 15 and a 36–14 Harvard win. Tests generate their own proof checksums
 and verify that unrelated, changed or damaged evidence cannot correct a date.
 Both capture URLs are in `fixtures.yaml`.
+
+## Columbia 2007 line-break archive excerpt
+
+`boxscore_columbia_2007_princeton_breaks.html` preserves the first two report
+blocks from the September 29 Columbia–Princeton archive. HTML br/p boundaries
+carry the actual line breaks, and some two-team conversion values have only
+one separating space. The reduced excerpt and full cached page produce the
+same game/team-stat dictionaries after layout normalization. Printed records
+remain source text and are not model fields. The URL is in `fixtures.yaml`.

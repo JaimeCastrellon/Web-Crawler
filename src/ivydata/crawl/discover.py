@@ -43,10 +43,22 @@ def find_boxscore_links(schedule_html: str, page_url: str, boxscore_regex: str) 
     for anchor in LexborHTMLParser(schedule_html).css("a[href]"):
         url = urldefrag(urljoin(page_url, anchor.attributes["href"]))[0]
         parsed = urlsplit(url)
+        legacy = False
+        if "/sports/football/schedule/" in urlsplit(page_url).path and anchor.text(
+            separator=" ", strip=True
+        ).casefold() in {"stats", "box score", "boxscore", "final stats"}:
+            parent = anchor.parent
+            while parent is not None:
+                if {"sidearm-schedule-game", "s-game-card"} & set(
+                    parent.attributes.get("class", "").split()
+                ):
+                    legacy = True
+                    break
+                parent = parent.parent
         if (
             parsed.scheme in {"http", "https"}
             and parsed.hostname
-            and pattern.fullmatch(parsed.path.rstrip("/"))
+            and (pattern.fullmatch(parsed.path.rstrip("/")) or legacy)
         ):
             links[url] = None
     return list(links)
