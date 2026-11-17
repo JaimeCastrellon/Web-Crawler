@@ -193,7 +193,11 @@ the tenant school last even when it is away; the parser reads only explicit home
 team names from the saved JSON state to orient scores and statistics. The source
 school's hostname does not determine either team. Legacy explicit statistics
 column ids also support reversed column order. Game dates come from game information,
-not article publication dates. Quarter totals are checked against finals; overtime
+not article publication dates. A yearless numeric game date may use the full
+numeric date from its own Football Box Score title/og:title only when there is
+one unambiguous valid date and its month/day match. Missing or conflicting
+titles leave the date unknown; explicit full game dates retain precedence.
+Quarter totals are checked against finals; overtime
 points are summed and the number of extra periods is retained.
 
 Missing lines remain `None`, real zeroes remain zero, and time of possession becomes

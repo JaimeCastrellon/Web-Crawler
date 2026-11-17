@@ -117,3 +117,14 @@ carry the actual line breaks, and some two-team conversion values have only
 one separating space. The reduced excerpt and full cached page produce the
 same game/team-stat dictionaries after layout normalization. Printed records
 remain source text and are not model fields. The URL is in `fixtures.yaml`.
+
+## Cornell 2016 yearless game-date excerpt
+
+`boxscore_cornell_2016_colgate_yearless.html` retains the original Football Box
+Score title, quarter/statistics tables and game information from Cornell–Colgate
+on October 1, 2016. The game information gives only `10/1`; the title gives
+`10/1/2016`. Captured through Fetcher on 2026-11-17. The excerpt and full cached
+page produce identical game/team-stat dictionaries. The capture URL is in
+`fixtures.yaml`. A yearless numeric game date is completed only from one
+unambiguous full date in its own football box-score title, with matching
+month/day. Neither URL seasons nor article dates supply the missing year.
