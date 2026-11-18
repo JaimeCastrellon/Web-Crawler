@@ -41,7 +41,7 @@ columbia,2012,wikipedia,10,10,1,0
 columbia,2013,wikipedia,10,10,1,0
 columbia,2014,wikipedia,10,10,3,0
 columbia,2015,wikipedia,10,10,3,0
-columbia,2016,wikipedia,10,10,3,0
+columbia,2016,wikipedia,10,10,4,0
 columbia,2017,wikipedia,10,10,10,0
 columbia,2018,wikipedia,10,10,10,0
 columbia,2019,wikipedia,10,10,10,0
@@ -93,7 +93,7 @@ dartmouth,2012,wikipedia,10,10,1,0
 dartmouth,2013,wikipedia,10,10,1,0
 dartmouth,2014,wikipedia,10,10,3,0
 dartmouth,2015,wikipedia,10,10,3,0
-dartmouth,2016,wikipedia,10,10,3,0
+dartmouth,2016,wikipedia,10,10,4,0
 dartmouth,2017,wikipedia,10,10,10,0
 dartmouth,2018,wikipedia,10,10,10,0
 dartmouth,2019,wikipedia,10,10,10,0
@@ -119,7 +119,7 @@ harvard,2012,wikipedia,10,10,1,0
 harvard,2013,wikipedia,10,10,1,0
 harvard,2014,wikipedia,10,10,3,0
 harvard,2015,wikipedia,10,10,3,0
-harvard,2016,wikipedia,10,10,3,0
+harvard,2016,wikipedia,10,10,4,0
 harvard,2017,wikipedia,10,10,10,0
 harvard,2018,wikipedia,10,10,10,2
 harvard,2019,wikipedia,10,10,10,0
@@ -171,7 +171,7 @@ princeton,2012,wikipedia,10,10,1,0
 princeton,2013,wikipedia,10,10,1,0
 princeton,2014,wikipedia,10,10,3,0
 princeton,2015,wikipedia,10,10,3,0
-princeton,2016,wikipedia,10,10,3,0
+princeton,2016,wikipedia,10,10,10,0
 princeton,2017,wikipedia,10,10,10,0
 princeton,2018,wikipedia,10,10,10,0
 princeton,2019,wikipedia,10,10,10,0
@@ -197,7 +197,7 @@ yale,2012,official_export|wikipedia,10,10,1,1
 yale,2013,official_export|wikipedia,10,10,1,0
 yale,2014,official_export|wikipedia,10,10,3,0
 yale,2015,official_export|wikipedia,10,10,3,0
-yale,2016,official_export|wikipedia,10,10,3,0
+yale,2016,official_export|wikipedia,10,10,4,0
 yale,2017,official_export|wikipedia,10,10,10,0
 yale,2018,official_export|wikipedia,10,10,10,1
 yale,2019,official_export|wikipedia,10,10,10,0

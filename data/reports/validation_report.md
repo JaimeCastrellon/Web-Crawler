@@ -1,6 +1,6 @@
 # Validation report
 
-Game rows: 1355. Errors: 0. Warnings: 176.
+Game rows: 1355. Errors: 0. Warnings: 190.
 
 This report checks the data currently present; it does not certify complete historical coverage.
 Ivy counts use completed games and expect seven in full seasons; current split seasons are excluded.
@@ -25,7 +25,7 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 | 2013 | train | 52 | 10 | 42 |
 | 2014 | train | 52 | 27 | 25 |
 | 2015 | train | 52 | 27 | 25 |
-| 2016 | train | 52 | 27 | 25 |
+| 2016 | train | 52 | 34 | 18 |
 | 2017 | train | 52 | 52 | 0 |
 | 2018 | train | 52 | 52 | 0 |
 | 2019 | train | 52 | 52 | 0 |
@@ -148,8 +148,19 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: https://dartmouthsports.com/sports/football/schedule/2021 row 7: multiple box-score URLs ['https://dartmouthsports.com/sports/football/stats/2021/harvard/boxscore/9754', 'https://dartmouthsports.com/documents/2021/10/30/211030_Harvard_Box.pdf']; raw=at #21 Harvard Cambridge, Mass. / Harvard Stadium W, 20-17 Oct 30 (Sat) 12:00 PM Game Center Box Score Recap Box Score (HTML) Box Score Game Info Source: https://dartmouthsports.com/sports/football/schedule/2021
 - **warning**: https://dartmouthsports.com/sports/football/schedule/2021 row 9: multiple box-score URLs ['https://dartmouthsports.com/sports/football/stats/2021/cornell/boxscore/9756', 'https://dartmouthsports.com/documents/2021/11/13/211113_Cornell_Box.pdf']; raw=vs Cornell Buddy Teevens Stadium at Memorial Field Hanover, N.H. Military Appreciation Day Presented by Casella W, 41-7 Nov 13 (Sat) 1:30 PM Game Center Box Score Recap Box Score Highlights Military Appreciation Day Presented by Casella Game Info Source: https://dartmouthsports.com/sports/football/schedule/2021
 - **warning**: https://en.wikipedia.org/wiki/2001_Dartmouth_Big_Green_football_team: reviewed date correction 2001-09-27 -&gt; 2001-09-29; corroborated by https://pennathletics.com/sports/football/schedule/2001; original disagreement retained
+- **warning**: princeton recovery: RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3604 Source: https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3604
+- **warning**: princeton recovery: RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3607 Source: https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3607
+- **warning**: princeton recovery: RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3609 Source: https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3609
+- **warning**: princeton recovery: RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3626 Source: https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3626
+- **warning**: princeton recovery: RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3628 Source: https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3628
+- **warning**: princeton recovery: RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3639 Source: https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3639
+- **warning**: princeton recovery: RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3641 Source: https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3641
+- **warning**: princeton recovery: RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3643 Source: https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3643
+- **warning**: princeton recovery: RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3645 Source: https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3645
+- **warning**: princeton recovery: RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3649 Source: https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3649
 - **warning**: princeton recovery: challenge response Source: https://goprincetontigers.com/news/2007/9/15/1241219.aspx
 - **warning**: princeton recovery: challenge response Source: https://goprincetontigers.com/news/2008/9/20/1586520.aspx
+- **warning**: princeton recovery: deferred after unusable server response for school/season Source: https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3658
 - **warning**: princeton recovery: deferred after unusable server response for school/season Source: https://goprincetontigers.com/news/2007/10/13/1279997.aspx
 - **warning**: princeton recovery: deferred after unusable server response for school/season Source: https://goprincetontigers.com/news/2007/10/20/1284529.aspx
 - **warning**: princeton recovery: deferred after unusable server response for school/season Source: https://goprincetontigers.com/news/2007/10/26/1290081.aspx
@@ -169,9 +180,12 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: princeton recovery: deferred after unusable server response for school/season Source: https://goprincetontigers.com/news/2008/11/7/1620584.aspx
 - **warning**: princeton recovery: deferred after unusable server response for school/season Source: https://goprincetontigers.com/news/2008/9/27/1591547.aspx
 - **warning**: princeton recovery: discovery-only schedule has unparsed rows: https://goprincetontigers.com/sports/football/schedule/2008-09 row 1: missing opponent name; raw=The Citadel Charleston, S.C. L, 24-37 Sep 20 (Sat) 1 p.m. Recap Stats Source: https://goprincetontigers.com/sports/football/schedule/2008-09
+- **warning**: princeton recovery: incomplete/wrong-season identity, finals, team statistics or quarter totals Source: https://goprincetontigers.com/news/2014/10/25/209734720.aspx
+- **warning**: princeton recovery: incomplete/wrong-season identity, finals, team statistics or quarter totals Source: https://goprincetontigers.com/news/2014/9/20/209666594.aspx
 - **warning**: princeton recovery: no supported 2006 schedule; declared=2026 Source: https://goprincetontigers.com/sports/football/schedule/2006
 - **warning**: princeton recovery: no supported 2007 schedule; declared=2026 Source: https://goprincetontigers.com/sports/football/schedule/2007
 - **warning**: princeton recovery: no supported 2008 schedule; declared=2026 Source: https://goprincetontigers.com/sports/football/schedule/2008
+- **warning**: princeton recovery: unusable response (HTTP 404, challenge=Incapsula) Source: http://www.goprincetontigers.com/fls/10600/statistics/fb/2015/1107YAL.HTM
 - **warning**: reviewed box-score date 2006-09-15 -&gt; 2006-09-16; verified official schedule: https://pennathletics.com/sports/football/schedule/2006; original disagreement retained Source: https://pennathletics.com/sports/football/stats/2006/lafayette/boxscore/9663
 - **warning**: reviewed box-score date 2008-10-10 -&gt; 2008-10-11; verified official schedule: https://cornellbigred.com/sports/football/schedule/2008-09; original disagreement retained Source: https://cornellbigred.com/sports/football/stats/2008-09/harvard-university/boxscore/8080
 - **warning**: reviewed box-score date 2018-09-14 -&gt; 2018-09-15; verified official schedule: https://gocrimson.com/sports/football/schedule/2018; original disagreement retained Source: https://ivyleague.com/boxscore.aspx?id=JcLFfL9RUu0H5ystoOMbjQ7A58QMysWHEEqi7hufVoTI16ISPxsV8Z%2bOa0ZKvNuKPMMP9TbOLpFLjoR2T14sHpDP7ush9LNGOJ6R%2f1w%2fvh7O4h0b0ivvzjdjvnrbKi5N7XFlbMTGnv5TtnG2YjN1nKnXHOAyIeZ8mFePZCOexJKXHqqtXtfNLe8ivT0V0C6V&amp;path=football
