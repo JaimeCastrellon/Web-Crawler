@@ -18,6 +18,7 @@ from ivydata.normalize import teams
         ("BRWN", "brown"),
         ("Holy Cross", "holy-cross"),
         ("Saint Francis (Pa.)", "saint-francis-pa"),
+        ("Saint Francis U", "st-francis-pa"),
         ("San José State", "san-jose-state"),
         (" Texas A&amp;M ", "texas-a-m"),
     ],
