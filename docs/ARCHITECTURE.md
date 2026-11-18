@@ -410,3 +410,26 @@ docstring, and raises `NotImplementedError("Task N")` until implemented. Summary
 | `normalize/merge.py` | `make_game_id`, `merge_games(...) -> MergeResult` | 6 |
 | `build.py` | `add_pregame_records`, `assign_splits`, `build` | 7 |
 | `validate/checks.py` | `run_checks(...) -> list[Issue]`, `write_report` | 8 |
+
+## Explicitly reviewed PDF game excerpts
+
+`data/manifest/reviewed_boxscores.json` can supply factual game excerpts when an
+official PDF has a clearly identified game but the HTML report is unavailable.
+This is reviewed curation, not automatic PDF parsing. Each entry identifies the
+source URL, participating Ivy school, season, full-response SHA-256/fetch time,
+page and region, and the explicit `visual_cached_pdf` review method. The URL is
+also recorded as `reviewed_boxscore` in a recovered manifest. Raw PDFs remain
+ignored; only the selected factual values are committed.
+
+`normalize.curated.load_reviewed_boxscores` validates the exact input schema,
+checks the unchanged successful PDF body and cache metadata, and emits the same
+`ParsedBoxscore` contract before ordinary merging. Missing fields become `None`.
+Only game/result fields and the existing team-stat fields are allowed; printed
+W-L records, season aggregates and pre-game features are not accepted inputs.
+Invalid identities, bounds, quarter totals, duplicate excerpts, missing evidence
+or changed proof fail before processed outputs are replaced. Dates and header
+records are never inferred from publication dates or the current clock.
+
+The standard build computes turnovers, strictly earlier pre-game records and
+splits for reviewed excerpts too. Normal source priority, disagreement reporting
+and deterministic CSV writing remain in effect. No output columns change.

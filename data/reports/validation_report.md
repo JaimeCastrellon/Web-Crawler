@@ -1,6 +1,6 @@
 # Validation report
 
-Game rows: 1355. Errors: 0. Warnings: 262.
+Game rows: 1355. Errors: 0. Warnings: 281.
 
 This report checks the data currently present; it does not certify complete historical coverage.
 Ivy counts use completed games and expect seven in full seasons; current split seasons are excluded.
@@ -23,9 +23,9 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 | 2011 | train | 52 | 19 | 33 |
 | 2012 | train | 52 | 10 | 42 |
 | 2013 | train | 52 | 10 | 42 |
-| 2014 | train | 52 | 48 | 4 |
+| 2014 | train | 52 | 49 | 3 |
 | 2015 | train | 52 | 43 | 9 |
-| 2016 | train | 52 | 43 | 9 |
+| 2016 | train | 52 | 45 | 7 |
 | 2017 | train | 52 | 52 | 0 |
 | 2018 | train | 52 | 52 | 0 |
 | 2019 | train | 52 | 52 | 0 |
@@ -94,6 +94,7 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: Ivy League recovery: no football box-score links in 2006 index: https://ivyleague.com/stats.aspx?path=football&amp;year=2006 Source: https://ivyleague.com/stats.aspx?path=football&amp;year=2006
 - **warning**: Ivy League recovery: no football box-score links in 2007 index: https://ivyleague.com/stats.aspx?path=football&amp;year=2007 Source: https://ivyleague.com/stats.aspx?path=football&amp;year=2007
 - **warning**: Ivy League recovery: no football box-score links in 2008 index: https://ivyleague.com/stats.aspx?path=football&amp;year=2008 Source: https://ivyleague.com/stats.aspx?path=football&amp;year=2008
+- **warning**: brown recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=4334 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=4334
 - **warning**: brown recovery: deferred after unusable box-score response on same school/season Source: https://brownbears.com/sports/football/stats/2006/columbia/boxscore/12866
 - **warning**: brown recovery: deferred after unusable box-score response on same school/season Source: https://brownbears.com/sports/football/stats/2006/cornell/boxscore/12862
 - **warning**: brown recovery: deferred after unusable box-score response on same school/season Source: https://brownbears.com/sports/football/stats/2006/dartmouth/boxscore/12865
@@ -171,6 +172,13 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: columbia recovery: incomplete/wrong-season identity, finals, team statistics or quarter totals Source: https://gocolumbialions.com/sports/2014/9/27/Stats_7531.aspx
 - **warning**: cornell recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://cornellbigred.com/sports/football/stats/2006-07/colgate-university/boxscore/4203
 - **warning**: cornell recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://cornellbigred.com/sports/football/stats/2006-07/university-of-albany/boxscore/4201
+- **warning**: dartmouth recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=1052 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=1052
+- **warning**: dartmouth recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=2100 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=2100
+- **warning**: dartmouth recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=3009 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=3009
+- **warning**: dartmouth recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=3637 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=3637
+- **warning**: dartmouth recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=4336 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=4336
+- **warning**: dartmouth recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=4732 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=4732
+- **warning**: dartmouth recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=663 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=663
 - **warning**: dartmouth recovery: deferred after unusable box-score response on same school/season Source: https://dartmouthsports.com/sports/football/stats/2006/brown/boxscore/2313
 - **warning**: dartmouth recovery: deferred after unusable box-score response on same school/season Source: https://dartmouthsports.com/sports/football/stats/2006/columbia/boxscore/2279
 - **warning**: dartmouth recovery: deferred after unusable box-score response on same school/season Source: https://dartmouthsports.com/sports/football/stats/2006/cornell/boxscore/2304
@@ -204,6 +212,15 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: dartmouth recovery: unusable response (HTTP 500, challenge=Incapsula) Source: https://dartmouthsports.com/sports/football/stats/2006/penn/boxscore/2215
 - **warning**: dartmouth recovery: unusable response (HTTP 500, challenge=Incapsula) Source: https://dartmouthsports.com/sports/football/stats/2016/holy-cross/boxscore/9497
 - **warning**: dartmouth recovery: unusable response (HTTP 500, challenge=None) Source: https://dartmouthsports.com/sports/football/stats/2007/new-hampshire/boxscore/3719
+- **warning**: harvard recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=1041 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=1041
+- **warning**: harvard recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=1455 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=1455
+- **warning**: harvard recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=2091 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=2091
+- **warning**: harvard recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=2962 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=2962
+- **warning**: harvard recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=3627 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=3627
+- **warning**: harvard recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=4337 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=4337
+- **warning**: harvard recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=4734 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=4734
+- **warning**: harvard recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=5166 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=5166
+- **warning**: harvard recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=653 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=653
 - **warning**: harvard recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://static.gocrimson.com/custompages/sports/fball/2006-07/files/yaleharv.htm
 - **warning**: harvard recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://static.gocrimson.com/custompages/sports/fball/2007-08/files/harvyale.htm
 - **warning**: harvard recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://static.gocrimson.com/custompages/sports/fball/2008-09/files/yaleharv.htm
@@ -261,6 +278,8 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: reviewed box-score date 2006-09-15 -&gt; 2006-09-16; verified official schedule: https://pennathletics.com/sports/football/schedule/2006; original disagreement retained Source: https://pennathletics.com/sports/football/stats/2006/lafayette/boxscore/9663
 - **warning**: reviewed box-score date 2008-10-10 -&gt; 2008-10-11; verified official schedule: https://cornellbigred.com/sports/football/schedule/2008-09; original disagreement retained Source: https://cornellbigred.com/sports/football/stats/2008-09/harvard-university/boxscore/8080
 - **warning**: reviewed box-score date 2018-09-14 -&gt; 2018-09-15; verified official schedule: https://gocrimson.com/sports/football/schedule/2018; original disagreement retained Source: https://ivyleague.com/boxscore.aspx?id=JcLFfL9RUu0H5ystoOMbjQ7A58QMysWHEEqi7hufVoTI16ISPxsV8Z%2bOa0ZKvNuKPMMP9TbOLpFLjoR2T14sHpDP7ush9LNGOJ6R%2f1w%2fvh7O4h0b0ivvzjdjvnrbKi5N7XFlbMTGnv5TtnG2YjN1nKnXHOAyIeZ8mFePZCOexJKXHqqtXtfNLe8ivT0V0C6V&amp;path=football
+- **warning**: yale recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=1046 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=1046
+- **warning**: yale recovery: RobotsDisallowed: robots.txt disallows https://goholycross.com/common/controls/doc_handler.aspx?doc=1471 Source: https://goholycross.com/common/controls/doc_handler.aspx?doc=1471
 - **warning**: yale recovery: deferred after unusable box-score response on same school/season Source: https://yalebulldogs.com/sports/football/stats/2006/brown/boxscore/10178
 - **warning**: yale recovery: deferred after unusable box-score response on same school/season Source: https://yalebulldogs.com/sports/football/stats/2006/columbia/boxscore/10177
 - **warning**: yale recovery: deferred after unusable box-score response on same school/season Source: https://yalebulldogs.com/sports/football/stats/2006/dartmouth/boxscore/10174

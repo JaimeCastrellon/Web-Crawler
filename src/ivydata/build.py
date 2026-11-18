@@ -20,6 +20,7 @@ import pandas as pd
 from ivydata.config import Config
 from ivydata.crawl.manifest import MANIFEST_COLUMNS
 from ivydata.crawl.pages import challenge_provider
+from ivydata.normalize.curated import load_reviewed_boxscores
 from ivydata.normalize.merge import merge_games
 from ivydata.normalize.reviews import apply_box_date_review, load_box_date_reviews
 from ivydata.normalize.teams import is_ivy
@@ -243,10 +244,17 @@ def _build(raw_dir: Path, out_dir: Path, config: Config, exported: ExportParse) 
     warnings: list[dict[str, str]] = []
     cache_errors = []
     boxes, schedules = [], list(exported.rows)
+    reviewed_error = None
 
     def warn(url: str, message: str) -> None:
         logger.warning("%s: %s", url, message)
         warnings.append({"source_url": url, "message": message})
+
+    try:
+        boxes = load_reviewed_boxscores(manifest_dir / "reviewed_boxscores.json", raw_dir, config)
+    except (ValueError, OSError) as exc:
+        reviewed_error = exc
+        warn("", f"reviewed PDF evidence rejected: {exc}")
 
     for message in exported.warnings:
         warn("", message)
@@ -317,12 +325,16 @@ def _build(raw_dir: Path, out_dir: Path, config: Config, exported: ExportParse) 
         .sort_values(WARNING_COLUMNS)
     )
     _publish(raw_dir.parent / "reports/build_warnings.csv", _csv_text(report, WARNING_COLUMNS))
+    if reviewed_error is not None:
+        raise ValueError(
+            f"{reviewed_error}; processed files were not replaced; see build_warnings.csv"
+        ) from reviewed_error
     if cache_errors:
         raise ValueError(
             f"{len(cache_errors)} missing/corrupt successful cache entries; "
             "processed files were not replaced; see build_warnings.csv"
         )
-    if (rows or exported.rows) and not merged.games:
+    if (rows or exported.rows or boxes) and not merged.games:
         raise ValueError(
             "no usable games in selected sources; processed files were not replaced; "
             "see build_warnings.csv"

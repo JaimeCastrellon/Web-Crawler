@@ -1,0 +1,66 @@
+[
+  {
+    "url": "https://static.goholycross.com/oldsite/sports/m-footbl/2015-16/files/2015-hc-fb-prospectus.pdf",
+    "school": "harvard",
+    "season": 2014,
+    "source_sha256": "0ceed0b1b9cb443930243c5e6bff178471c06c2978c188485149c6459efa3d89",
+    "source_fetched_at": "2026-11-18T01:20:21.708057+00:00",
+    "evidence_page": 20,
+    "evidence_region": "right column, Game #4, scoring summary and Team Statistics; home venue stated as Harvard Stadium in the same recap",
+    "review_method": "visual_cached_pdf",
+    "game": {
+      "date": "2014-09-19",
+      "home_raw": "Harvard",
+      "away_raw": "Holy Cross",
+      "stadium": "Harvard Stadium",
+      "city": "Cambridge, Mass.",
+      "home_q1": 7,
+      "home_q2": 7,
+      "home_q3": 13,
+      "home_q4": 14,
+      "home_pts": 41,
+      "away_q1": 6,
+      "away_q2": 6,
+      "away_q3": 6,
+      "away_q4": 0,
+      "away_pts": 18,
+      "num_ot": 0
+    },
+    "team_stats": [
+      {
+        "team_raw": "Holy Cross",
+        "is_home": false,
+        "first_downs": 21,
+        "rush_yds": 105,
+        "pass_yds": 233,
+        "total_yds": 338,
+        "pass_cmp": 26,
+        "pass_att": 41,
+        "pass_int": 1,
+        "fumbles": 3,
+        "fumbles_lost": 2,
+        "penalties": 6,
+        "penalty_yds": 59,
+        "punts": 3,
+        "time_of_possession_s": 1884
+      },
+      {
+        "team_raw": "Harvard",
+        "is_home": true,
+        "first_downs": 22,
+        "rush_yds": 211,
+        "pass_yds": 227,
+        "total_yds": 438,
+        "pass_cmp": 19,
+        "pass_att": 25,
+        "pass_int": 1,
+        "fumbles": 1,
+        "fumbles_lost": 1,
+        "penalties": 9,
+        "penalty_yds": 69,
+        "punts": 3,
+        "time_of_possession_s": 1716
+      }
+    ]
+  }
+]
