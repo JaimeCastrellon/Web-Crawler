@@ -184,3 +184,18 @@ means matching saved row exports and is a lower evidence tier. Export support UR
 are pipe-separated. The cached evidence hash/time are filled only for cached
 verification. Reviews preserve raw source disagreements; the ledger is not a
 model feature and does not change sources_agree to true.
+
+## Reviewed PDF excerpt input
+
+Optional `data/manifest/reviewed_boxscores.json` is a list of factual game
+excerpts. Each object has exactly `url`, `school`, `season`, `source_sha256`,
+`source_fetched_at`, `evidence_page` (one-based), `evidence_region`,
+`review_method` (`visual_cached_pdf`), `game`, and `team_stats`. The game and two
+team objects use only the existing `ParsedBoxscore` fields described above.
+Omitted fields stay missing; the excerpt never supplies pre-game records.
+
+A recovered manifest row of kind `reviewed_boxscore` records the complete source
+PDF's successful response. Its checksum and fetch time must match the excerpt
+and the local raw cache. The page/region pointer records the visual review; it
+is not a claim that a generic PDF parser independently verified every number.
+The output game/team CSV schemas are unchanged.

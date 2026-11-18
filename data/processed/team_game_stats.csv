@@ -1455,8 +1455,8 @@ game_id,season,date,split,stats_level,team,opponent,is_home,neutral_site,points,
 20131123-harvard-at-yale,2013,2013-11-23,train,score_only,yale,harvard,true,false,7,34,9,5,4,0,3,3,,,,,,,,,,,,,,,,,,,,,,,,,
 20131123-princeton-at-dartmouth,2013,2013-11-23,train,score_only,dartmouth,princeton,true,false,28,24,9,5,4,0,4,2,,,,,,,,,,,,,,,,,,,,,,,,,
 20131123-princeton-at-dartmouth,2013,2013-11-23,train,score_only,princeton,dartmouth,false,false,24,28,9,8,1,0,6,0,,,,,,,,,,,,,,,,,,,,,,,,,
-20140919-holy-cross-at-harvard,2014,2014-09-19,train,score_only,harvard,holy-cross,true,false,41,18,0,0,0,0,0,0,,,,,,,,,,,,,,,,,,,,,,,,,
-20140919-holy-cross-at-harvard,2014,2014-09-19,train,score_only,holy-cross,harvard,false,false,18,41,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+20140919-holy-cross-at-harvard,2014,2014-09-19,train,full,harvard,holy-cross,true,false,41,18,0,0,0,0,0,0,22,,211,,19,25,227,,1,,438,1,1,9,69,,,,,,,3,,1716,2
+20140919-holy-cross-at-harvard,2014,2014-09-19,train,full,holy-cross,harvard,false,false,18,41,,,,,,,21,,105,,26,41,233,,1,,338,3,2,6,59,,,,,,,3,,1884,3
 20140920-brown-at-georgetown,2014,2014-09-20,train,full,brown,georgetown,false,false,3,17,0,0,0,0,0,0,16,31,88,0,19,34,215,0,2,65,303,2,2,5,21,5,14,0,1,5,33,5,218,1700,4
 20140920-brown-at-georgetown,2014,2014-09-20,train,full,georgetown,brown,true,false,17,3,,,,,,,21,38,250,1,18,28,177,1,1,66,427,1,1,5,36,3,11,1,1,2,15,6,294,1900,2
 20140920-central-connecticut-state-at-dartmouth,2014,2014-09-20,train,full,central-connecticut-state,dartmouth,false,false,25,35,,,,,,,26,43,163,2,27,45,312,2,0,88,475,0,0,7,50,7,18,4,6,0,0,4,143,2257,0
@@ -1681,8 +1681,8 @@ game_id,season,date,split,stats_level,team,opponent,is_home,neutral_site,points,
 20160917-st-francis-pa-at-columbia,2016,2016-09-17,train,full,st-francis-pa,columbia,false,false,13,9,,,,,,,19,47,273,0,11,23,128,1,0,70,401,0,0,12,122,3,15,0,1,2,3,7,248,2159,0
 20160924-columbia-at-georgetown,2016,2016-09-24,train,score_only,columbia,georgetown,false,false,14,17,1,0,1,0,0,0,,,,,,,,,,,,,,,,,,,,,,,,,
 20160924-columbia-at-georgetown,2016,2016-09-24,train,score_only,georgetown,columbia,true,false,17,14,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-20160924-dartmouth-at-holy-cross,2016,2016-09-24,train,score_only,dartmouth,holy-cross,false,false,35,10,1,1,0,0,0,0,,,,,,,,,,,,,,,,,,,,,,,,,
-20160924-dartmouth-at-holy-cross,2016,2016-09-24,train,score_only,holy-cross,dartmouth,true,false,10,35,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+20160924-dartmouth-at-holy-cross,2016,2016-09-24,train,full,dartmouth,holy-cross,false,false,35,10,1,1,0,0,0,0,21,44,208,3,19,30,245,1,0,74,453,0,0,8,65,8,17,2,2,1,7,6,243,1856,0
+20160924-dartmouth-at-holy-cross,2016,2016-09-24,train,full,holy-cross,dartmouth,true,false,10,35,,,,,,,19,34,122,0,21,36,163,1,2,70,285,3,2,2,15,6,15,1,3,2,10,4,162,1744,4
 20160924-harvard-at-brown,2016,2016-09-24,train,full,brown,harvard,true,false,22,32,1,1,0,0,0,0,25,29,74,0,32,50,316,3,3,79,390,2,0,6,50,8,18,1,3,2,14,5,214,1839,3
 20160924-harvard-at-brown,2016,2016-09-24,train,full,harvard,brown,false,false,32,22,1,1,0,0,0,0,22,43,189,4,17,31,205,0,0,74,394,2,2,7,73,7,16,0,0,3,22,6,217,1761,2
 20160924-penn-at-fordham,2016,2016-09-24,train,full,fordham,penn,true,false,31,17,,,,,,,23,46,209,3,18,33,231,1,1,79,440,0,0,6,45,12,18,1,2,1,7,2,96,1805,1
@@ -1719,8 +1719,8 @@ game_id,season,date,split,stats_level,team,opponent,is_home,neutral_site,points,
 20161015-brown-at-princeton,2016,2016-10-15,train,full,princeton,brown,true,false,31,7,4,3,1,0,1,0,19,41,88,1,22,30,256,3,0,71,344,1,1,6,46,5,15,2,3,3,10,6,247,2000,1
 20161015-columbia-at-penn,2016,2016-10-15,train,full,columbia,penn,false,false,10,35,4,1,3,0,0,1,12,33,55,1,17,34,179,0,1,67,234,0,0,5,42,5,18,2,2,5,25,8,326,1779,1
 20161015-columbia-at-penn,2016,2016-10-15,train,full,penn,columbia,true,false,35,10,4,2,2,0,1,0,18,33,199,1,18,28,264,4,1,61,463,1,0,3,27,6,14,1,1,1,6,5,188,1821,1
-20161015-harvard-at-holy-cross,2016,2016-10-15,train,score_only,harvard,holy-cross,false,false,17,27,4,4,0,0,2,0,,,,,,,,,,,,,,,,,,,,,,,,,
-20161015-harvard-at-holy-cross,2016,2016-10-15,train,score_only,holy-cross,harvard,true,false,27,17,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+20161015-harvard-at-holy-cross,2016,2016-10-15,train,full,harvard,holy-cross,false,false,17,27,4,4,0,0,2,0,16,29,26,1,19,33,219,1,1,62,245,5,2,5,44,4,15,1,1,6,41,8,359,1498,3
+20161015-harvard-at-holy-cross,2016,2016-10-15,train,full,holy-cross,harvard,true,false,27,17,,,,,,,17,35,130,0,23,35,244,2,0,70,374,0,0,4,35,6,18,2,2,6,42,6,219,2102,0
 20161015-sacred-heart-at-cornell,2016,2016-10-15,train,full,cornell,sacred-heart,true,false,24,31,4,3,1,0,1,1,19,49,257,3,15,39,117,0,1,88,374,2,1,7,64,8,22,3,4,5,26,8,357,2062,2
 20161015-sacred-heart-at-cornell,2016,2016-10-15,train,full,sacred-heart,cornell,false,false,31,24,,,,,,,20,44,265,2,13,24,206,2,4,68,471,2,1,6,49,7,13,0,0,1,6,5,170,1538,5
 20161015-towson-at-dartmouth,2016,2016-10-15,train,score_only,dartmouth,towson,true,false,20,17,4,2,2,0,0,2,,,,,,,,,,,,,,,,,,,,,,,,,

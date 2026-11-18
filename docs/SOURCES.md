@@ -129,3 +129,13 @@ Fetcher enforces robots, configured identity/delays and cache reuse. Footer term
 checks are traced in `data/reports/recovery/rhode_island_policy.csv`; the linked
 local terms PDF is robots-disallowed and was not fetched. Only derived factual
 game data is published. No header records or season totals become game features.
+
+Holy Cross's public static archive supplies the missing Harvard and Dartmouth
+2016 boxes. Its 2015 spring prospectus contains the Harvard–Holy Cross 2014
+recap on page 20, right column. That game was visually checked against the PDF's
+quarter scores and Team Statistics table, with the home venue also stated in
+the recap and corroborated by the official 2014 schedule. The committed reviewed
+excerpt is bound to the full cached PDF and its successful-response metadata.
+Only explicit game totals are retained. Punt yards are missing because a rounded
+punt average cannot establish an exact total; player lines are not summed to
+fill absent team totals. The 2015 publication date is not the 2014 game date.
