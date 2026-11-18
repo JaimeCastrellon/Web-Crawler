@@ -1,0 +1,15 @@
+url,school,season,kind,error
+http://www.goprincetontigers.com/fls/10600/statistics/fb/2015/1107YAL.HTM,princeton,2015,boxscore,"unusable response (HTTP 404, challenge=Incapsula)"
+https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3604,princeton,2014,boxscore,RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3604
+https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3607,princeton,2014,boxscore,RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3607
+https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3609,princeton,2014,boxscore,RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3609
+https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3626,princeton,2014,boxscore,RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3626
+https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3628,princeton,2014,boxscore,RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3628
+https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3639,princeton,2015,boxscore,RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3639
+https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3641,princeton,2015,boxscore,RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3641
+https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3643,princeton,2015,boxscore,RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3643
+https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3645,princeton,2015,boxscore,RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3645
+https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3649,princeton,2015,boxscore,RobotsDisallowed: robots.txt disallows https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3649
+https://goprincetontigers.com/common/controls/doc_handler.aspx?doc=3658,princeton,2015,boxscore,deferred after unusable server response for school/season
+https://goprincetontigers.com/news/2014/10/25/209734720.aspx,princeton,2014,boxscore,"incomplete/wrong-season identity, finals, team statistics or quarter totals"
+https://goprincetontigers.com/news/2014/9/20/209666594.aspx,princeton,2014,boxscore,"incomplete/wrong-season identity, finals, team statistics or quarter totals"

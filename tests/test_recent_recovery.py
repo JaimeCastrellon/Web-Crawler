@@ -39,9 +39,9 @@ def test_recent_recovery_has_traceable_games_and_honest_attempts(path):
         assert matches[0]["season"] == box["season"]
         assert box["school"] in (matches[0]["home_team"], matches[0]["away_team"])
     for attempt in attempts:
-        assert attempt["url"].startswith("https://")
+        assert attempt["url"].startswith(("https://", "http://"))
         if not attempt["status"]:
             assert not attempt["sha256"] and not attempt["fetched_at"]
         if attempt["notes"]:
             assert any(e["url"] == attempt["requested_url"] for e in errors)
-    assert all(e["error"] and e["url"].startswith("https://") for e in errors)
+    assert all(e["error"] and e["url"].startswith(("https://", "http://")) for e in errors)
