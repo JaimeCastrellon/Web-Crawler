@@ -1,0 +1,4 @@
+url,kind,status,fetched_at,sha256,notes
+https://gorhody.com,homepage_footer,200,2026-11-18T01:09:27.654168+00:00,6e779dbeb34098901e69ee1204c19c03538f86da5c7bf5592d36aec01c9d714b,footer links identify the common terms and local terms PDF
+https://www.sidearmsports.com/terms-of-service/,common_terms,200,2026-11-18T01:10:44.048388+00:00,f77c1cff9a22b0d1dedf5c840436212ea83c0234a887f8a863500e3e46001410,"inspected linked common terms; statistics are factual game results, not reproduced articles"
+https://gorhody.com/documents/2019/1/8/Rhody_TermsConditions.pdf,local_terms,,,,RobotsDisallowed; not fetched; no rules bypassed

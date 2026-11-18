@@ -9,11 +9,11 @@ requests after the scope decision target those earlier gaps.
 ## Current dataset
 
 - 1,355 unique games / 2,710 team rows retained.
-- 800 games have box-score statistics overall, up from 131 before the
+- 802 games have box-score statistics overall, up from 131 before the
   league and school recovery work.
 - Active 2006–2026 scope: 1,043 game rows, 1,039 completed games;
-  784 have box-score statistics (75.5% of completed games).
-- 255 completed active-scope games remain score-only. Four upcoming 2026
+  786 have box-score statistics (75.6% of completed games).
+- 253 completed active-scope games remain score-only. Four upcoming 2026
   games keep blank results. 2020 is excluded.
 - Every known completed game from 2017 onward has box-score statistics.
   All 107 games in the 2024–2025 test split have box-score statistics.
@@ -62,15 +62,21 @@ Printed W-L records are never model features.
 | Period | Completed games | With box stats | Still score-only |
 |---|---:|---:|---:|
 | 2017–2026 | 467 | 467 | 0 |
-| 2014–2016 | 156 | 132 | 24 |
+| 2014–2016 | 156 | 134 | 22 |
 | 2009–2013 | 260 | 79 | 181 |
 | 2006–2008 | 156 | 106 | 50 |
+
+## Official opponent recovery
+
+| Source | Verified boxes | Newly detailed games at that stage |
+|---|---:|---:|
+| [Rhode Island](recovery/rhode_island_opponent.md) | 2 | 2 |
 
 [Per-season counts](collection_2006_onward.csv).
 
 ## Remaining work
 
-255 completed-game gaps remain in the active scope. Continue with official
+253 completed-game gaps remain in the active scope. Continue with official
 opponent copies and supported public archives, newest seasons first. Access
 restrictions and incomplete old league indexes remain limitations. Existing
 2000–2005 rows are retained; their gaps, including Yale 2004, stay deferred.
@@ -84,6 +90,6 @@ stay missing. Signed net sack-yard values remain as reported by the source.
 Review the dependency stack before merging: #21–#25, #13, #26–#28, #29–#36,
 then the 2014–2016 source PRs. Nothing is merged automatically.
 
-Verification: 343 offline tests pass. Validation reports 0 errors and
+Verification: 344 offline tests pass. Validation reports 0 errors and
 262 warnings, including access/parse limitations and retained disagreements.
 Lint, formatting, duplicate-id and whitespace checks accompany publication.

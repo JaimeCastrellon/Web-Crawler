@@ -117,3 +117,15 @@ conditional on corroborating official Penn input, and its raw disagreement stays
 visible. Official Brown/Dartmouth 2021 schedules confirm two other disputed dates.
 Merrimack's official Harvard 2025 box score fills a missing result so later Harvard
 pre-game records can be computed without header records.
+
+## Official opponent copies
+
+When both the school and league sources lack a game, official opponent pages
+can supply another public copy. The first accepted opponent source is Rhode
+Island: its 2015 and 2016 Harvard boxes match the existing dates, teams and
+final scores, and include both teams' statistics. The recovery manifest records
+the participating Ivy school while preserving `gorhody.com` in source URLs.
+Fetcher enforces robots, configured identity/delays and cache reuse. Footer terms
+checks are traced in `data/reports/recovery/rhode_island_policy.csv`; the linked
+local terms PDF is robots-disallowed and was not fetched. Only derived factual
+game data is published. No header records or season totals become game features.

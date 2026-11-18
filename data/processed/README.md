@@ -2,7 +2,7 @@
 
 1,355 unique games and 2,710 team rows across 26 seasons, excluding 2020. The shared
 build combines the original PR #13's saved row exports with verified cached schedules
-and recovered box scores. There are 800 games with box-score statistics and 555
+and recovered box scores. There are 802 games with box-score statistics and 553
 score-only entries. Eight canceled 2001 games and four future 2026 games have no final
 score and do not update pre-game records. Other played games have known final scores.
 
@@ -24,7 +24,7 @@ the saved exports. Full rebuilding requires matching local raw cache bodies for
 verified sources; successful missing/corrupt entries stop publication. `python -m
 ivydata validate` writes the current report. No wall-clock date determines output.
 
-Source disagreements and the one reviewed date correction remain in the report;
+Source disagreements and explicit date corrections remain in the report;
 zero structural errors do not certify every source claim as independently verified.
 The main remaining work is resolving those disagreements and expanding box-score
 coverage. New collection targets 2006 onward; the older Yale 2004 gaps are

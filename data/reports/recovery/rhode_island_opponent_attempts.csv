@@ -1,0 +1,5 @@
+requested_url,url,school,season,kind,status,fetched_at,sha256,disposition,notes
+https://gorhody.com/sports/football/stats/2015/harvard/boxscore/2079,https://gorhody.com/sports/football/stats/2015/harvard/boxscore/2079,harvard,2015,boxscore,200,2026-11-18T01:14:55.626455+00:00,a88ce9f594474eac12626f95e438bcdedfa62e13411592e467ba62122520e203,accepted,
+https://gorhody.com/sports/football/schedule/2015,https://gorhody.com/sports/football/schedule/2015,harvard,2015,schedule,200,2026-11-18T01:14:04.989589+00:00,3602abf423df28018c98984829665dd28caac570299874f43a96f3f5cb55d390,discovery_only,
+https://gorhody.com/sports/football/stats/2016/harvard/boxscore/2090,https://gorhody.com/sports/football/stats/2016/harvard/boxscore/2090,harvard,2016,boxscore,200,2026-11-18T01:15:25.694886+00:00,8dd0d0660e099c0822bbb1b529c6236798d905e736a6a48e2ddc9c43024a4e17,accepted,
+https://gorhody.com/sports/football/schedule/2016,https://gorhody.com/sports/football/schedule/2016,harvard,2016,schedule,200,2026-11-18T01:13:35.357516+00:00,b7b5f54cdf8028c016575b27e46d03bc35fd14e6cda471ec40a7c5f91089466b,discovery_only,
