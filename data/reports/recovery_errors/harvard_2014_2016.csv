@@ -1,0 +1,5 @@
+url,school,season,kind,error
+https://gocrimson.com/sports/football/schedule/2015,harvard,2015,schedule,"unusable response (HTTP 200, challenge=Incapsula)"
+https://gocrimson.com/sports/football/schedule/2015-16,harvard,2015,schedule,no supported 2015 schedule; declared=2026
+https://gocrimson.com/sports/football/schedule/2016,harvard,2016,schedule,"unusable response (HTTP 200, challenge=Incapsula)"
+https://gocrimson.com/sports/football/schedule/2016-17,harvard,2016,schedule,no supported 2016 schedule; declared=2026

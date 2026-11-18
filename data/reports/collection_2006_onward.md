@@ -9,11 +9,11 @@ requests after the scope decision target those earlier gaps.
 ## Current dataset
 
 - 1,355 unique games / 2,710 team rows retained.
-- 756 games have box-score statistics overall, up from 131 before the
+- 762 games have box-score statistics overall, up from 131 before the
   league and school recovery work.
 - Active 2006–2026 scope: 1,043 game rows, 1,039 completed games;
-  740 have box-score statistics (71.2% of completed games).
-- 299 completed active-scope games remain score-only. Four upcoming 2026
+  746 have box-score statistics (71.8% of completed games).
+- 293 completed active-scope games remain score-only. Four upcoming 2026
   games keep blank results. 2020 is excluded.
 - Every known completed game from 2017 onward has box-score statistics.
   All 107 games in the 2024–2025 test split have box-score statistics.
@@ -46,6 +46,7 @@ its own stage; newly detailed games are incremental in dependency order.
 |---|---:|---:|
 | [Brown](recovery/brown_2014_2016.md) | 27 | 27 |
 | [Cornell](recovery/cornell_2014_2016.md) | 24 | 24 |
+| [Harvard](recovery/harvard_2014_2016.md) | 8 | 6 |
 | [Princeton](recovery/princeton_2014_2016.md) | 7 | 7 |
 
 Every source has a request inventory and URL-bearing failure/deferred report.
@@ -58,7 +59,7 @@ Printed W-L records are never model features.
 | Period | Completed games | With box stats | Still score-only |
 |---|---:|---:|---:|
 | 2017–2026 | 467 | 467 | 0 |
-| 2014–2016 | 156 | 88 | 68 |
+| 2014–2016 | 156 | 94 | 62 |
 | 2009–2013 | 260 | 79 | 181 |
 | 2006–2008 | 156 | 106 | 50 |
 
@@ -66,7 +67,7 @@ Printed W-L records are never model features.
 
 ## Remaining work
 
-299 completed-game gaps remain in the active scope. Continue with official
+293 completed-game gaps remain in the active scope. Continue with official
 opponent copies and supported public archives, newest seasons first. Access
 restrictions and incomplete old league indexes remain limitations. Existing
 2000–2005 rows are retained; their gaps, including Yale 2004, stay deferred.
@@ -80,6 +81,6 @@ stay missing. Signed net sack-yard values remain as reported by the source.
 Review the dependency stack before merging: #21–#25, #13, #26–#28, #29–#36,
 then the 2014–2016 source PRs. Nothing is merged automatically.
 
-Verification: 338 offline tests pass. Validation reports 0 errors and
-190 warnings, including access/parse limitations and retained disagreements.
+Verification: 339 offline tests pass. Validation reports 0 errors and
+194 warnings, including access/parse limitations and retained disagreements.
 Lint, formatting, duplicate-id and whitespace checks accompany publication.
