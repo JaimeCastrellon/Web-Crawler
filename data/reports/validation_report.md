@@ -1,6 +1,6 @@
 # Validation report
 
-Game rows: 1355. Errors: 0. Warnings: 190.
+Game rows: 1355. Errors: 0. Warnings: 194.
 
 This report checks the data currently present; it does not certify complete historical coverage.
 Ivy counts use completed games and expect seven in full seasons; current split seasons are excluded.
@@ -23,7 +23,7 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 | 2011 | train | 52 | 19 | 33 |
 | 2012 | train | 52 | 10 | 42 |
 | 2013 | train | 52 | 10 | 42 |
-| 2014 | train | 52 | 27 | 25 |
+| 2014 | train | 52 | 33 | 19 |
 | 2015 | train | 52 | 27 | 25 |
 | 2016 | train | 52 | 34 | 18 |
 | 2017 | train | 52 | 52 | 0 |
@@ -140,7 +140,11 @@ Ivy counts use completed games and expect seven in full seasons; current split s
 - **warning**: harvard recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://static.gocrimson.com/custompages/sports/fball/2007-08/files/harvyale.htm
 - **warning**: harvard recovery: incomplete/wrong-season game identity, finals, or team statistics Source: https://static.gocrimson.com/custompages/sports/fball/2008-09/files/yaleharv.htm
 - **warning**: harvard recovery: no supported 2008 schedule; declared=2026 Source: https://gocrimson.com/sports/football/schedule/2008-09
+- **warning**: harvard recovery: no supported 2015 schedule; declared=2026 Source: https://gocrimson.com/sports/football/schedule/2015-16
+- **warning**: harvard recovery: no supported 2016 schedule; declared=2026 Source: https://gocrimson.com/sports/football/schedule/2016-17
 - **warning**: harvard recovery: unusable response (HTTP 200, challenge=Incapsula) Source: https://gocrimson.com/sports/football/schedule/2008
+- **warning**: harvard recovery: unusable response (HTTP 200, challenge=Incapsula) Source: https://gocrimson.com/sports/football/schedule/2015
+- **warning**: harvard recovery: unusable response (HTTP 200, challenge=Incapsula) Source: https://gocrimson.com/sports/football/schedule/2016
 - **warning**: https://brownbears.com/sports/football/stats/2007/duquesne/boxscore/12826: invalid punts/punt_yds: 'undefined-undefined'
 - **warning**: https://dartmouthsports.com/sports/football/schedule/2021 row 1: multiple box-score URLs ['https://dartmouthsports.com/sports/football/stats/2021/valparaiso/boxscore/9748', 'https://dartmouthsports.com/documents/2021/9/18/210918_Valparaiso_Box.pdf']; raw=at Valparaiso Valparaiso, Ind. / Brown Field W, 28-18 Sep 18 (Sat) 2:00 PM Game Center Box Score Recap Photos Box Score Game Info Source: https://dartmouthsports.com/sports/football/schedule/2021
 - **warning**: https://dartmouthsports.com/sports/football/schedule/2021 row 2: multiple box-score URLs ['https://dartmouthsports.com/sports/football/stats/2021/sacred-heart/boxscore/9749', 'https://dartmouthsports.com/documents/2021/9/25/210925_SHU_Box.pdf']; raw=vs Sacred Heart Buddy Teevens Stadium at Memorial Field Hanover, N.H. Faculty and Staff Appreciation Day Presented by Ledyard National Bank W, 41-3 Sep 25 (Sat) 1:30 PM Game Center Box Score Recap Box Score (HTML) Box Score Faculty and Staff Appreciation Day Presented by Ledyard National Bank Game Info Source: https://dartmouthsports.com/sports/football/schedule/2021
